@@ -84,7 +84,7 @@ public class Interfaz_PaginaGerente extends JFrame {
 			}
 		});
 		btnABM.setFont(new Font("Calibri", Font.PLAIN, 15));
-		btnABM.setBounds(155, 289, 228, 215);
+		btnABM.setBounds(51, 280, 195, 178);
 		contentPane.add(btnABM);
 		
 		JButton btnReserva = new JButton("Realizar Reserva");
@@ -104,7 +104,7 @@ public class Interfaz_PaginaGerente extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnReserva.setBounds(474, 289, 228, 215);
+		btnReserva.setBounds(627, 284, 197, 178);
 		contentPane.add(btnReserva);
 		
 		JButton btnCerrarSession = new JButton("Cerrar Sesión");
@@ -120,8 +120,22 @@ public class Interfaz_PaginaGerente extends JFrame {
         });
 		
 		btnCerrarSession.setFont(new Font("Calibri", Font.PLAIN, 15));
-		btnCerrarSession.setBounds(787, 289, 228, 215);
+		btnCerrarSession.setBounds(919, 288, 179, 176);
 		contentPane.add(btnCerrarSession);
+		
+		JButton btnABMClientes = new JButton("Agregar Clientes");
+		btnABMClientes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Interfaz_CrearCliente cliente = new Interfaz_CrearCliente();
+				cliente.setVisible(true);
+				cliente.setLocationRelativeTo(null); // Centrar la nueva ventana
+                dispose(); // Cerrar la ventana actual si lo deseas
+			}
+		});
+		btnABMClientes.setFont(new Font("Calibri", Font.PLAIN, 15));
+		btnABMClientes.setBackground(Color.WHITE);
+		btnABMClientes.setBounds(332, 283, 197, 178);
+		contentPane.add(btnABMClientes);
 	}
 }
 

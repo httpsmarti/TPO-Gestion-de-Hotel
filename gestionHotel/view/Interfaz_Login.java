@@ -20,12 +20,12 @@ import javax.swing.JButton;
 import javax.swing.UIManager;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Interfaz_Login extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtIngreseTexto;
-	private JPasswordField passwordField;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -54,100 +54,65 @@ public class Interfaz_Login extends JFrame {
 		JPanel panel_1 = new JPanel();
 		panel_1.setForeground(new Color(204, 125, 251));
 		panel_1.setBackground(new Color(204, 125, 251));
-		panel_1.setBounds(301, 94, 539, 91);
+		panel_1.setBounds(307, 146, 525, 119);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("¡Bienvenido!");
+		lblNewLabel.setBounds(193, 38, 141, 49);
+		panel_1.add(lblNewLabel);
 		lblNewLabel.setForeground(new Color(64, 0, 64));
 		lblNewLabel.setBackground(new Color(64, 0, 64));
 		lblNewLabel.setFont(new Font("Calibri", Font.BOLD, 25));
-		lblNewLabel.setBounds(20, 11, 141, 49);
-		panel_1.add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("Por favor ingrese los datos");
-		lblNewLabel_1.setFont(new Font("Calibri", Font.PLAIN, 14));
-		lblNewLabel_1.setBounds(20, 50, 275, 14);
-		panel_1.add(lblNewLabel_1);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(255, 255, 255)));
 		panel.setBackground(new Color(255, 255, 255));
-		panel.setBounds(301, 94, 539, 456);
+		panel.setBounds(307, 264, 525, 276);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblNewLabel_5 = new JLabel("Registrate Aquí");
-		lblNewLabel_5.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-                Interfaz_Registro registro = new Interfaz_Registro();
+		JButton btnNewButton = new JButton("Cliente");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Interfaz_SelectClient registro = new Interfaz_SelectClient();
                 registro.setVisible(true);
                 registro.setLocationRelativeTo(null); // Centrar la nueva ventana
                 dispose(); // Cerrar la ventana actual si lo deseas
-            }
-        });
+			}
+		});
 
-		lblNewLabel_5.setForeground(new Color(174, 51, 249));
-		lblNewLabel_5.setBackground(new Color(255, 255, 255));
-		lblNewLabel_5.setFont(new Font("Calibri", Font.BOLD, 16));
-		lblNewLabel_5.setBounds(307, 403, 110, 26);
-		panel.add(lblNewLabel_5);
 		
-		JLabel lblNewLabel_3 = new JLabel("Recuerdame");
-		lblNewLabel_3.setFont(new Font("Calibri", Font.PLAIN, 14));
-		lblNewLabel_3.setBounds(51, 308, 73, 18);
-		panel.add(lblNewLabel_3);
-		
-		txtIngreseTexto = new JTextField();
-		txtIngreseTexto.setForeground(new Color(0, 0, 0));
-		txtIngreseTexto.setText(" ");
-		txtIngreseTexto.setBackground(new Color(255, 255, 255));
-		txtIngreseTexto.setFont(new Font("Calibri", Font.PLAIN, 17));
-		txtIngreseTexto.setBounds(29, 145, 483, 41);
-		panel.add(txtIngreseTexto);
-		txtIngreseTexto.setColumns(10);
-		
-		JLabel lblNewLabel_2 = new JLabel("Usuario");
-		lblNewLabel_2.setFont(new Font("Calibri", Font.PLAIN, 16));
-		lblNewLabel_2.setBounds(29, 113, 65, 32);
-		panel.add(lblNewLabel_2);
-		
-		JLabel lblNewLabel_2_1 = new JLabel("Contraseña");
-		lblNewLabel_2_1.setFont(new Font("Calibri", Font.PLAIN, 16));
-		lblNewLabel_2_1.setBounds(29, 209, 102, 32);
-		panel.add(lblNewLabel_2_1);
-		
-		passwordField = new JPasswordField();
-		passwordField.setForeground(new Color(0, 0, 0));
-		passwordField.setFont(new Font("Calibri", Font.BOLD, 15));
-		passwordField.setBackground(new Color(255, 255, 255));
-		passwordField.setBounds(29, 240, 483, 41);
-		panel.add(passwordField);
-		
-		JCheckBox chckbxNewCheckBox = new JCheckBox("");
-		chckbxNewCheckBox.setBackground(new Color(255, 255, 255));
-		chckbxNewCheckBox.setFont(new Font("Calibri", Font.PLAIN, 23));
-		chckbxNewCheckBox.setBounds(29, 303, 21, 23);
-		panel.add(chckbxNewCheckBox);
-		
-		JButton btnNewButton = new JButton("Iniciar Sesión");
 		btnNewButton.setForeground(new Color(255, 255, 255));
 		btnNewButton.setBackground(new Color(70, 70, 70));
-		btnNewButton.setFont(new Font("Calibri", Font.BOLD, 16));
-		btnNewButton.setBounds(29, 345, 483, 41);
+		btnNewButton.setFont(new Font("Calibri", Font.BOLD, 24));
+		btnNewButton.setBounds(27, 107, 215, 76);
 		panel.add(btnNewButton);
 		
-		JLabel lblNewLabel_4 = new JLabel("¿Todavía no tienes una cuenta?");
-		lblNewLabel_4.setFont(new Font("Calibri", Font.PLAIN, 16));
-		lblNewLabel_4.setBounds(98, 400, 205, 33);
-		panel.add(lblNewLabel_4);
+		JButton btnGerente = new JButton("Gerente");
+		btnGerente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Interfaz_PaginaGerente registro = new Interfaz_PaginaGerente();
+                registro.setVisible(true);
+                registro.setLocationRelativeTo(null); // Centrar la nueva ventana
+                dispose(); // Cerrar la ventana actual si lo deseas
+			}
+		});
+		btnGerente.setForeground(Color.WHITE);
+		btnGerente.setFont(new Font("Calibri", Font.BOLD, 24));
+		btnGerente.setBackground(new Color(70, 70, 70));
+		btnGerente.setBounds(280, 107, 215, 76);
+		panel.add(btnGerente);
 		
-		JLabel lblNewLabel_6 = new JLabel("* Campos vacios o Datos incorrectos");
-		lblNewLabel_6.setForeground(new Color(255, 0, 0));
-		lblNewLabel_6.setFont(new Font("Calibri", Font.BOLD, 16));
-		lblNewLabel_6.setBounds(264, 292, 248, 26);
-		panel.add(lblNewLabel_6);
+		JLabel lblNewLabel_1 = new JLabel("Ingresar como");
+		lblNewLabel_1.setFont(new Font("Calibri", Font.PLAIN, 19));
+		lblNewLabel_1.setBounds(203, 55, 112, 24);
+		panel.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setBounds(505, 56, 125, 60);
+		contentPane.add(lblNewLabel_2);
+		lblNewLabel_2.setIcon(new ImageIcon(Interfaz_Login.class.getResource("/img/logo.png")));
 	}
 }
 

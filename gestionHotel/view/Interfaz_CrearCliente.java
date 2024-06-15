@@ -1,27 +1,28 @@
 package view;
 
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
-import javax.swing.JTable;
-import javax.swing.JScrollPane;
-import javax.swing.table.DefaultTableModel;
-import java.awt.Font;
-import javax.swing.JLabel;
-import java.awt.Color;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.SoftBevelBorder;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class Interfaz_Reserva extends JFrame {
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class Interfaz_CrearCliente extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
@@ -31,7 +32,7 @@ public class Interfaz_Reserva extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Interfaz_Reserva frame = new Interfaz_Reserva();
+					Interfaz_CrearCliente frame = new Interfaz_CrearCliente();
 					frame.setVisible(true);
 					frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
@@ -41,7 +42,7 @@ public class Interfaz_Reserva extends JFrame {
 		});
 	}
 
-	public Interfaz_Reserva() {
+	public Interfaz_CrearCliente() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1180, 683);
 		contentPane = new BackgroundPanel3();
@@ -66,9 +67,9 @@ public class Interfaz_Reserva extends JFrame {
 		panel_1.setBounds(0, 123, 1164, 43);
 		contentPane.add(panel_1);
 		
-		JLabel lblNewLabel = new JLabel("Seleccione Habitación");
+		JLabel lblNewLabel = new JLabel("Crear Cliente");
 		lblNewLabel.setFont(new Font("Calibri", Font.BOLD, 18));
-		lblNewLabel.setBounds(482, 8, 165, 32);
+		lblNewLabel.setBounds(564, 11, 106, 32);
 		panel_1.add(lblNewLabel);
 		
 		JPanel panel_3 = new JPanel();
@@ -78,23 +79,6 @@ public class Interfaz_Reserva extends JFrame {
 		contentPane.add(panel_3);
 		panel_3.setLayout(null);
 		
-		JButton btnNewButton = new JButton("Siguiente");
-		btnNewButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				Interfaz_Detalle siguiente = new Interfaz_Detalle();
-				siguiente.setVisible(true);
-				siguiente.setLocationRelativeTo(null); // Centrar la nueva ventana
-                dispose(); // Cerrar la ventana actual si lo deseas
-            }
-        });
-		
-		btnNewButton.setForeground(new Color(255, 255, 255));
-		btnNewButton.setBackground(new Color(63, 63, 63));
-		btnNewButton.setFont(new Font("Calibri", Font.BOLD, 14));
-		btnNewButton.setBounds(1042, 11, 89, 34);
-		panel_3.add(btnNewButton);
-		
 		JButton btnNewButton_1 = new JButton("Atrás");
 		btnNewButton_1.addMouseListener(new MouseAdapter() {
 			@Override
@@ -103,25 +87,6 @@ public class Interfaz_Reserva extends JFrame {
         		atras.setVisible(true);
         		atras.setLocationRelativeTo(null); // Centrar la nueva ventana
                 dispose(); // Cerrar la ventana actual si lo deseas
-                
-        /*
-         HOLA JOACO ACA NECESITAMOS QUE CUANDO TOQUE EL BOTON DE ATRAS EN LA INTERFAZ DE RESERVA DESDE CLIENTE, ME REDIRIJA AL INICIO DE INTERFAZ DE CLIENTE, NO DE GERENTE
-         
-         ACA TE INSERTO EL CODIGO DE CUANDO TOQUE ATRAS ME LLEVE A CLIENTE (ESTO ES LO IMPORTANTE)
-         public void mouseClicked(MouseEvent e) {
-        		Interfaz_PaginaCliente atras = new Interfaz_PaginaCliente();
-        		atras.setVisible(true);
-        		atras.setLocationRelativeTo(null); // Centrar la nueva ventana
-                dispose(); // Cerrar la ventana actual si lo deseas
-         
-         --------------------------------------------------------------------------------------------------------------------
-         POR LAS DUDAS, (NO CREO Q LO NECESITES PERO IGUAL) TE DEJO LO MISMO PERO CUANDO TE LLEVE A GERENTE
-          public void mouseClicked(MouseEvent e) {
-        		Interfaz_PaginaGerente atras = new Interfaz_PaginaGerente();
-        		atras.setVisible(true);
-        		atras.setLocationRelativeTo(null); // Centrar la nueva ventana
-                dispose(); // Cerrar la ventana actual si lo deseas
-         */
             }
         });
 		
@@ -132,32 +97,42 @@ public class Interfaz_Reserva extends JFrame {
 		contentPane.add(btnNewButton_1);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(248, 211, 649, 339);
+		scrollPane.setBounds(285, 238, 649, 219);
 		contentPane.add(scrollPane);
 
 		// Definir las columnas antes de establecer el modelo en la tabla
-        tablaFuncional.addColumn("Habitacion");
-        tablaFuncional.addColumn("Descripción");
-        tablaFuncional.addColumn("Precio");
-        tablaFuncional.addColumn("Activo");
+        tablaFuncional.addColumn("Nombre");
+        tablaFuncional.addColumn("Apellido");
+        tablaFuncional.addColumn("DNI");
+        tablaFuncional.addColumn("Edad");
+        tablaFuncional.addColumn("Mail");
+        tablaFuncional.addColumn("Contacto");
 
         table = new JTable(tablaFuncional);
         table.setFont(new Font("Calibri", Font.PLAIN, 12));
         table.setBackground(new Color(255, 255, 255));
-		scrollPane.setViewportView(table);		
+		scrollPane.setViewportView(table);
 		
-		JLabel lblSeleccioneUna = new JLabel("* Seleccione una habitación para continuar");
-		lblSeleccioneUna.setForeground(Color.RED);
-		lblSeleccioneUna.setFont(new Font("Calibri", Font.BOLD, 16));
-		lblSeleccioneUna.setBounds(837, 561, 297, 26);
-		contentPane.add(lblSeleccioneUna);
+		JButton btnNewButton_2 = new JButton("Agregar Cliente");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Interfaz_AgregarCliente agregarC = new Interfaz_AgregarCliente();
+				agregarC.setVisible(true);
+				agregarC.setLocationRelativeTo(null); // Centrar la ventana secundaria
+			}
+		});
+		btnNewButton_2.setForeground(Color.WHITE);
+		btnNewButton_2.setBackground(Color.DARK_GRAY);
+		btnNewButton_2.setFont(new Font("Calibri", Font.PLAIN, 16));
+		btnNewButton_2.setBounds(549, 502, 136, 43);
+		contentPane.add(btnNewButton_2);
 	}
 }
 
-class BackgroundPanel3 extends JPanel {
+class BackgroundPanel9 extends JPanel {
 	private Image backgroundImage;
 
-	public BackgroundPanel3() {
+	public BackgroundPanel9() {
 		// Cargar la imagen
 		ImageIcon icon = new ImageIcon("C:\\Users\\marti\\Documents\\GitHub\\Gestion-Hotel\\gestionHoteles\\img\\blob-login.png");
 		backgroundImage = icon.getImage();
