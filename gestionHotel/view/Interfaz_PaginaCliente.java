@@ -44,6 +44,16 @@ import java.awt.event.MouseEvent;
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		JLabel lblNewLabel_2_1 = new JLabel("Mis Reservas");
+		lblNewLabel_2_1.setFont(new Font("Calibri", Font.BOLD, 16));
+		lblNewLabel_2_1.setBounds(227, 428, 90, 20);
+		contentPane.add(lblNewLabel_2_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("Reservar");
+		lblNewLabel_2.setFont(new Font("Calibri", Font.BOLD, 16));
+		lblNewLabel_2.setBounds(554, 428, 66, 20);
+		contentPane.add(lblNewLabel_2);
+		
 		JLabel lblNewLabel = new JLabel("Cerrar Sesión");
 		lblNewLabel.setFont(new Font("Calibri", Font.BOLD, 16));
 		lblNewLabel.setBounds(854, 428, 90, 20);
@@ -122,11 +132,6 @@ import java.awt.event.MouseEvent;
 	btnCerrarSesion.setFont(new Font("Calibri", Font.PLAIN, 15));
 			btnCerrarSesion.setBounds(787, 289, 228, 215);
 			contentPane.add(btnCerrarSesion);
-			
-			JLabel lblNewLabel_2 = new JLabel("Cerrar Sesión");
-			lblNewLabel_2.setFont(new Font("Calibri", Font.BOLD, 16));
-			lblNewLabel_2.setBounds(540, 429, 90, 20);
-			contentPane.add(lblNewLabel_2);
 		}
 	}
 	

@@ -45,6 +45,16 @@ public class Interfaz_PaginaGerente extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		JLabel lblNewLabel_2_1 = new JLabel("Cerrar Sesión");
+		lblNewLabel_2_1.setFont(new Font("Calibri", Font.BOLD, 16));
+		lblNewLabel_2_1.setBounds(387, 405, 90, 20);
+		contentPane.add(lblNewLabel_2_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("Cerrar Sesión");
+		lblNewLabel_2.setFont(new Font("Calibri", Font.BOLD, 16));
+		lblNewLabel_2.setBounds(962, 404, 90, 20);
+		contentPane.add(lblNewLabel_2);
+		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon(Interfaz_PaginaGerente.class.getResource("/img/BostonResort (6).png")));
 		lblNewLabel_1.setBounds(0, 0, 1164, 115);
@@ -67,7 +77,8 @@ public class Interfaz_PaginaGerente extends JFrame {
 		panel_1.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("Calibri", Font.BOLD, 16));
 		
-		JButton btnABM = new JButton("ABM Habitacion");
+		JButton btnABM = new JButton("");
+		btnABM.setIcon(new ImageIcon(Interfaz_PaginaGerente.class.getResource("/img/ambHabitacion.png")));
 		btnABM.setBackground(new Color(255, 255, 255));
 		btnABM.addMouseListener(new MouseAdapter() {
 			@Override
@@ -87,7 +98,8 @@ public class Interfaz_PaginaGerente extends JFrame {
 		btnABM.setBounds(51, 280, 195, 178);
 		contentPane.add(btnABM);
 		
-		JButton btnReserva = new JButton("Realizar Reserva");
+		JButton btnReserva = new JButton("");
+		btnReserva.setIcon(new ImageIcon(Interfaz_PaginaGerente.class.getResource("/img/reserva.png")));
 		btnReserva.setBackground(new Color(255, 255, 255));
 		btnReserva.addMouseListener(new MouseAdapter() {
 			@Override
@@ -107,7 +119,8 @@ public class Interfaz_PaginaGerente extends JFrame {
 		btnReserva.setBounds(627, 284, 197, 178);
 		contentPane.add(btnReserva);
 		
-		JButton btnCerrarSession = new JButton("Cerrar Sesión");
+		JButton btnCerrarSession = new JButton("");
+		btnCerrarSession.setIcon(new ImageIcon(Interfaz_PaginaGerente.class.getResource("/img/salida.png")));
 		btnCerrarSession.setBackground(new Color(255, 255, 255));
 		btnCerrarSession.addMouseListener(new MouseAdapter() {
 			@Override
@@ -123,7 +136,8 @@ public class Interfaz_PaginaGerente extends JFrame {
 		btnCerrarSession.setBounds(919, 288, 179, 176);
 		contentPane.add(btnCerrarSession);
 		
-		JButton btnABMClientes = new JButton("Agregar Clientes");
+		JButton btnABMClientes = new JButton("");
+		btnABMClientes.setIcon(new ImageIcon(Interfaz_PaginaGerente.class.getResource("/img/clientes.png")));
 		btnABMClientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Interfaz_CrearCliente cliente = new Interfaz_CrearCliente();
