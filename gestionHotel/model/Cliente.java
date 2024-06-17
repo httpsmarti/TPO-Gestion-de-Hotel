@@ -31,5 +31,4 @@ public class Cliente extends AbstractCuenta {
             this.contactoPref = contactoPref;
         }
     }
-
 }

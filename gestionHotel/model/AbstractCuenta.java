@@ -59,14 +59,9 @@ public abstract class AbstractCuenta {
         this.mail = mail;
     }
     
-    public void crearReserva(AbstractHabitacion habitacion, Date fechaInicio, Date fechaFin, Date fechaReserva, List<Huesped> huespedes, PagoStrategy medioDePago) {
+    public Reserva crearReserva(int idReserva, Double precio, AbstractHabitacion habitacion, Date fechaInicio, Date fechaFin, Date fechaReserva, List<Huesped> huespedes, PagoStrategy medioDePago) {
         PagoContexto contexto = new PagoContexto();
         contexto.setEstrategia(medioDePago);
-        // contexto.pagar(monto);
-        // Lógica de creación de reserva
-    }
-
-    public void cancelarReserva(int idReserva) {
-        // Implementar lógica de cancelación de reserva
+        return new Reserva(idReserva, precio, fechaInicio, fechaFin, fechaReserva, habitacion, this.DNI, huespedes, contexto, "Pendiente de pago");
     }
 }

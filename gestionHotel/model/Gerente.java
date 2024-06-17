@@ -8,20 +8,28 @@ public class Gerente extends AbstractCuenta {
         super(nombre, apellido, DNI, telefono, mail);
     }
 
-    public void crearFactura(int idReserva, double monto) {
-        // Implementar lógica para crear una factura
-        System.out.println("Factura creada para la reserva ID: " + idReserva + " con monto: " + monto);
+    public Factura crearFactura(int idFactura, Reserva reserva) {
+        return new Factura(idFactura, reserva);
     }
 
-    public void crearHabitacion(String idHabitacion, int cantPersonas, String tipo, List<String> extras) {
-        // Implementar lógica para crear una habitación
+    public Habitacion crearHabitacion(String idHabitacion, Double precio, int cantPersonas, List<String> extras) {
+    	return new Habitacion(idHabitacion, precio, cantPersonas, extras);
+    }
+    
+    public Suite crearSuite(String idHabitacion, Double precio, int cantPersonas, List<String> extras) {
+    	return new Suite(idHabitacion, precio, cantPersonas, extras);
     }
 
-    public void modificarHabitacion(String idHabitacion, int nuevaCantPersonas, List<String> nuevosExtras) {
-        // Implementar lógica para modificar una habitación existente
+    public void modificarHabitacion(AbstractHabitacion habitacion, int nuevaCantPersonas, Double nuevoPrecioPorNoche, List<String> nuevosExtras) {
+        habitacion.setCantPersonas(nuevaCantPersonas);
+        habitacion.setPrecioPorNoche(nuevoPrecioPorNoche);
+        habitacion.setExtras(nuevosExtras);
     }
 
-    public void modificarPoliticas(String nuevasPoliticas) {
-        // Implementar lógica para modificar políticas del hotel
+    public void modificarPoliticas(PoliticasReserva politicas, int cantDiasTemprano, int cantDiasTarde, float dtoTemprano, float recragoTarde) {
+        politicas.setCantDiasTemprano(cantDiasTemprano);
+        politicas.setCantDiasTarde(cantDiasTarde);
+        politicas.setDtoTemprano(dtoTemprano);
+        politicas.setRecragoTarde(recragoTarde);
     }
 }

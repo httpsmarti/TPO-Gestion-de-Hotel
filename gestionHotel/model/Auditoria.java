@@ -24,7 +24,13 @@ public class Auditoria {
 	}
 	
 	public void eliminarEventoPorId(String idEvento) {
-		//logica
+		for (int i = 0; i < eventos.size(); i++) {
+		    EventoAuditoria eventoActual = eventos.get(i);
+		    String idEventoActual = eventoActual.getIdEvento();
+		    if (idEventoActual.equals(idEvento)) {
+		      eventos.remove(i);
+		      break;
+		    }
+		}
 	}
-	
 }

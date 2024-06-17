@@ -4,42 +4,48 @@ import java.util.*;
 
 public abstract class AbstractHabitacion {
     private String idHabitacion;
+    private Double precioPorNoche;
     private int cantPersonas;
-    private String tipo;
     private List<String> extras;
     private boolean disponible;
 
-    public AbstractHabitacion(String idHabitacion, int cantPersonas, List<String> extras) {
+    public AbstractHabitacion(String idHabitacion, Double precioPorNoche, int cantPersonas, List<String> extras) {
         this.idHabitacion = idHabitacion;
+        this.precioPorNoche = precioPorNoche;
         this.cantPersonas = cantPersonas;
         this.extras = extras;
         this.disponible = true; // Por defecto, la habitación está disponible
-        this.tipo = definirTipo();
-        validarTipo();
     }
 
     protected abstract String definirTipo();
-
-    private void validarTipo() {
-        if (!tipo.equals("habitacion") && !tipo.equals("suite")) {
-            throw new IllegalArgumentException("El tipo de habitación debe ser 'habitacion' o 'suite'");
-        }
-    }
 
     public String getIdHabitacion() {
         return idHabitacion;
     }
 
+    public Double getPrecioPorNoche() {
+    	return precioPorNoche;
+    }
+    
+    public void setPrecioPorNoche(Double precioPorNoche) {
+    	this.precioPorNoche = precioPorNoche;
+    }
+    
+    
     public int getCantPersonas() {
         return cantPersonas;
     }
-
-    public String getTipo() {
-        return tipo;
+    
+    public void setCantPersonas(int cantPeronas) {
+    	this.cantPersonas = cantPeronas;
     }
 
     public List<String> getExtras() {
         return extras;
+    }
+    
+    public void setExtras(List<String> extras) {
+        this.extras = extras;
     }
 
     public boolean isDisponible() {
@@ -48,16 +54,5 @@ public abstract class AbstractHabitacion {
 
     public void setDisponible(boolean disponible) {
         this.disponible = disponible;
-    }
-
-    @Override
-    public String toString() {
-        return "Habitacion{" +
-                "idHabitacion='" + idHabitacion + '\'' +
-                ", cantPersonas=" + cantPersonas +
-                ", tipo='" + tipo + '\'' +
-                ", extras=" + extras +
-                ", disponible=" + disponible +
-                '}';
     }
 }
