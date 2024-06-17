@@ -136,10 +136,12 @@ public class Interfaz_Reserva extends JFrame {
 		contentPane.add(scrollPane);
 
 		// Definir las columnas antes de establecer el modelo en la tabla
-        tablaFuncional.addColumn("Habitacion");
+		if (tablaFuncional.getColumnCount() == 0) {
+		tablaFuncional.addColumn("Habitacion");
         tablaFuncional.addColumn("Descripción");
         tablaFuncional.addColumn("Precio");
         tablaFuncional.addColumn("Activo");
+		}
 
         table = new JTable(tablaFuncional);
         table.setFont(new Font("Calibri", Font.PLAIN, 12));

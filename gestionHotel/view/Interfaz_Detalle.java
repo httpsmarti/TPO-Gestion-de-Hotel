@@ -135,9 +135,11 @@ public class Interfaz_Detalle extends JFrame {
         contentPane.add(scrollPane);
         
         // Definir las columnas antes de establecer el modelo en la tabla
+        if (tablaFuncional.getColumnCount() == 0) {
         tablaFuncional.addColumn("Habitacion");
         tablaFuncional.addColumn("Descripción");
         tablaFuncional.addColumn("Precio");
+        }
 
         table = new JTable(tablaFuncional);
         table.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -204,11 +206,26 @@ public class Interfaz_Detalle extends JFrame {
         comboBox.setBounds(23, 116, 394, 32);
         panel_2.add(comboBox);
         
-        JComboBox comboBox_1 = new JComboBox();
-        comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"Servicio Despertador", "TV ", "Minibar"}));
-        comboBox_1.setToolTipText("");
-        comboBox_1.setBounds(23, 188, 394, 32);
-        panel_2.add(comboBox_1);
+        JRadioButton rdbtnMinibar = new JRadioButton("Minibar");
+        rdbtnMinibar.setFont(new Font("Calibri", Font.PLAIN, 15));
+        rdbtnMinibar.setBackground(Color.WHITE);
+        rdbtnMinibar.setActionCommand("rdbtnCredito");
+        rdbtnMinibar.setBounds(46, 198, 109, 23);
+        panel_2.add(rdbtnMinibar);
+        
+        JRadioButton rdbtnServicioDespertador = new JRadioButton("Servicio Despertador");
+        rdbtnServicioDespertador.setFont(new Font("Calibri", Font.PLAIN, 15));
+        rdbtnServicioDespertador.setBackground(Color.WHITE);
+        rdbtnServicioDespertador.setActionCommand("rdbtnDebito");
+        rdbtnServicioDespertador.setBounds(157, 198, 160, 23);
+        panel_2.add(rdbtnServicioDespertador);
+        
+        JRadioButton rdbtnTv = new JRadioButton("TV");
+        rdbtnTv.setFont(new Font("Calibri", Font.PLAIN, 15));
+        rdbtnTv.setBackground(Color.WHITE);
+        rdbtnTv.setActionCommand("rdbtnTransferencia");
+        rdbtnTv.setBounds(345, 198, 72, 23);
+        panel_2.add(rdbtnTv);
         
         JPanel panel_2_1 = new JPanel();
         panel_2_1.setBackground(new Color(255, 255, 255));
@@ -277,9 +294,11 @@ public class Interfaz_Detalle extends JFrame {
         panel_2_1.add(scrollPane_1);
 
         // Definir las columnas antes de establecer el modelo en la tabla_1
+        if (tablaFuncional1.getColumnCount() == 0) {
         tablaFuncional1.addColumn("DNI");
         tablaFuncional1.addColumn("Nombre");
         tablaFuncional1.addColumn("Apellido");
+        }
 
         table_1 = new JTable(tablaFuncional1);
         table_1.setFont(new Font("Calibri", Font.PLAIN, 12));

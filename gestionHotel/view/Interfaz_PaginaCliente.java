@@ -44,6 +44,11 @@ import java.awt.event.MouseEvent;
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		JLabel lblNewLabel = new JLabel("Cerrar Sesión");
+		lblNewLabel.setFont(new Font("Calibri", Font.BOLD, 16));
+		lblNewLabel.setBounds(854, 428, 90, 20);
+		contentPane.add(lblNewLabel);
+		
 		JLabel lblNewLabel_1 = new JLabel("");
 	lblNewLabel_1.setIcon(new ImageIcon(Interfaz_PaginaGerente.class.getResource("/img/BostonResort (6).png")));
 	lblNewLabel_1.setBounds(0, 0, 1164, 115);
@@ -66,7 +71,8 @@ import java.awt.event.MouseEvent;
 	lblIniciasteSesinComo.setBounds(10, 12, 211, 23);
 	panel_1.add(lblIniciasteSesinComo);
 	
-	JButton btnVerMisReservas = new JButton("Mis Reservas");
+	JButton btnVerMisReservas = new JButton("");
+	btnVerMisReservas.setIcon(new ImageIcon(Interfaz_PaginaCliente.class.getResource("/img/misReservas.png")));
 	btnVerMisReservas.setBackground(new Color(255, 255, 255));
 	btnVerMisReservas.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
@@ -76,7 +82,8 @@ import java.awt.event.MouseEvent;
 	btnVerMisReservas.setBounds(155, 289, 228, 215);
 	contentPane.add(btnVerMisReservas);
 	
-	JButton btnReservar = new JButton("Realizar Reserva");
+	JButton btnReservar = new JButton("\r\n");
+	btnReservar.setIcon(new ImageIcon(Interfaz_PaginaCliente.class.getResource("/img/reserva.png")));
 	btnReservar.addMouseListener(new MouseAdapter() {
 		@Override
 		public void mouseClicked(MouseEvent e) {
@@ -96,7 +103,12 @@ import java.awt.event.MouseEvent;
 	btnReservar.setBounds(474, 289, 228, 215);
 	contentPane.add(btnReservar);
 	
-	JButton btnCerrarSesion = new JButton("Cerrar Sesión");
+	JButton btnCerrarSesion = new JButton("");
+	btnCerrarSesion.setIcon(new ImageIcon(Interfaz_PaginaCliente.class.getResource("/img/salida.png")));
+	btnCerrarSesion.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+		}
+	});
 	btnCerrarSesion.setBackground(new Color(255, 255, 255));
 	btnCerrarSesion.addMouseListener(new MouseAdapter() {
 		@Override
@@ -110,6 +122,11 @@ import java.awt.event.MouseEvent;
 	btnCerrarSesion.setFont(new Font("Calibri", Font.PLAIN, 15));
 			btnCerrarSesion.setBounds(787, 289, 228, 215);
 			contentPane.add(btnCerrarSesion);
+			
+			JLabel lblNewLabel_2 = new JLabel("Cerrar Sesión");
+			lblNewLabel_2.setFont(new Font("Calibri", Font.BOLD, 16));
+			lblNewLabel_2.setBounds(540, 429, 90, 20);
+			contentPane.add(lblNewLabel_2);
 		}
 	}
 	

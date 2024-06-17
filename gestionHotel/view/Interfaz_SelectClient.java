@@ -6,8 +6,11 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,13 +18,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class Interfaz_SelectClient extends JFrame {
 
@@ -90,9 +92,11 @@ public class Interfaz_SelectClient extends JFrame {
         scrollPane.setBounds(45, 160, 444, 210);
         panel.add(scrollPane);
 
-        // Definir las columnas antes de establecer el modelo en la tabla
-        tablaFuncional.addColumn("Nombre");
-        tablaFuncional.addColumn("Apellido");
+        // Verificar si las columnas ya han sido agregadas
+        if (tablaFuncional.getColumnCount() == 0) {
+            tablaFuncional.addColumn("Nombre");
+            tablaFuncional.addColumn("Apellido");
+        }
 
         table = new JTable(tablaFuncional);
         table.setBorder(new LineBorder(new Color(0, 0, 0)));
