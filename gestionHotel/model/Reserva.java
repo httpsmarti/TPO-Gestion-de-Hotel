@@ -10,7 +10,7 @@ public class Reserva {
 	private Date fechaInicio;
 	private Date fechaFin;
 	private Date fechaReserva;
-	private AbstractHabitacion habitacion;
+	private List<AbstractHabitacion> habitaciones; //pasar a lista -- 
 	private String DNIClienteReserva;
 	private List<Huesped> huespedes;
 	private PagoContexto pagoContexto;
@@ -34,11 +34,11 @@ public class Reserva {
 	public void setFechaReserva(Date fechaReserva) {
 		this.fechaReserva = fechaReserva;
 	}
-	public AbstractHabitacion getHabitacion() {
-		return habitacion;
+	public List<AbstractHabitacion> getHabitaciones() {
+		return habitaciones;
 	}
-	public void setHabitacion(AbstractHabitacion habitacion) {
-		this.habitacion = habitacion;
+	public void setHabitacion(List<AbstractHabitacion> habitaciones) {
+		this.habitaciones = habitaciones;
 	}
 	public String getDNIClienteReserva() {
 		return DNIClienteReserva;
@@ -78,7 +78,7 @@ public class Reserva {
 		this.precio = precio;
 	}
 
-	public Reserva(int idReserva, Double precio, Date fechaInicio, Date fechaFin, Date fechaReserva, AbstractHabitacion habitacion,
+	public Reserva(int idReserva, Double precio, Date fechaInicio, Date fechaFin, Date fechaReserva, List<AbstractHabitacion> habitaciones,
 			String DNIClienteReserva, List<Huesped> huespedes, PagoContexto pagoContexto, String estado) {
 		super();
 		this.idReserva = idReserva;
@@ -86,7 +86,7 @@ public class Reserva {
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 		this.fechaReserva = fechaReserva;
-		this.habitacion = habitacion;
+		this.habitaciones = new ArrayList<AbstractHabitacion>();
 		this.DNIClienteReserva = DNIClienteReserva;
 		this.huespedes = huespedes;
 		this.pagoContexto = pagoContexto;

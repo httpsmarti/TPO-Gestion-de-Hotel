@@ -11,8 +11,7 @@ public class Controller {
 
 	private List<Cliente> clientes;
     private Gerente gerente;
-    private List<Habitacion> habitaciones;
-    private List<Suite> suites;
+    private List<AbstractHabitacion> habitaciones;
     private List<Reserva> reservas;
     private List<Huesped> huespedes;
     private GestorDeNotificaciones gestorNotif;
@@ -20,13 +19,12 @@ public class Controller {
     
     private Interfaz_Login vista;
     
-    public Controller(List<Cliente> clientes, Gerente gerente, List<Habitacion> habitaciones, List<Suite> suites,
+    public Controller(List<Cliente> clientes, Gerente gerente, List<AbstractHabitacion> habitaciones,
 			List<Reserva> reservas, List<Huesped> huespedes, GestorDeNotificaciones gestorNotif, Auditoria auditoria, Interfaz_Login vista) {
 		super();
 		this.clientes = clientes;
 		this.gerente = gerente;
 		this.habitaciones = habitaciones;
-		this.suites = suites;
 		this.reservas = reservas;
 		this.huespedes = huespedes;
 		this.gestorNotif = gestorNotif;

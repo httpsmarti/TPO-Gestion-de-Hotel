@@ -4,7 +4,7 @@ import java.util.*;
 
 import interfaces.PagoStrategy;
 
-public abstract class AbstractCuenta {
+public class AbstractCuenta {
     private String nombre;
     private String apellido;
     private String DNI;
@@ -59,9 +59,9 @@ public abstract class AbstractCuenta {
         this.mail = mail;
     }
     
-    public Reserva crearReserva(int idReserva, Double precio, AbstractHabitacion habitacion, Date fechaInicio, Date fechaFin, Date fechaReserva, List<Huesped> huespedes, PagoStrategy medioDePago) {
+    public Reserva crearReserva(int idReserva, Double precio, List<AbstractHabitacion> habitaciones, Date fechaInicio, Date fechaFin, Date fechaReserva, List<Huesped> huespedes, PagoStrategy medioDePago) {
         PagoContexto contexto = new PagoContexto();
         contexto.setEstrategia(medioDePago);
-        return new Reserva(idReserva, precio, fechaInicio, fechaFin, fechaReserva, habitacion, this.DNI, huespedes, contexto, "Pendiente de pago");
+        return new Reserva(idReserva, precio, fechaInicio, fechaFin, fechaReserva, habitaciones, this.DNI, huespedes, contexto, "Pendiente de pago");
     }
 }

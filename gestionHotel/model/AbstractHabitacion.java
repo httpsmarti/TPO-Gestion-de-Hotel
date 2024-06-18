@@ -2,22 +2,30 @@ package model;
 
 import java.util.*;
 
-public abstract class AbstractHabitacion {
+public class AbstractHabitacion {
     private String idHabitacion;
     private Double precioPorNoche;
     private int cantPersonas;
+    private String tipo;
     private List<String> extras;
     private boolean disponible;
 
-    public AbstractHabitacion(String idHabitacion, Double precioPorNoche, int cantPersonas, List<String> extras) {
+    public AbstractHabitacion(String idHabitacion, Double precioPorNoche, int cantPersonas, String tipo, List<String> extras) {
         this.idHabitacion = idHabitacion;
         this.precioPorNoche = precioPorNoche;
         this.cantPersonas = cantPersonas;
+        this.tipo = tipo;
         this.extras = extras;
         this.disponible = true; // Por defecto, la habitación está disponible
     }
 
-    protected abstract String definirTipo();
+    public String getTipo() {
+		return tipo;
+	}
+    
+    public void setTipo(String tipo) {
+    	this.tipo = tipo;
+    }
 
     public String getIdHabitacion() {
         return idHabitacion;
