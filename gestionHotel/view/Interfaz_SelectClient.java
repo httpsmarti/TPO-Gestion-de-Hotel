@@ -28,8 +28,10 @@ import javax.swing.table.TableCellRenderer;
 public class Interfaz_SelectClient extends JFrame {
 
     private JPanel contentPane;
+    private JButton btnRegistrarse;
+    private JButton button;
     private JTable table;
-    static DefaultTableModel tablaFuncional = new DefaultTableModel();
+    private DefaultTableModel tablaFuncional = new DefaultTableModel();
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -60,15 +62,7 @@ public class Interfaz_SelectClient extends JFrame {
         panel.setBounds(301, 41, 539, 552);
         contentPane.add(panel);
 
-        JButton btnRegistrarse = new JButton("Continuar");
-        btnRegistrarse.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		Interfaz_PaginaCliente clienteP = new Interfaz_PaginaCliente();
-        		clienteP.setVisible(true);
-        		clienteP.setLocationRelativeTo(null); // Centrar la nueva ventana
-                dispose(); // Cerrar la ventana actual si lo deseas
-			}
-        });
+        btnRegistrarse = new JButton("Continuar");
         btnRegistrarse.setForeground(Color.WHITE);
         btnRegistrarse.setFont(new Font("Calibri", Font.BOLD, 16));
         btnRegistrarse.setBackground(new Color(70, 70, 70));
@@ -94,6 +88,7 @@ public class Interfaz_SelectClient extends JFrame {
 
         // Verificar si las columnas ya han sido agregadas
         if (tablaFuncional.getColumnCount() == 0) {
+        	tablaFuncional.addColumn("DNI");
             tablaFuncional.addColumn("Nombre");
             tablaFuncional.addColumn("Apellido");
         }
@@ -112,22 +107,29 @@ public class Interfaz_SelectClient extends JFrame {
         scrollPane.setViewportView(table);
 
         // Agregar el botón de volver
-        JButton button = new JButton("Volver");
-        button.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                Interfaz_Login login = new Interfaz_Login();
-                login.setVisible(true);
-                login.setLocationRelativeTo(null);
-                dispose();
-            }
-        });
-
+        button = new JButton("Volver");
+        
         button.setFont(new Font("Calibri", Font.BOLD, 14));
         button.setForeground(Color.WHITE);
         button.setBackground(new Color(70, 70, 70));
         button.setBounds(25, 22, 87, 34);
         contentPane.add(button);
+    }
+
+    public JButton getBtnRegistrarse() {
+        return btnRegistrarse;
+    }
+
+    public JButton getButton() {
+        return button;
+    }
+
+    public JTable getTable() {
+        return table;
+    }
+
+    public DefaultTableModel getTablaFuncional() {
+        return tablaFuncional;
     }
 
     // Renderer personalizado para las celdas

@@ -1,5 +1,5 @@
 package view;
-//ola :'D
+
 import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -8,6 +8,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
+import java.awt.Component;
+
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.MatteBorder;
@@ -73,16 +75,8 @@ public class Interfaz_Login extends JFrame {
 		panel.setLayout(null);
 		
 		JButton btnNewButton = new JButton("Cliente");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Interfaz_SelectClient registro = new Interfaz_SelectClient();
-                registro.setVisible(true);
-                registro.setLocationRelativeTo(null); // Centrar la nueva ventana
-                dispose(); // Cerrar la ventana actual si lo deseas
-			}
-		});
-
 		
+
 		btnNewButton.setForeground(new Color(255, 255, 255));
 		btnNewButton.setBackground(new Color(70, 70, 70));
 		btnNewButton.setFont(new Font("Calibri", Font.BOLD, 24));
@@ -90,14 +84,8 @@ public class Interfaz_Login extends JFrame {
 		panel.add(btnNewButton);
 		
 		JButton btnGerente = new JButton("Gerente");
-		btnGerente.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Interfaz_PaginaGerente registro = new Interfaz_PaginaGerente();
-                registro.setVisible(true);
-                registro.setLocationRelativeTo(null); // Centrar la nueva ventana
-                dispose(); // Cerrar la ventana actual si lo deseas
-			}
-		});
+		
+		
 		btnGerente.setForeground(Color.WHITE);
 		btnGerente.setFont(new Font("Calibri", Font.BOLD, 24));
 		btnGerente.setBackground(new Color(70, 70, 70));
@@ -114,6 +102,36 @@ public class Interfaz_Login extends JFrame {
 		contentPane.add(lblNewLabel_2);
 		lblNewLabel_2.setIcon(new ImageIcon(Interfaz_Login.class.getResource("/img/logo.png")));
 	}
+	
+    public JButton getBtnCliente() {
+        Component[] components = contentPane.getComponents();
+        for (Component component : components) {
+            if (component instanceof JPanel) {
+                Component[] panelComponents = ((JPanel) component).getComponents();
+                for (Component panelComponent : panelComponents) {
+                    if (panelComponent instanceof JButton && ((JButton) panelComponent).getText().equals("Cliente")) {
+                        return (JButton) panelComponent;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    public JButton getBtnGerente() {
+        Component[] components = contentPane.getComponents();
+        for (Component component : components) {
+            if (component instanceof JPanel) {
+                Component[] panelComponents = ((JPanel) component).getComponents();
+                for (Component panelComponent : panelComponents) {
+                    if (panelComponent instanceof JButton && ((JButton) panelComponent).getText().equals("Gerente")) {
+                        return (JButton) panelComponent;
+                    }
+                }
+            }
+        }
+        return null;
+    }
 }
 
 class BackgroundPanel extends JPanel {

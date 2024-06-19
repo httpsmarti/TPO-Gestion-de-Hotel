@@ -59,7 +59,7 @@ public class AbstractCuenta {
         this.mail = mail;
     }
     
-    public Reserva crearReserva(int idReserva, Double precio, List<AbstractHabitacion> habitaciones, Date fechaInicio, Date fechaFin, Date fechaReserva, List<Huesped> huespedes, PagoStrategy medioDePago) {
+    public Reserva crearReserva(String idReserva, Double precio, List<AbstractHabitacion> habitaciones, Date fechaInicio, Date fechaFin, Date fechaReserva, List<Huesped> huespedes, PagoStrategy medioDePago) {
         PagoContexto contexto = new PagoContexto();
         contexto.setEstrategia(medioDePago);
         return new Reserva(idReserva, precio, fechaInicio, fechaFin, fechaReserva, habitaciones, this.DNI, huespedes, contexto, "Pendiente de pago");

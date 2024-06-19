@@ -5,12 +5,12 @@ import java.util.*;
 import interfaces.PagoStrategy;
 
 public class Reserva {
-	private int idReserva;
+	private String idReserva;
 	private Double precio;
 	private Date fechaInicio;
 	private Date fechaFin;
 	private Date fechaReserva;
-	private List<AbstractHabitacion> habitaciones; //pasar a lista -- 
+	private List<AbstractHabitacion> habitaciones;
 	private String DNIClienteReserva;
 	private List<Huesped> huespedes;
 	private PagoContexto pagoContexto;
@@ -65,10 +65,10 @@ public class Reserva {
 		Estado = estado;
 	}
 	
-	public int getIdReserva() {
+	public String getIdReserva() {
 		return idReserva;
 	}
-	public void setEstado(int idReserva) {
+	public void setIdReserva(String idReserva) {
 		this.idReserva = idReserva;
 	}
 	public Double getPrecio() {
@@ -78,7 +78,7 @@ public class Reserva {
 		this.precio = precio;
 	}
 
-	public Reserva(int idReserva, Double precio, Date fechaInicio, Date fechaFin, Date fechaReserva, List<AbstractHabitacion> habitaciones,
+	public Reserva(String idReserva, Double precio, Date fechaInicio, Date fechaFin, Date fechaReserva, List<AbstractHabitacion> habitaciones,
 			String DNIClienteReserva, List<Huesped> huespedes, PagoContexto pagoContexto, String estado) {
 		super();
 		this.idReserva = idReserva;

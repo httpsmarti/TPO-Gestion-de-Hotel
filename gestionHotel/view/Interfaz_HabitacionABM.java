@@ -25,7 +25,7 @@ public class Interfaz_HabitacionABM extends JFrame {
 	private JPanel contentPane;
 	private JTable table;
 	static DefaultTableModel tablaFuncional = new DefaultTableModel();
-
+	private JButton btnAgregarHabitacion;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -58,7 +58,7 @@ public class Interfaz_HabitacionABM extends JFrame {
         table.setForeground(new Color(255, 255, 255));
         table.setModel(tablaFuncional);
         scrollPane.setViewportView(table);
-
+        // poner el if cant columnas == 0
         tablaFuncional.addColumn("Código");
         tablaFuncional.addColumn("Habitacion");
         tablaFuncional.addColumn("Descripción");
@@ -67,15 +67,15 @@ public class Interfaz_HabitacionABM extends JFrame {
         tablaFuncional.addColumn("Precio");
         tablaFuncional.addColumn("Activo");
 
-        JButton btnAgregarHabitacion = new JButton("Agregar Habitación");
-        btnAgregarHabitacion.addActionListener(new ActionListener() {
+        btnAgregarHabitacion = new JButton("Agregar Habitación");
+        /*btnAgregarHabitacion.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Mostrar la ventana de Agregar Habitación
                 Interfaz_AgregarHabitacion agregarHabitacion = new Interfaz_AgregarHabitacion();
                 agregarHabitacion.setVisible(true);
                 agregarHabitacion.setLocationRelativeTo(null); // Centrar la ventana secundaria
             }
-        });
+        });*/
 
         
         btnAgregarHabitacion.setForeground(new Color(128, 0, 128));
@@ -145,6 +145,7 @@ public class Interfaz_HabitacionABM extends JFrame {
         panel.add(btnAtras);
     }
 }
+
 
 class BackgroundPanel2 extends JPanel {
 	private Image backgroundImage;

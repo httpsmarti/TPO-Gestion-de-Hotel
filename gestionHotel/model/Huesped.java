@@ -1,37 +1,37 @@
 package model;
 
 public class Huesped {
-	private int idHuesped;
-	private int nombre;
-	private int apellido;
-	private int DNI;
+	private String idHuesped;
+	private String nombre;
+	private String apellido;
+	private String DNI;
 	
-	public int getIdHuesped() {
+	public String getIdHuesped() {
 		return idHuesped;
 	}
-	public void setIdHuesped(int idHuesped) {
+	public void setIdHuesped(String idHuesped) {
 		this.idHuesped = idHuesped;
 	}
-	public int getNombre() {
+	public String getNombre() {
 		return nombre;
 	}
-	public void setNombre(int nombre) {
+	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public int getApellido() {
+	public String getApellido() {
 		return apellido;
 	}
-	public void setApellido(int apellido) {
+	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
-	public int getDNI() {
+	public String getDNI() {
 		return DNI;
 	}
-	public void setDNI(int dNI) {
+	public void setDNI(String dNI) {
 		DNI = dNI;
 	}
 	
-	public Huesped(int idHuesped, int nombre, int apellido, int dNI) {
+	public Huesped(String idHuesped, String nombre, String apellido, String dNI) {
 		super();
 		this.idHuesped = idHuesped;
 		this.nombre = nombre;
