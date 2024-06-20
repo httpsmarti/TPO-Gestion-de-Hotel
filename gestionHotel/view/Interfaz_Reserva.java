@@ -26,6 +26,8 @@ public class Interfaz_Reserva extends JFrame {
 	private JPanel contentPane;
 	private JTable table;
 	static DefaultTableModel tablaFuncional = new DefaultTableModel();
+	private JButton btnSiguiente; 
+	private JButton btnAtras;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -78,8 +80,9 @@ public class Interfaz_Reserva extends JFrame {
 		contentPane.add(panel_3);
 		panel_3.setLayout(null);
 		
-		JButton btnNewButton = new JButton("Siguiente");
-		btnNewButton.addMouseListener(new MouseAdapter() {
+		JButton btnSiguiente = new JButton("Siguiente");
+		/*
+		btnSiguiente.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Interfaz_Detalle siguiente = new Interfaz_Detalle();
@@ -87,24 +90,25 @@ public class Interfaz_Reserva extends JFrame {
 				siguiente.setLocationRelativeTo(null); // Centrar la nueva ventana
                 dispose(); // Cerrar la ventana actual si lo deseas
             }
-        });
+        });*/
 		
-		btnNewButton.setForeground(new Color(255, 255, 255));
-		btnNewButton.setBackground(new Color(63, 63, 63));
-		btnNewButton.setFont(new Font("Calibri", Font.BOLD, 14));
-		btnNewButton.setBounds(1042, 11, 89, 34);
-		panel_3.add(btnNewButton);
+		btnSiguiente.setForeground(new Color(255, 255, 255));
+		btnSiguiente.setBackground(new Color(63, 63, 63));
+		btnSiguiente.setFont(new Font("Calibri", Font.BOLD, 14));
+		btnSiguiente.setBounds(1042, 11, 89, 34);
+		panel_3.add(btnSiguiente);
 		
-		JButton btnNewButton_1 = new JButton("Atrás");
-		btnNewButton_1.addMouseListener(new MouseAdapter() {
+		JButton btnAtras = new JButton("Atrás");
+		/*
+		btnAtras.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
         		Interfaz_PaginaGerente atras = new Interfaz_PaginaGerente();
         		atras.setVisible(true);
         		atras.setLocationRelativeTo(null); // Centrar la nueva ventana
                 dispose(); // Cerrar la ventana actual si lo deseas
+        
                 
-        /*
          HOLA JOACO ACA NECESITAMOS QUE CUANDO TOQUE EL BOTON DE ATRAS EN LA INTERFAZ DE RESERVA DESDE CLIENTE, ME REDIRIJA AL INICIO DE INTERFAZ DE CLIENTE, NO DE GERENTE
          
          ACA TE INSERTO EL CODIGO DE CUANDO TOQUE ATRAS ME LLEVE A CLIENTE (ESTO ES LO IMPORTANTE)
@@ -121,15 +125,15 @@ public class Interfaz_Reserva extends JFrame {
         		atras.setVisible(true);
         		atras.setLocationRelativeTo(null); // Centrar la nueva ventana
                 dispose(); // Cerrar la ventana actual si lo deseas
-         */
+
             }
-        });
+        });*/
 		
-		btnNewButton_1.setBackground(new Color(63, 63, 63));
-		btnNewButton_1.setForeground(new Color(255, 255, 255));
-		btnNewButton_1.setFont(new Font("Calibri", Font.PLAIN, 14));
-		btnNewButton_1.setBounds(22, 177, 76, 34);
-		contentPane.add(btnNewButton_1);
+		btnAtras.setBackground(new Color(63, 63, 63));
+		btnAtras.setForeground(new Color(255, 255, 255));
+		btnAtras.setFont(new Font("Calibri", Font.PLAIN, 14));
+		btnAtras.setBounds(22, 177, 76, 34);
+		contentPane.add(btnAtras);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(248, 211, 649, 339);

@@ -49,17 +49,17 @@ import java.awt.event.MouseEvent;
 
 	        JLabel lblNewLabel_2_1 = new JLabel("Mis Reservas");
 	        lblNewLabel_2_1.setFont(new Font("Calibri", Font.BOLD, 16));
-	        lblNewLabel_2_1.setBounds(227, 428, 90, 20);
+	        lblNewLabel_2_1.setBounds(222, 480, 90, 20);
 	        contentPane.add(lblNewLabel_2_1);
 
 	        JLabel lblNewLabel_2 = new JLabel("Reservar");
 	        lblNewLabel_2.setFont(new Font("Calibri", Font.BOLD, 16));
-	        lblNewLabel_2.setBounds(554, 428, 66, 20);
+	        lblNewLabel_2.setBounds(562, 480, 66, 20);
 	        contentPane.add(lblNewLabel_2);
 
 	        JLabel lblNewLabel = new JLabel("Cerrar Sesión");
 	        lblNewLabel.setFont(new Font("Calibri", Font.BOLD, 16));
-	        lblNewLabel.setBounds(854, 428, 90, 20);
+	        lblNewLabel.setBounds(864, 480, 90, 20);
 	        contentPane.add(lblNewLabel);
 
 	        JLabel lblNewLabel_1 = new JLabel("");
@@ -88,7 +88,7 @@ import java.awt.event.MouseEvent;
 	        btnVerMisReservas.setIcon(new ImageIcon(Interfaz_PaginaCliente.class.getResource("/img/misReservas.png")));
 	        btnVerMisReservas.setBackground(new Color(255, 255, 255));
 	        btnVerMisReservas.setFont(new Font("Calibri", Font.PLAIN, 15));
-	        btnVerMisReservas.setBounds(155, 289, 228, 215);
+	        btnVerMisReservas.setBounds(181, 307, 168, 162);
 	        contentPane.add(btnVerMisReservas);
 
 	        btnReservar = new JButton("\r\n");
@@ -104,14 +104,14 @@ import java.awt.event.MouseEvent;
 	        });
 	        btnReservar.setBackground(new Color(255, 255, 255));
 	        btnReservar.setFont(new Font("Calibri", Font.PLAIN, 15));
-	        btnReservar.setBounds(474, 289, 228, 215);
+	        btnReservar.setBounds(507, 307, 168, 162);
 	        contentPane.add(btnReservar);
 
 	        btnCerrarSesion = new JButton("");
 	        btnCerrarSesion.setIcon(new ImageIcon(Interfaz_PaginaCliente.class.getResource("/img/salida.png")));
 	        btnCerrarSesion.setBackground(new Color(255, 255, 255));
 	        btnCerrarSesion.setFont(new Font("Calibri", Font.PLAIN, 15));
-	        btnCerrarSesion.setBounds(787, 289, 228, 215);
+	        btnCerrarSesion.setBounds(828, 307, 168, 162);
 	        contentPane.add(btnCerrarSesion);
 	    }
 

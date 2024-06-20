@@ -28,6 +28,8 @@ import java.awt.event.ActionEvent;
 public class Interfaz_Login extends JFrame {
 
 	private JPanel contentPane;
+	private JButton btnCliente;
+	private JButton btnGerente;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -74,14 +76,14 @@ public class Interfaz_Login extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JButton btnNewButton = new JButton("Cliente");
+		JButton btnCliente = new JButton("Cliente");
 		
 
-		btnNewButton.setForeground(new Color(255, 255, 255));
-		btnNewButton.setBackground(new Color(70, 70, 70));
-		btnNewButton.setFont(new Font("Calibri", Font.BOLD, 24));
-		btnNewButton.setBounds(27, 107, 215, 76);
-		panel.add(btnNewButton);
+		btnCliente.setForeground(new Color(255, 255, 255));
+		btnCliente.setBackground(new Color(70, 70, 70));
+		btnCliente.setFont(new Font("Calibri", Font.BOLD, 24));
+		btnCliente.setBounds(27, 107, 215, 76);
+		panel.add(btnCliente);
 		
 		JButton btnGerente = new JButton("Gerente");
 		

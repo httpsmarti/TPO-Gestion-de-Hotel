@@ -44,10 +44,10 @@ public class Interfaz_EliminarHuesped extends JFrame {
         lblEliminarHusped.setBounds(338, 116, 129, 20);
         contentPane.add(lblEliminarHusped);
         
-        JLabel lblNombre_1_1 = new JLabel("DNI:");
-        lblNombre_1_1.setFont(new Font("Calibri", Font.PLAIN, 16));
-        lblNombre_1_1.setBounds(252, 176, 42, 17);
-        contentPane.add(lblNombre_1_1);
+        JLabel lblDNI = new JLabel("DNI:");
+        lblDNI.setFont(new Font("Calibri", Font.PLAIN, 16));
+        lblDNI.setBounds(252, 176, 42, 17);
+        contentPane.add(lblDNI);
         
         DNI_EliminarHuesped = new JTextField();
         DNI_EliminarHuesped.setColumns(10);

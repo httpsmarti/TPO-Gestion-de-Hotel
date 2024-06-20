@@ -25,8 +25,11 @@ public class Interfaz_HabitacionABM extends JFrame {
 	private JPanel contentPane;
 	private JTable table;
 	static DefaultTableModel tablaFuncional = new DefaultTableModel();
+	private JButton btnAtras;
 	private JButton btnAgregarHabitacion;
-
+	private JButton btnModificarHabitacion;
+	private JButton btnEliminarHabitacion;
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -58,7 +61,8 @@ public class Interfaz_HabitacionABM extends JFrame {
         table.setForeground(new Color(255, 255, 255));
         table.setModel(tablaFuncional);
         scrollPane.setViewportView(table);
-        // poner el if cant columnas == 0
+        
+        if (tablaFuncional.getColumnCount() == 0) {
         tablaFuncional.addColumn("Código");
         tablaFuncional.addColumn("Habitacion");
         tablaFuncional.addColumn("Descripción");
@@ -66,6 +70,7 @@ public class Interfaz_HabitacionABM extends JFrame {
         tablaFuncional.addColumn("Tipo");
         tablaFuncional.addColumn("Precio");
         tablaFuncional.addColumn("Activo");
+        }
 
         btnAgregarHabitacion = new JButton("Agregar Habitación");
         /*btnAgregarHabitacion.addActionListener(new ActionListener() {
@@ -85,6 +90,7 @@ public class Interfaz_HabitacionABM extends JFrame {
         contentPane.add(btnAgregarHabitacion);
 
         JButton btnEliminarHabitacion = new JButton("Eliminar Habitación");
+        /*
         btnEliminarHabitacion.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
                 // Mostrar la ventana de Agregar Habitación
@@ -93,6 +99,7 @@ public class Interfaz_HabitacionABM extends JFrame {
         		eliminarHabitacion.setLocationRelativeTo(null); // Centrar la ventana secundaria
             }
         });
+        */
         
         btnEliminarHabitacion.setForeground(new Color(128, 0, 128));
         btnEliminarHabitacion.setFont(new Font("Calibri", Font.PLAIN, 16));
@@ -101,6 +108,7 @@ public class Interfaz_HabitacionABM extends JFrame {
         contentPane.add(btnEliminarHabitacion);
 
         JButton btnModificarHabitacion = new JButton("Modificar Habitación");
+        /*
         btnModificarHabitacion.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
                 // Mostrar la ventana de Agregar Habitación
@@ -109,6 +117,7 @@ public class Interfaz_HabitacionABM extends JFrame {
         		modificarHabitacion.setLocationRelativeTo(null); // Centrar la ventana secundaria
             }
         });
+        */
         
         btnModificarHabitacion.setForeground(new Color(128, 0, 128));
         btnModificarHabitacion.setFont(new Font("Calibri", Font.PLAIN, 16));

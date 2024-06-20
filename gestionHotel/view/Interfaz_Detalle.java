@@ -40,10 +40,19 @@ public class Interfaz_Detalle extends JFrame {
     private JPanel contentPane;
     private JTable table;
     private JTable table_1;
+    private JButton btnReservar;
+    private JButton  btnResgistrarHuesped;
+    private JButton btnEliminarHuesped;
     private JRadioButton rdbtnCredito;
     private JRadioButton rdbtnDebito;
     private JRadioButton rdbtnTransferencia;
     private ButtonGroup grupoMetodoPago = new ButtonGroup();
+    private JButton btnAtras;
+    private JDateChooser dateCheckIn;
+    private JDateChooser dateCheckOut;
+    private JComboBox comboCantHuesped;
+    private JComboBox comboTipo;
+    
     static DefaultTableModel tablaFuncional = new DefaultTableModel();
     static DefaultTableModel tablaFuncional1 = new DefaultTableModel();
 
@@ -81,8 +90,8 @@ public class Interfaz_Detalle extends JFrame {
         lblDetalle.setBounds(482, 12, 175, 32);
         panel_1.add(lblDetalle);
         
-        JButton btnNewButton_1 = new JButton("Atrás");
-        btnNewButton_1.addMouseListener(new MouseAdapter() {
+        JButton btnAtras = new JButton("Atrás");/*
+        btnAtras.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent e) {
         		Interfaz_Reserva atras = new Interfaz_Reserva();
@@ -90,13 +99,13 @@ public class Interfaz_Detalle extends JFrame {
         		atras.setLocationRelativeTo(null); // Centrar la nueva ventana
                 dispose(); // Cerrar la ventana actual si lo deseas
             }
-        });
+        });*/
         
-        btnNewButton_1.setBounds(20, 8, 76, 34);
-        panel_1.add(btnNewButton_1);
-        btnNewButton_1.setForeground(Color.WHITE);
-        btnNewButton_1.setFont(new Font("Calibri", Font.PLAIN, 14));
-        btnNewButton_1.setBackground(new Color(63, 63, 63));
+        btnAtras.setBounds(20, 8, 76, 34);
+        panel_1.add(btnAtras);
+        btnAtras.setForeground(Color.WHITE);
+        btnAtras.setFont(new Font("Calibri", Font.PLAIN, 14));
+        btnAtras.setBackground(new Color(63, 63, 63));
         
         JPanel panel = new JPanel();
         panel.setLayout(null);
@@ -116,11 +125,12 @@ public class Interfaz_Detalle extends JFrame {
         contentPane.add(panel_3);
         
         JButton btnReservar = new JButton("Reservar");
+        /*
         btnReservar.addActionListener((ActionListener) new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				 JOptionPane.showMessageDialog(null, "Reserva realizada, vuelva pronto :)");
 			}
-		});
+		});*/
         
         btnReservar.setForeground(Color.WHITE);
         btnReservar.setFont(new Font("Calibri", Font.BOLD, 14));
@@ -165,6 +175,7 @@ public class Interfaz_Detalle extends JFrame {
         lblNewLabel.setBounds(23, 11, 68, 20);
         panel_2.add(lblNewLabel);
         
+        //elije las fechas
         JLabel lblCheckOut = new JLabel("Check Out\r\n");
         lblCheckOut.setFont(new Font("Calibri", Font.BOLD, 16));
         lblCheckOut.setBounds(247, 11, 82, 20);
@@ -200,11 +211,12 @@ public class Interfaz_Detalle extends JFrame {
         lblExtra_1.setBounds(23, 168, 68, 20);
         panel_2.add(lblExtra_1);
         
-        JComboBox comboBox = new JComboBox();
-        comboBox.setModel(new DefaultComboBoxModel(new String[] {"Habitacion", "Suite"}));
-        comboBox.setToolTipText("");
-        comboBox.setBounds(23, 116, 394, 32);
-        panel_2.add(comboBox);
+        // elije si es habitacion o suite
+        JComboBox comboTipo = new JComboBox();
+        comboTipo.setModel(new DefaultComboBoxModel(new String[] {"Habitacion", "Suite"}));
+        comboTipo.setToolTipText("");
+        comboTipo.setBounds(23, 116, 394, 32);
+        panel_2.add(comboTipo);
         
         JRadioButton rdbtnMinibar = new JRadioButton("Minibar");
         rdbtnMinibar.setFont(new Font("Calibri", Font.PLAIN, 15));
@@ -248,11 +260,11 @@ public class Interfaz_Detalle extends JFrame {
         cliente.setBounds(370, 20, 74, 14);
         panel_2_1.add(cliente);
         
-        JComboBox comboBox_2 = new JComboBox();
-        comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5"}));
-        comboBox_2.setToolTipText("");
-        comboBox_2.setBounds(143, 40, 74, 32);
-        panel_2_1.add(comboBox_2);
+        JComboBox comboCantHuesped = new JComboBox();
+        comboCantHuesped.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5"}));
+        comboCantHuesped.setToolTipText("");
+        comboCantHuesped.setBounds(143, 40, 74, 32);
+        panel_2_1.add(comboCantHuesped);
         
         JButton  btnResgistrarHuesped = new JButton("Registrar Huésped");
         btnResgistrarHuesped.addActionListener(new ActionListener() {

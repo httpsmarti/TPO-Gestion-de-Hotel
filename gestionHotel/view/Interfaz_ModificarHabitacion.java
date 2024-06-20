@@ -17,9 +17,13 @@ public class Interfaz_ModificarHabitacion extends JFrame {
 
     private JPanel contentPane;
     private JTextField textDNI;
-    private JTextField DNI_EliminarHuesped;
-    private JTextField textField;
-    private JTextField textField_1;
+    private JTextField id_ModificarHabitacion;
+    private JTextField nombre_ModificarHabitacion;
+    private JTextField descripcion_ModificarHabitacion;
+    private JSpinner spinner_ModificarHabitacion;
+    private JComboBox state_ModificarHabitacion;
+    private JButton btnGuardar;
+    private JLabel mensajeErrorDNI;
 
     public Interfaz_ModificarHabitacion() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -40,10 +44,10 @@ public class Interfaz_ModificarHabitacion extends JFrame {
         panel_1.setBounds(0, 332, 591, 38);
         contentPane.add(panel_1);
         
-        JButton btnAgregar = new JButton("Guardar Cambios");
-        btnAgregar.setBackground(new Color(255, 255, 255));
-        btnAgregar.setBounds(439, 8, 134, 23);
-        panel_1.add(btnAgregar);
+        JButton btnGuardar = new JButton("Guardar Cambios");
+        btnGuardar.setBackground(new Color(255, 255, 255));
+        btnGuardar.setBounds(439, 8, 134, 23);
+        panel_1.add(btnGuardar);
         
         JLabel lblEliminarHusped = new JLabel("Modificar Habitación");
         lblEliminarHusped.setFont(new Font("Calibri", Font.BOLD, 16));
@@ -55,10 +59,10 @@ public class Interfaz_ModificarHabitacion extends JFrame {
         lblNombre_1_1.setBounds(230, 61, 62, 17);
         contentPane.add(lblNombre_1_1);
         
-        DNI_EliminarHuesped = new JTextField();
-        DNI_EliminarHuesped.setColumns(10);
-        DNI_EliminarHuesped.setBounds(324, 53, 236, 25);
-        contentPane.add(DNI_EliminarHuesped);
+        id_ModificarHabitacion = new JTextField();
+        id_ModificarHabitacion.setColumns(10);
+        id_ModificarHabitacion.setBounds(324, 53, 236, 25);
+        contentPane.add(id_ModificarHabitacion);
         
         JLabel mensajeErrorDNI = new JLabel("* Campos vacios o Datos incorrectos");
         mensajeErrorDNI.setForeground(Color.RED);
@@ -71,20 +75,20 @@ public class Interfaz_ModificarHabitacion extends JFrame {
         lblNombre_1_1_1.setBounds(230, 107, 77, 17);
         contentPane.add(lblNombre_1_1_1);
         
-        textField = new JTextField();
-        textField.setColumns(10);
-        textField.setBounds(324, 99, 236, 25);
-        contentPane.add(textField);
+        nombre_ModificarHabitacion = new JTextField();
+        nombre_ModificarHabitacion.setColumns(10);
+        nombre_ModificarHabitacion.setBounds(324, 99, 236, 25);
+        contentPane.add(nombre_ModificarHabitacion);
         
         JLabel lblNombre_1_1_2 = new JLabel("Descripción:");
         lblNombre_1_1_2.setFont(new Font("Calibri", Font.PLAIN, 16));
         lblNombre_1_1_2.setBounds(230, 145, 84, 17);
         contentPane.add(lblNombre_1_1_2);
         
-        textField_1 = new JTextField();
-        textField_1.setColumns(10);
-        textField_1.setBounds(324, 145, 236, 52);
-        contentPane.add(textField_1);
+        descripcion_ModificarHabitacion = new JTextField();
+        descripcion_ModificarHabitacion.setColumns(10);
+        descripcion_ModificarHabitacion.setBounds(324, 145, 236, 52);
+        contentPane.add(descripcion_ModificarHabitacion);
         
         JLabel lblNombre_1_1_1_1 = new JLabel("Precio");
         lblNombre_1_1_1_1.setFont(new Font("Calibri", Font.PLAIN, 16));
@@ -96,15 +100,15 @@ public class Interfaz_ModificarHabitacion extends JFrame {
         lblNombre_1_1_1_1_1.setBounds(230, 252, 72, 17);
         contentPane.add(lblNombre_1_1_1_1_1);
         
-        JSpinner spinner = new JSpinner();
-        spinner.setBounds(324, 208, 77, 25);
-        contentPane.add(spinner);
+        JSpinner spinner_ModificarHabitacion = new JSpinner();
+        spinner_ModificarHabitacion.setBounds(324, 208, 77, 25);
+        contentPane.add(spinner_ModificarHabitacion);
         
-        JComboBox comboBox = new JComboBox();
-        comboBox.setModel(new DefaultComboBoxModel(new String[] {"Activo", "Inactivo"}));
-        comboBox.setToolTipText("");
-        comboBox.setBounds(324, 244, 239, 25);
-        contentPane.add(comboBox);
+        JComboBox state_ModificarHabitacion = new JComboBox();
+        state_ModificarHabitacion.setModel(new DefaultComboBoxModel(new String[] {"Activo", "Inactivo"}));
+        state_ModificarHabitacion.setToolTipText("");
+        state_ModificarHabitacion.setBounds(324, 244, 239, 25);
+        contentPane.add(state_ModificarHabitacion);
 
         // Centrar la ventana cuando se hace visible
         setLocationRelativeTo(null);

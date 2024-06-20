@@ -15,6 +15,8 @@ public class Interfaz_RegistrarHuesped extends JFrame {
     private JTextField textNombre;
     private JTextField textApellido;
     private JTextField textDNI;
+    private JButton btnRegistrar;
+    private JLabel mensajeYaExisteDNI;
 
     public Interfaz_RegistrarHuesped() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

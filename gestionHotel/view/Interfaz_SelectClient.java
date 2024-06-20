@@ -28,7 +28,7 @@ import javax.swing.table.TableCellRenderer;
 public class Interfaz_SelectClient extends JFrame {
 
     private JPanel contentPane;
-    private JButton btnRegistrarse;
+    private JButton btnSiguiente;
     private JButton button;
     private JTable table;
     private DefaultTableModel tablaFuncional = new DefaultTableModel();
@@ -62,12 +62,12 @@ public class Interfaz_SelectClient extends JFrame {
         panel.setBounds(301, 41, 539, 552);
         contentPane.add(panel);
 
-        btnRegistrarse = new JButton("Continuar");
-        btnRegistrarse.setForeground(Color.WHITE);
-        btnRegistrarse.setFont(new Font("Calibri", Font.BOLD, 16));
-        btnRegistrarse.setBackground(new Color(70, 70, 70));
-        btnRegistrarse.setBounds(29, 481, 483, 41);
-        panel.add(btnRegistrarse);
+        btnSiguiente = new JButton("Continuar");
+        btnSiguiente.setForeground(Color.WHITE);
+        btnSiguiente.setFont(new Font("Calibri", Font.BOLD, 16));
+        btnSiguiente.setBackground(new Color(70, 70, 70));
+        btnSiguiente.setBounds(29, 481, 483, 41);
+        panel.add(btnSiguiente);
 
         JPanel panel_1 = new JPanel();
         panel_1.setLayout(null);
@@ -117,7 +117,7 @@ public class Interfaz_SelectClient extends JFrame {
     }
 
     public JButton getBtnRegistrarse() {
-        return btnRegistrarse;
+        return btnSiguiente;
     }
 
     public JButton getButton() {

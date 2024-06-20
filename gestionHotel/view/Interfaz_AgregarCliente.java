@@ -22,6 +22,7 @@ public class Interfaz_AgregarCliente extends JFrame {
     private JTextField textEdad;
     private JTextField textTelefono;
     private JTextField textMail;
+    private JButton btnRegistrar;
 
     public Interfaz_AgregarCliente() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

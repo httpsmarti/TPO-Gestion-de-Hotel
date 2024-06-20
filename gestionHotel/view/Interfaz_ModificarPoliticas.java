@@ -21,14 +21,19 @@ import javax.swing.border.SoftBevelBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
+import javax.swing.DropMode;
 
-public class Interfaz_CrearCliente extends JFrame {
+public class Interfaz_ModificarPoliticas extends JFrame {
 
 	private JPanel contentPane;
-	private JTable table;
 	static DefaultTableModel tablaFuncional = new DefaultTableModel();
-	private JButton btnAgregarCliente;
+	private JButton btnAplicarCambios;
 	private JButton btnAtras;
+	private JTextField txtCantDiasTemprano;
+	private JTextField txtCantDiasTarde;
+	private JTextField txtDescuento;
+	private JTextField txtRecargo;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -44,7 +49,7 @@ public class Interfaz_CrearCliente extends JFrame {
 		});
 	}
 
-	public Interfaz_CrearCliente() {
+	public Interfaz_ModificarPoliticas() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1180, 683);
 		contentPane = new BackgroundPanel3();
@@ -69,9 +74,9 @@ public class Interfaz_CrearCliente extends JFrame {
 		panel_1.setBounds(0, 123, 1164, 43);
 		contentPane.add(panel_1);
 		
-		JLabel lblNewLabel = new JLabel("Crear Cliente");
+		JLabel lblNewLabel = new JLabel("Modificar Políticas");
 		lblNewLabel.setFont(new Font("Calibri", Font.BOLD, 18));
-		lblNewLabel.setBounds(564, 11, 106, 32);
+		lblNewLabel.setBounds(533, 11, 151, 32);
 		panel_1.add(lblNewLabel);
 		
 		JPanel panel_3 = new JPanel();
@@ -80,6 +85,13 @@ public class Interfaz_CrearCliente extends JFrame {
 		panel_3.setBounds(0, 588, 1164, 56);
 		contentPane.add(panel_3);
 		panel_3.setLayout(null);
+		
+		JButton btnAplicarCambios = new JButton("Aplicar cambios");
+		btnAplicarCambios.setForeground(Color.WHITE);
+		btnAplicarCambios.setFont(new Font("Calibri", Font.PLAIN, 15));
+		btnAplicarCambios.setBackground(new Color(63, 63, 63));
+		btnAplicarCambios.setBounds(962, 11, 161, 34);
+		panel_3.add(btnAplicarCambios);
 		
 		JButton btnAtras = new JButton("Atrás");
 		/*
@@ -99,47 +111,63 @@ public class Interfaz_CrearCliente extends JFrame {
 		btnAtras.setBounds(22, 177, 76, 34);
 		contentPane.add(btnAtras);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(285, 238, 649, 219);
-		contentPane.add(scrollPane);
-
-		// Definir las columnas antes de establecer el modelo en la tabla
-		if (tablaFuncional.getColumnCount() == 0) {
-        tablaFuncional.addColumn("Nombre");
-        tablaFuncional.addColumn("Apellido");
-        tablaFuncional.addColumn("DNI");
-        tablaFuncional.addColumn("Edad");
-        tablaFuncional.addColumn("Mail");
-        tablaFuncional.addColumn("Contacto");
-		}
-
-        table = new JTable(tablaFuncional);
-        table.setFont(new Font("Calibri", Font.PLAIN, 12));
-        table.setBackground(new Color(255, 255, 255));
-		scrollPane.setViewportView(table);
+		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(new Color(255, 255, 255));
+		panel_2.setBounds(218, 243, 720, 280);
+		contentPane.add(panel_2);
+		panel_2.setLayout(null);
 		
-		JButton btnAgregarCliente = new JButton("Agregar Cliente");
-		/*
-		btnAgregarCliente.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Interfaz_AgregarCliente agregarC = new Interfaz_AgregarCliente();
-				agregarC.setVisible(true);
-				agregarC.setLocationRelativeTo(null); // Centrar la ventana secundaria
-			}
-		});*/
+		JLabel lblNewLabel_2 = new JLabel("Cantidad de días temprano:");
+		lblNewLabel_2.setFont(new Font("Calibri", Font.PLAIN, 15));
+		lblNewLabel_2.setBounds(61, 67, 175, 26);
+		panel_2.add(lblNewLabel_2);
 		
-		btnAgregarCliente.setForeground(Color.WHITE);
-		btnAgregarCliente.setBackground(Color.DARK_GRAY);
-		btnAgregarCliente.setFont(new Font("Calibri", Font.PLAIN, 16));
-		btnAgregarCliente.setBounds(549, 502, 136, 43);
-		contentPane.add(btnAgregarCliente);
+		JLabel lblNewLabel_2_1 = new JLabel("Cantidad de días tarde:");
+		lblNewLabel_2_1.setFont(new Font("Calibri", Font.PLAIN, 15));
+		lblNewLabel_2_1.setBounds(61, 167, 175, 26);
+		panel_2.add(lblNewLabel_2_1);
+		
+		JLabel lblNewLabel_2_1_1 = new JLabel("Descuento (%)");
+		lblNewLabel_2_1_1.setFont(new Font("Calibri", Font.PLAIN, 15));
+		lblNewLabel_2_1_1.setBounds(426, 67, 98, 26);
+		panel_2.add(lblNewLabel_2_1_1);
+		
+		JLabel lblNewLabel_2_1_1_1 = new JLabel("Recargo (%)");
+		lblNewLabel_2_1_1_1.setFont(new Font("Calibri", Font.PLAIN, 15));
+		lblNewLabel_2_1_1_1.setBounds(426, 167, 86, 26);
+		panel_2.add(lblNewLabel_2_1_1_1);
+		
+		txtCantDiasTemprano = new JTextField();
+		txtCantDiasTemprano.setText("poner algo");
+		txtCantDiasTemprano.setBounds(246, 67, 86, 25);
+		panel_2.add(txtCantDiasTemprano);
+		txtCantDiasTemprano.setColumns(10);
+		
+		txtCantDiasTarde = new JTextField();
+		txtCantDiasTarde.setText("poner algo");
+		txtCantDiasTarde.setColumns(10);
+		txtCantDiasTarde.setBounds(246, 168, 86, 25);
+		panel_2.add(txtCantDiasTarde);
+		
+		txtDescuento = new JTextField();
+		txtDescuento.setText("poner algo");
+		txtDescuento.setColumns(10);
+		txtDescuento.setBounds(534, 68, 86, 25);
+		panel_2.add(txtDescuento);
+		
+		txtRecargo = new JTextField();
+		txtRecargo.setText("poner algo");
+		txtRecargo.setColumns(10);
+		txtRecargo.setBounds(534, 168, 86, 25);
+		panel_2.add(txtRecargo);
+
 	}
 }
 
-class BackgroundPanel9 extends JPanel {
+class BackgroundPanel20 extends JPanel {
 	private Image backgroundImage;
 
-	public BackgroundPanel9() {
+	public BackgroundPanel20() {
 		// Cargar la imagen
 		ImageIcon icon = new ImageIcon("C:\\Users\\marti\\Documents\\GitHub\\Gestion-Hotel\\gestionHoteles\\img\\blob-login.png");
 		backgroundImage = icon.getImage();
