@@ -307,7 +307,6 @@ public class Controller {
     	JComboBox comboBoxDisponible = agrHab.getComboBoxDisponible();
         JComboBox comboBoxTipo = agrHab.getComboBoxTipo();
         JSpinner spCantPersonas = agrHab.getSpCantPersonas();
-        JComboBox comboBoxExtras = agrHab.getComboBoxExtras();
     	
     }
     

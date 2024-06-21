@@ -25,7 +25,7 @@ public class Interfaz_HabitacionABM extends JFrame {
 	private JPanel contentPane;
 	
 	private JTable table;
-	private DefaultTableModel tablaFuncional = new DefaultTableModel();
+	static DefaultTableModel tablaFuncional = new DefaultTableModel();
 	private JButton btnAtras;
 	private JButton btnAgregarHabitacion;
 	private JButton btnModificarHabitacion;
@@ -173,7 +173,7 @@ public class Interfaz_HabitacionABM extends JFrame {
 		return table;
 	}
 
-	public DefaultTableModel getTablaFuncional() {
+	public static DefaultTableModel getTablaFuncional() {
 		return tablaFuncional;
 	}
 }

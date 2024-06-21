@@ -13,6 +13,7 @@ import java.awt.Font;
 import javax.swing.JSpinner;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JRadioButton;
 
 public class Interfaz_AgregarHabitacion extends JFrame {
 
@@ -25,12 +26,14 @@ public class Interfaz_AgregarHabitacion extends JFrame {
 	private JComboBox comboBoxDisponible;
     private JComboBox comboBoxTipo;
     private JSpinner spCantPersonas;
-    private JComboBox comboBoxExtras;
-    
+	private JRadioButton rdbtnInternet;
+    private JRadioButton rdbtnMinibar;
+    private JRadioButton rdbtnServicioDespertador;
+    private JRadioButton rdbtnTv;
 
     public Interfaz_AgregarHabitacion() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBounds(100, 100, 607, 408);
+        setBounds(100, 100, 607, 473);
         contentPane = new JPanel();
         contentPane.setBackground(new Color(206, 140, 255));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -44,7 +47,7 @@ public class Interfaz_AgregarHabitacion extends JFrame {
         JPanel panel_1 = new JPanel();
         panel_1.setLayout(null);
         panel_1.setBackground(new Color(231, 198, 255));
-        panel_1.setBounds(0, 332, 591, 38);
+        panel_1.setBounds(0, 396, 591, 38);
         contentPane.add(panel_1);
         
         btnAgregar = new JButton("Agregar");
@@ -84,7 +87,7 @@ public class Interfaz_AgregarHabitacion extends JFrame {
         
         JLabel lblNombre_1_1_1_1_1 = new JLabel("Disponible:");
         lblNombre_1_1_1_1_1.setFont(new Font("Calibri", Font.PLAIN, 16));
-        lblNombre_1_1_1_1_1.setBounds(230, 286, 77, 17);
+        lblNombre_1_1_1_1_1.setBounds(230, 354, 77, 17);
         contentPane.add(lblNombre_1_1_1_1_1);
         
         spPrecio = new JSpinner();
@@ -94,7 +97,7 @@ public class Interfaz_AgregarHabitacion extends JFrame {
         comboBoxDisponible = new JComboBox();
         comboBoxDisponible.setModel(new DefaultComboBoxModel(new String[] {"Si", "No"}));
         comboBoxDisponible.setToolTipText("");
-        comboBoxDisponible.setBounds(359, 280, 201, 25);
+        comboBoxDisponible.setBounds(359, 348, 201, 25);
         contentPane.add(comboBoxDisponible);
         
         spCantPersonas = new JSpinner();
@@ -112,11 +115,33 @@ public class Interfaz_AgregarHabitacion extends JFrame {
         lblNombre_1_1_1_2.setBounds(230, 248, 77, 17);
         contentPane.add(lblNombre_1_1_1_2);
         
-        comboBoxExtras = new JComboBox();
-        comboBoxExtras.setModel(new DefaultComboBoxModel(new String[] {"Servicio Despertador", "TV ", "Internet", "Minibar"}));
-        comboBoxExtras.setToolTipText("");
-        comboBoxExtras.setBounds(359, 244, 201, 25);
-        contentPane.add(comboBoxExtras);
+        rdbtnTv = new JRadioButton("TV");
+        rdbtnTv.setFont(new Font("Calibri", Font.PLAIN, 15));
+        rdbtnTv.setBackground(new Color(206, 140, 255));
+        rdbtnTv.setActionCommand("rdbtnTransferencia");
+        rdbtnTv.setBounds(521, 259, 47, 23);
+        contentPane.add(rdbtnTv);
+        
+        rdbtnInternet = new JRadioButton("Internet");
+        rdbtnInternet.setFont(new Font("Calibri", Font.PLAIN, 15));
+        rdbtnInternet.setBackground(new Color(206, 140, 255));
+        rdbtnInternet.setActionCommand("rdbtnDebito");
+        rdbtnInternet.setBounds(457, 299, 93, 23);
+        contentPane.add(rdbtnInternet);
+        
+        rdbtnServicioDespertador = new JRadioButton("Servicio Despertador");
+        rdbtnServicioDespertador.setFont(new Font("Calibri", Font.PLAIN, 15));
+        rdbtnServicioDespertador.setBackground(new Color(206, 140, 255));
+        rdbtnServicioDespertador.setActionCommand("rdbtnDebito");
+        rdbtnServicioDespertador.setBounds(359, 259, 160, 23);
+        contentPane.add(rdbtnServicioDespertador);
+        
+        rdbtnMinibar = new JRadioButton("Minibar");
+        rdbtnMinibar.setFont(new Font("Calibri", Font.PLAIN, 15));
+        rdbtnMinibar.setBackground(new Color(206, 140, 255));
+        rdbtnMinibar.setActionCommand("rdbtnCredito");
+        rdbtnMinibar.setBounds(359, 299, 82, 23);
+        contentPane.add(rdbtnMinibar);
 
         // Centrar la ventana cuando se hace visible
         setLocationRelativeTo(null);
@@ -124,9 +149,6 @@ public class Interfaz_AgregarHabitacion extends JFrame {
     
     public JTextField getTextDNI() {
 		return textDNI;
-	}
- 	public JComboBox getComboBoxExtras() {
-		return comboBoxExtras;
 	}
 
 	public JComboBox getComboBoxTipo() {
@@ -149,5 +171,21 @@ public class Interfaz_AgregarHabitacion extends JFrame {
 
 	public JButton getBtnAgregar() {
 		return btnAgregar;
+	}
+	
+    public JRadioButton getRdbtnInternet() {
+		return rdbtnInternet;
+	}
+
+	public JRadioButton getRdbtnMinibar() {
+		return rdbtnMinibar;
+	}
+
+	public JRadioButton getRdbtnServicioDespertador() {
+		return rdbtnServicioDespertador;
+	}
+
+	public JRadioButton getRdbtnTv() {
+		return rdbtnTv;
 	}
 }
