@@ -73,6 +73,8 @@ public class main {
 		
         reservas.add(reserva1);
         
-		Controller controller = new Controller(clientes, gerente, habitaciones, reservas, huespedes, gestorNotif, auditoria, vista);
+        PoliticasReserva politicas = new PoliticasReserva(7, 7, 10, 20);
+        
+		Controller controller = new Controller(clientes, gerente, habitaciones, reservas, huespedes, gestorNotif, auditoria, politicas, vista);
 	}
 }

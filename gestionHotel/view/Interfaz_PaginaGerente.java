@@ -132,7 +132,7 @@ public class Interfaz_PaginaGerente extends JFrame {
         lblNewLabel_2_1_1_2.setBounds(665, 582, 132, 20);
         contentPane.add(lblNewLabel_2_1_1_2);
         
-        JButton btnModificarPoliticas = new JButton("");
+        btnModificarPoliticas = new JButton("");
         /*
         btnModificarPoliticas.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
@@ -162,6 +162,10 @@ public class Interfaz_PaginaGerente extends JFrame {
 
     public JButton getBtnABMClientes() {
         return btnABMClientes;
+    }
+    
+    public JButton getBtnModificarPoliticas() {
+    	return btnModificarPoliticas;
     }
 }
 

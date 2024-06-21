@@ -6,7 +6,10 @@ import view.*;
 import java.util.*;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JSpinner;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import java.awt.event.ActionEvent;
@@ -23,11 +26,11 @@ public class Controller {
     private List<Huesped> huespedes;
     private GestorDeNotificaciones gestorNotif;
     private Auditoria auditoria;
-    
+    private PoliticasReserva politicas;
     private Cliente clienteActual;
     
     public Controller(List<Cliente> clientes, Gerente gerente, List<AbstractHabitacion> habitaciones,
-            List<Reserva> reservas, List<Huesped> huespedes, GestorDeNotificaciones gestorNotif, Auditoria auditoria, Interfaz_Login vista) {
+            List<Reserva> reservas, List<Huesped> huespedes, GestorDeNotificaciones gestorNotif, Auditoria auditoria, PoliticasReserva politicas, Interfaz_Login vista) {
         super();
         this.clientes = clientes;
         this.gerente = gerente;
@@ -35,6 +38,7 @@ public class Controller {
         this.reservas = reservas;
         this.huespedes = huespedes;
         this.gestorNotif = gestorNotif;
+        this.politicas = politicas;
         this.auditoria = auditoria;
         
         iniciarVistaLogin();
@@ -66,7 +70,7 @@ public class Controller {
     		});
         }
     }
-       
+    
     private void iniciarVistaSelectClient() {
     	Interfaz_SelectClient sClient = new Interfaz_SelectClient();
     	sClient.setVisible(true);
@@ -131,8 +135,240 @@ public class Controller {
         }
         return null;
     }
+    
+    private void iniciarVistaGerente() { //falta terminar, por ahora paso al cliente
+    	Interfaz_PaginaGerente registro = new Interfaz_PaginaGerente();
+    	registro.setVisible(true);
+        registro.setLocationRelativeTo(null);
+        JButton btnABMHabitaciones = registro.getBtnABM();
+        JButton btnReserva = registro.getBtnReserva();
+        JButton btnCerrarSession = registro.getBtnCerrarSession();
+        JButton btnABMClientes = registro.getBtnABMClientes();
+        JButton btnModificarPoliticas = registro.getBtnModificarPoliticas();
+        
+        if (btnABMHabitaciones != null) {
+        	btnABMHabitaciones.addActionListener(new ActionListener() {
+    			public void actionPerformed(ActionEvent e) {
+    				registro.dispose();
+                    iniciarVistaHabitacionABM(); //faltan agregar y modificar
+    			}
+    		});
+        }
+        
+        if (btnReserva!= null) {
+        	btnReserva.addActionListener(new ActionListener() {
+        		public void actionPerformed(ActionEvent e) {
+        			registro.dispose();
+                	iniciarVistaReserva(); // sin terminar
+    			}
+        	});
+        }
+        
+        if (btnABMClientes != null) {
+        	btnABMClientes.addActionListener(new ActionListener() {
+        		public void actionPerformed(ActionEvent e) {
+        			registro.dispose();
+        			iniciarVistaClientesABM(); //no hay vista para esto
+    			}
+        	});
+        }
+        
+        if (btnCerrarSession != null) {
+        	btnCerrarSession.addActionListener(new ActionListener() {
+    			public void actionPerformed(ActionEvent e) {
+    				registro.dispose();
+                    iniciarVistaLogin();
+    			}
+    		});
+        }
+        
+        if (btnModificarPoliticas != null) {
+        	btnModificarPoliticas.addActionListener(new ActionListener() {
+    			public void actionPerformed(ActionEvent e) {
+    				registro.dispose();
+                    iniciarVistaPoliticas();
+    			}
+    		});
+        }
+    }
+    
+    private void iniciarVistaPoliticas() {
+    	Interfaz_ModificarPoliticas modPoliticas = new Interfaz_ModificarPoliticas();
+		modPoliticas.setVisible(true);
+		modPoliticas.setLocationRelativeTo(null);
+		
+		JButton btnAplicarCambios = modPoliticas.getBtnAplicarCambios();
+		JButton btnAtras = modPoliticas.getBtnAtras();
+		JTextField txtCantDiasTemprano = modPoliticas.getTxtCantDiasTemprano();
+		JTextField txtCantDiasTarde = modPoliticas.getTxtCantDiasTarde();
+		JTextField txtDescuento = modPoliticas.getTxtDescuento();
+		JTextField txtRecargo = modPoliticas.getTxtRecargo();
+		
+		btnAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				modPoliticas.dispose();
+                iniciarVistaGerente();
+			}
+		});
+		
+		btnAplicarCambios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(txtCantDiasTemprano.getText() != "" &&
+				txtCantDiasTarde.getText() != "" &&
+				txtDescuento.getText() != "" &&
+				txtRecargo.getText() != "") {
+					modPoliticas.dispose();
+					politicas = new PoliticasReserva(Integer.parseInt(txtCantDiasTemprano.getText()), 
+													Integer.parseInt(txtCantDiasTarde.getText()), 
+													Float.parseFloat(txtDescuento.getText()), 
+													Float.parseFloat(txtRecargo.getText()));
+				}
+			}
+		});
+    }
+    
+    private void iniciarVistaHabitacionABM() { //falta agregar y modificar
+    	Interfaz_HabitacionABM habABM = new Interfaz_HabitacionABM();
+    	habABM.setVisible(true);
+        habABM.setLocationRelativeTo(null);
+        JButton btnAtras = habABM.getBtnAtras(); // me lleva a PaginaGerente
+        JButton btnAgregar = habABM.getBtnAgregarHabitacion(); // Interfaz_AgregarHabitacion
+        JButton btnModificar = habABM.getBtnModificarHabitacion(); // Interfaz_ModificarHabitacion
+        JButton btnEliminar = habABM.getBtnEliminarHabitacion(); // Interfaz_EliminarHabitacion
+        
+        if (btnAtras != null) {
+        	btnAtras.addActionListener(new ActionListener() {
+    			public void actionPerformed(ActionEvent e) {
+    				habABM.dispose();
+    				iniciarVistaGerente();
+    			}
+    		});
+        }
 
-    private void iniciarVistaCliente() {
+        if (btnAgregar != null) {
+        	btnAgregar.addActionListener(new ActionListener() {
+    			public void actionPerformed(ActionEvent e) {
+    				iniciarVistaAgregarHabitacion(); //sin terminar
+    			}
+    		});
+        }
+
+        if (btnModificar != null) {
+        	btnModificar.addActionListener(new ActionListener() {
+    			public void actionPerformed(ActionEvent e) {
+    				iniciarVistaModificarHabitacion(); //sin terminar
+    			}
+    		});
+        }
+
+        if (btnEliminar != null) {
+        	btnEliminar.addActionListener(new ActionListener() {
+    			public void actionPerformed(ActionEvent e) {
+    				iniciarVistaEliminarHabitacion();
+    			}
+    		});
+        }   
+    }
+    
+    private void iniciarVistaAgregarHabitacion() { //HABLAR DESPUES CON MARTIS, VER NOTAS
+    	Interfaz_AgregarHabitacion agrHab = new Interfaz_AgregarHabitacion();
+    	agrHab.setVisible(true);
+    	agrHab.setLocationRelativeTo(null);
+    	JSpinner spPrecio = agrHab.getSpPrecio();
+    	JTextField txtCodigo = agrHab.getTxtCodigo();
+    	JTextField txtNombre = agrHab.getTxtNombre();
+    	JTextField txtDescripcion = agrHab.getTxtDescripcion();
+    	JButton btnAgregar = agrHab.getBtnAgregar();
+    	JComboBox comboBoxActivo = agrHab.getComboBoxActivo();
+    	
+    	/*btnAgregar.addActionListener(new ActionListener() {
+    		public void actionPerformed(ActionEvent e) {
+    			if (spPrecio.getSelectedItem() != null &&
+    				txtCodigo.getText() != "" &&
+    				txtNombre) {
+    				
+    			}
+    		}
+    	});*/
+    }
+    
+    private void iniciarVistaModificarHabitacion() { //mismo problema que en agregar habitacion
+    	Interfaz_ModificarHabitacion modHab = new Interfaz_ModificarHabitacion();
+    	modHab.setVisible(true);
+    	modHab.setLocationRelativeTo(null);
+    }
+    
+    private void iniciarVistaEliminarHabitacion() {
+    	Interfaz_EliminarHabitacion eliHab = new Interfaz_EliminarHabitacion();
+    	eliHab.setVisible(true);
+    	eliHab.setLocationRelativeTo(null);
+    	JTextField id = eliHab.getID_EliminarHabitacion();
+    	JButton btnEliminar = eliHab.getBtnEliminar();
+    	btnEliminar.addActionListener(new ActionListener() {
+    		public void actionPerformed(ActionEvent e) {
+    			eliminarHabitacionById(id.getText());
+    		}
+    	});
+    }
+    
+    private void eliminarHabitacionById(String id) {
+    	for (AbstractHabitacion hab : habitaciones) {
+    		if (hab.getIdHabitacion().equals(id)) {
+    			habitaciones.remove(hab);
+    		}
+    	}
+    }
+    
+    
+    public void iniciarVistaReserva() { //hablar con martis ---- voy a tener que pasarle al detalle de la reserva los datos de la habitación para que desde ahí pueda crear la reserva entera
+    	Interfaz_Reserva interReserva = new Interfaz_Reserva();
+    	interReserva.setVisible(true);
+    	interReserva.setLocationRelativeTo(null);
+    	
+    	DefaultTableModel tablaAñadir = interReserva.getTablaFuncional();
+    	//DefaultTableModel tablaRemover = interReserva.getTablaRemover(); //esto es para la tabla que muestra las habitaciones que ya tengo seleccionadas
+    	JButton btnAtras = interReserva.getBtnAtras();
+    	JButton btnSiguiente = interReserva.getBtnSiguiente();
+    	
+    	//aca agrego las habitaciones a la tablaAñadir
+    	if (tablaAñadir != null) {
+    		for (AbstractHabitacion hab : habitaciones) {
+    			Object[] linea = {}; //estas lineas coinciden con las columnas de la tabla, que deberian coincidir mejor con las caracteristicas de una habitacion
+    			tablaAñadir.addRow(linea);
+    		}
+    	}
+    	
+    	List<AbstractHabitacion> listaHabitaciones = new ArrayList<AbstractHabitacion>(); //aca guardo las habitaciones que añado, despues lo agrego todo a la tabla
+    	
+    	btnAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (clienteActual == null) {
+					interReserva.dispose();
+	                iniciarVistaGerente();
+				} else {
+					interReserva.dispose();
+	                iniciarVistaCliente();
+				}
+				
+			}
+		});
+    	
+    	btnSiguiente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				interReserva.dispose();
+                //iniciarVistaReservaDetalle(listaHabitaciones); //again, aca paso la lista de habitaciones para que pueda hacer bien la reserva
+			}
+		});
+    	
+    	
+    }
+    
+    public void iniciarVistaClientesABM() {
+    	//me faltaría la pantalla de clientes abm...
+    }
+    
+    
+    private void iniciarVistaCliente() { //LO SIGO CUANDO TERMINE CON LA PARTE DEL GERENTE
     	Interfaz_PaginaCliente pagCliente = new Interfaz_PaginaCliente();
     	JButton btnVerMisReservas = pagCliente.getBtnVerMisReservas();
     	JButton btnReservar = pagCliente.getBtnReservar();
@@ -144,7 +380,7 @@ public class Controller {
     		btnVerMisReservas.addActionListener(new ActionListener() {
     			public void actionPerformed(ActionEvent e) {
     				pagCliente.dispose();
-    				//no hace nada xd
+    				//martis haceme la view porfa D:
     			}
     		});
     	}
@@ -153,8 +389,7 @@ public class Controller {
 			btnReservar.addActionListener(new ActionListener() {
     			public void actionPerformed(ActionEvent e) {
     				pagCliente.dispose();
-    				//iniciarVistaReservas();
-    				//me lleva a Interfaz_Reserva
+    				iniciarVistaReserva();
     			}
     		});
     	}
@@ -169,48 +404,8 @@ public class Controller {
 		}
     }
     
-    private void iniciarVistaGerente() {
-    	Interfaz_PaginaGerente registro = new Interfaz_PaginaGerente();
-    	registro.setVisible(true);
-        registro.setLocationRelativeTo(null);
-        JButton btnABMHabitaciones = registro.getBtnABM();
-        JButton btnReserva = registro.getBtnReserva();
-        JButton btnCerrarSession = registro.getBtnCerrarSession();
-        JButton btnABMClientes = registro.getBtnABMClientes();
-                
-        
-        if (btnABMHabitaciones != null) {
-        	btnABMHabitaciones.addActionListener(new ActionListener() {
-    			public void actionPerformed(ActionEvent e) {
-    				registro.dispose();
-                    iniciarVistaHabitacionABM();
-    			}
-    		});
-        }
-        if (btnReserva!= null) {
-        	//registro.dispose();
-        	//iniciarVistaReserva();
-        }
-        
-        if (btnABMClientes != null) {
-        	//registro.dispose();
-        	//iniciarVistaClientesABM();
-        }
-        
-        if (btnCerrarSession != null) {
-        	btnCerrarSession.addActionListener(new ActionListener() {
-    			public void actionPerformed(ActionEvent e) {
-    				registro.dispose();
-                    iniciarVistaLogin();
-    			}
-    		});
-        }
-    }
     
-    private void iniciarVistaHabitacionABM() {
-    	Interfaz_HabitacionABM habABM = new Interfaz_HabitacionABM();
-    	habABM.setVisible(true);
-        habABM.setLocationRelativeTo(null);
-        //LISTENERS DE ESTA VIEW
-    }
+    
+    
+    
 }

@@ -16,6 +16,7 @@ import javax.swing.DefaultComboBoxModel;
 public class Interfaz_AgregarCliente extends JFrame {
 
     private JPanel contentPane;
+    
     private JTextField textNombre;
     private JTextField textApellido;
     private JTextField textDNI;
@@ -23,6 +24,7 @@ public class Interfaz_AgregarCliente extends JFrame {
     private JTextField textTelefono;
     private JTextField textMail;
     private JButton btnRegistrar;
+    private JComboBox ContactPreferece;
 
     public Interfaz_AgregarCliente() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -59,7 +61,7 @@ public class Interfaz_AgregarCliente extends JFrame {
         contentPane.add(panel_1);
         panel_1.setLayout(null);
         
-        JButton btnRegistrar = new JButton("Registrar");
+        btnRegistrar = new JButton("Registrar");
         btnRegistrar.setFont(new Font("Calibri", Font.PLAIN, 13));
         btnRegistrar.setBackground(new Color(255, 255, 255));
         btnRegistrar.setBounds(667, 11, 93, 23);
@@ -120,10 +122,43 @@ public class Interfaz_AgregarCliente extends JFrame {
         lblNombre_1_1_1_1_1_1.setBounds(244, 279, 170, 17);
         contentPane.add(lblNombre_1_1_1_1_1_1);
         
-        JComboBox ContactPreferece = new JComboBox();
+        ContactPreferece = new JComboBox();
         ContactPreferece.setModel(new DefaultComboBoxModel(new String[] {"SMS", "Whatsapp", "Email"}));
         ContactPreferece.setToolTipText("");
         ContactPreferece.setBounds(424, 275, 334, 26);
         contentPane.add(ContactPreferece);
     }
+    
+    public JTextField getTextNombre() {
+		return textNombre;
+	}
+
+	public JTextField getTextApellido() {
+		return textApellido;
+	}
+
+	public JTextField getTextDNI() {
+		return textDNI;
+	}
+
+	public JTextField getTextEdad() {
+		return textEdad;
+	}
+
+	public JTextField getTextTelefono() {
+		return textTelefono;
+	}
+
+	public JTextField getTextMail() {
+		return textMail;
+	}
+
+	public JButton getBtnRegistrar() {
+		return btnRegistrar;
+	}
+
+	public JComboBox getContactPreferece() {
+		return ContactPreferece;
+	}
+    
 }

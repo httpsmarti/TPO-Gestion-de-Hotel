@@ -29,6 +29,9 @@ public class Interfaz_CrearCliente extends JFrame {
 	static DefaultTableModel tablaFuncional = new DefaultTableModel();
 	private JButton btnAgregarCliente;
 	private JButton btnAtras;
+	private JScrollPane scrollPane;
+
+	
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -81,7 +84,7 @@ public class Interfaz_CrearCliente extends JFrame {
 		contentPane.add(panel_3);
 		panel_3.setLayout(null);
 		
-		JButton btnAtras = new JButton("Atrás");
+		btnAtras = new JButton("Atrás");
 		/*
 		btnAtras.addMouseListener(new MouseAdapter() {
 			@Override
@@ -99,7 +102,7 @@ public class Interfaz_CrearCliente extends JFrame {
 		btnAtras.setBounds(22, 177, 76, 34);
 		contentPane.add(btnAtras);
 		
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		scrollPane.setBounds(285, 238, 649, 219);
 		contentPane.add(scrollPane);
 
@@ -118,7 +121,7 @@ public class Interfaz_CrearCliente extends JFrame {
         table.setBackground(new Color(255, 255, 255));
 		scrollPane.setViewportView(table);
 		
-		JButton btnAgregarCliente = new JButton("Agregar Cliente");
+		btnAgregarCliente = new JButton("Agregar Cliente");
 		/*
 		btnAgregarCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -134,6 +137,27 @@ public class Interfaz_CrearCliente extends JFrame {
 		btnAgregarCliente.setBounds(549, 502, 136, 43);
 		contentPane.add(btnAgregarCliente);
 	}
+	
+	public JTable getTable() {
+		return table;
+	}
+
+	public static DefaultTableModel getTablaFuncional() {
+		return tablaFuncional;
+	}
+
+	public JButton getBtnAgregarCliente() {
+		return btnAgregarCliente;
+	}
+
+	public JButton getBtnAtras() {
+		return btnAtras;
+	}
+	
+	public JScrollPane getScrollPane() {
+		return scrollPane;
+	}
+	
 }
 
 class BackgroundPanel9 extends JPanel {

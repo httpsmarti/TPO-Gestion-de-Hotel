@@ -54,10 +54,9 @@ public class Interfaz_EliminarHabitacion extends JFrame {
         contentPane.add(lblCodigo);
         
         ID_EliminarHabitacion = new JTextField();
-        /*
         ID_EliminarHabitacion.setColumns(10);
         ID_EliminarHabitacion.setBounds(312, 137, 236, 25);
-        contentPane.add(ID_EliminarHabitacion);*/
+        contentPane.add(ID_EliminarHabitacion);
         
         JLabel mensajeErrorDNI = new JLabel("* Campos vacios o Datos incorrectos");
         mensajeErrorDNI.setForeground(Color.RED);
@@ -67,5 +66,13 @@ public class Interfaz_EliminarHabitacion extends JFrame {
 
         // Centrar la ventana cuando se hace visible
         setLocationRelativeTo(null);
+    }
+    
+    public JButton getBtnEliminar() {
+    	return btnEliminar;
+    }
+    
+    public JTextField getID_EliminarHabitacion() {
+    	return ID_EliminarHabitacion;
     }
 }

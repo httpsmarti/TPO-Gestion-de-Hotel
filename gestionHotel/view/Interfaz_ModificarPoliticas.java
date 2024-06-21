@@ -27,9 +27,9 @@ import javax.swing.DropMode;
 public class Interfaz_ModificarPoliticas extends JFrame {
 
 	private JPanel contentPane;
-	static DefaultTableModel tablaFuncional = new DefaultTableModel();
 	private JButton btnAplicarCambios;
 	private JButton btnAtras;
+
 	private JTextField txtCantDiasTemprano;
 	private JTextField txtCantDiasTarde;
 	private JTextField txtDescuento;
@@ -93,7 +93,7 @@ public class Interfaz_ModificarPoliticas extends JFrame {
 		btnAplicarCambios.setBounds(962, 11, 161, 34);
 		panel_3.add(btnAplicarCambios);
 		
-		JButton btnAtras = new JButton("Atrás");
+		btnAtras = new JButton("Atrás");
 		/*
 		btnAtras.addMouseListener(new MouseAdapter() {
 			@Override
@@ -160,8 +160,34 @@ public class Interfaz_ModificarPoliticas extends JFrame {
 		txtRecargo.setColumns(10);
 		txtRecargo.setBounds(534, 168, 86, 25);
 		panel_2.add(txtRecargo);
-
 	}
+	
+	
+	public JButton getBtnAplicarCambios() {
+		return btnAplicarCambios;
+	}
+
+	public JButton getBtnAtras() {
+		return btnAtras;
+	}
+
+	public JTextField getTxtCantDiasTemprano() {
+		return txtCantDiasTemprano;
+	}
+
+	public JTextField getTxtCantDiasTarde() {
+		return txtCantDiasTarde;
+	}
+
+	public JTextField getTxtDescuento() {
+		return txtDescuento;
+	}
+
+	public JTextField getTxtRecargo() {
+		return txtRecargo;
+	}
+
+
 }
 
 class BackgroundPanel20 extends JPanel {

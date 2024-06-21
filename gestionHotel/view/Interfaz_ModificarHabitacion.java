@@ -16,13 +16,13 @@ import javax.swing.DefaultComboBoxModel;
 public class Interfaz_ModificarHabitacion extends JFrame {
 
     private JPanel contentPane;
-    private JTextField textDNI;
     private JTextField id_ModificarHabitacion;
     private JTextField nombre_ModificarHabitacion;
     private JTextField descripcion_ModificarHabitacion;
     private JSpinner spinner_ModificarHabitacion;
     private JComboBox state_ModificarHabitacion;
     private JButton btnGuardar;
+    
     private JLabel mensajeErrorDNI;
 
     public Interfaz_ModificarHabitacion() {

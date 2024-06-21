@@ -89,7 +89,7 @@ public class Interfaz_HabitacionABM extends JFrame {
         btnAgregarHabitacion.setBounds(946, 258, 181, 40);
         contentPane.add(btnAgregarHabitacion);
 
-        JButton btnEliminarHabitacion = new JButton("Eliminar Habitación");
+        btnEliminarHabitacion = new JButton("Eliminar Habitación");
         /*
         btnEliminarHabitacion.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
@@ -107,7 +107,7 @@ public class Interfaz_HabitacionABM extends JFrame {
         btnEliminarHabitacion.setBounds(946, 327, 181, 40);
         contentPane.add(btnEliminarHabitacion);
 
-        JButton btnModificarHabitacion = new JButton("Modificar Habitación");
+        btnModificarHabitacion = new JButton("Modificar Habitación");
         /*
         btnModificarHabitacion.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
@@ -136,8 +136,8 @@ public class Interfaz_HabitacionABM extends JFrame {
         lblNewLabel.setBounds(430, 23, 286, 23);
         panel.add(lblNewLabel);
         
-        JButton btnAtras = new JButton("Atrás");
-        btnAtras.addMouseListener(new MouseAdapter() {
+        btnAtras = new JButton("Atrás");
+        /*btnAtras.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent e) {
         		Interfaz_PaginaGerente atras = new Interfaz_PaginaGerente();
@@ -145,7 +145,7 @@ public class Interfaz_HabitacionABM extends JFrame {
         		atras.setLocationRelativeTo(null); // Centrar la nueva ventana
                 dispose(); // Cerrar la ventana actual si lo deseas
             }
-        });
+        });*/
         
         btnAtras.setForeground(new Color(255, 255, 255));
         btnAtras.setBackground(new Color(62, 62, 62));
@@ -153,6 +153,22 @@ public class Interfaz_HabitacionABM extends JFrame {
         btnAtras.setBounds(20, 21, 77, 28);
         panel.add(btnAtras);
     }
+	
+	public JButton getBtnAtras() {
+		return btnAtras;
+	}
+
+	public JButton getBtnAgregarHabitacion() {
+		return btnAgregarHabitacion;
+	}
+
+	public JButton getBtnModificarHabitacion() {
+		return btnModificarHabitacion;
+	}
+
+	public JButton getBtnEliminarHabitacion() {
+		return btnEliminarHabitacion;
+	}
 }
 
 

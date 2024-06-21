@@ -25,6 +25,7 @@ public class Interfaz_Reserva extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
+	
 	static DefaultTableModel tablaFuncional = new DefaultTableModel();
 	private JButton btnSiguiente; 
 	private JButton btnAtras;
@@ -80,7 +81,7 @@ public class Interfaz_Reserva extends JFrame {
 		contentPane.add(panel_3);
 		panel_3.setLayout(null);
 		
-		JButton btnSiguiente = new JButton("Siguiente");
+		btnSiguiente = new JButton("Siguiente");
 		/*
 		btnSiguiente.addMouseListener(new MouseAdapter() {
 			@Override
@@ -98,7 +99,7 @@ public class Interfaz_Reserva extends JFrame {
 		btnSiguiente.setBounds(1042, 11, 89, 34);
 		panel_3.add(btnSiguiente);
 		
-		JButton btnAtras = new JButton("Atrás");
+		btnAtras = new JButton("Atrás");
 		/*
 		btnAtras.addMouseListener(new MouseAdapter() {
 			@Override
@@ -158,6 +159,19 @@ public class Interfaz_Reserva extends JFrame {
 		lblSeleccioneUna.setBounds(837, 561, 297, 26);
 		contentPane.add(lblSeleccioneUna);
 	}
+	
+	public DefaultTableModel getTablaFuncional() {
+		return tablaFuncional;
+	}
+
+	public JButton getBtnSiguiente() {
+		return btnSiguiente;
+	}
+
+	public JButton getBtnAtras() {
+		return btnAtras;
+	}
+	
 }
 
 class BackgroundPanel3 extends JPanel {

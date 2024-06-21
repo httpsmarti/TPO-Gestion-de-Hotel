@@ -17,10 +17,14 @@ import javax.swing.DefaultComboBoxModel;
 public class Interfaz_AgregarHabitacion extends JFrame {
 
     private JPanel contentPane;
+    
     private JTextField textDNI;
-    private JTextField DNI_EliminarHuesped;
-    private JTextField textField;
-    private JTextField textField_1;
+    private JSpinner spPrecio;
+    private JTextField txtCodigo;
+    private JTextField txtNombre;
+    private JTextField txtDescripcion;
+    private JButton btnAgregar;
+    private JComboBox comboBoxActivo;
 
     public Interfaz_AgregarHabitacion() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -41,7 +45,7 @@ public class Interfaz_AgregarHabitacion extends JFrame {
         panel_1.setBounds(0, 332, 591, 38);
         contentPane.add(panel_1);
         
-        JButton btnAgregar = new JButton("Agregar");
+        btnAgregar = new JButton("Agregar");
         btnAgregar.setBackground(new Color(255, 255, 255));
         btnAgregar.setBounds(487, 8, 86, 23);
         panel_1.add(btnAgregar);
@@ -56,10 +60,10 @@ public class Interfaz_AgregarHabitacion extends JFrame {
         lblNombre_1_1.setBounds(230, 61, 62, 17);
         contentPane.add(lblNombre_1_1);
         
-        DNI_EliminarHuesped = new JTextField();
-        DNI_EliminarHuesped.setColumns(10);
-        DNI_EliminarHuesped.setBounds(324, 53, 236, 25);
-        contentPane.add(DNI_EliminarHuesped);
+        txtCodigo = new JTextField();
+        txtCodigo.setColumns(10);
+        txtCodigo.setBounds(324, 53, 236, 25);
+        contentPane.add(txtCodigo);
         
         JLabel mensajeErrorDNI = new JLabel("* Campos vacios o Datos incorrectos");
         mensajeErrorDNI.setForeground(Color.RED);
@@ -72,20 +76,20 @@ public class Interfaz_AgregarHabitacion extends JFrame {
         lblNombre_1_1_1.setBounds(230, 107, 77, 17);
         contentPane.add(lblNombre_1_1_1);
         
-        textField = new JTextField();
-        textField.setColumns(10);
-        textField.setBounds(324, 99, 236, 25);
-        contentPane.add(textField);
+        txtNombre = new JTextField();
+        txtNombre.setColumns(10);
+        txtNombre.setBounds(324, 99, 236, 25);
+        contentPane.add(txtNombre);
         
         JLabel lblNombre_1_1_2 = new JLabel("Descripción:");
         lblNombre_1_1_2.setFont(new Font("Calibri", Font.PLAIN, 16));
         lblNombre_1_1_2.setBounds(230, 145, 84, 17);
         contentPane.add(lblNombre_1_1_2);
         
-        textField_1 = new JTextField();
-        textField_1.setColumns(10);
-        textField_1.setBounds(324, 145, 236, 52);
-        contentPane.add(textField_1);
+        txtDescripcion = new JTextField();
+        txtDescripcion.setColumns(10);
+        txtDescripcion.setBounds(324, 145, 236, 52);
+        contentPane.add(txtDescripcion);
         
         JLabel lblNombre_1_1_1_1 = new JLabel("Precio");
         lblNombre_1_1_1_1.setFont(new Font("Calibri", Font.PLAIN, 16));
@@ -97,17 +101,41 @@ public class Interfaz_AgregarHabitacion extends JFrame {
         lblNombre_1_1_1_1_1.setBounds(230, 252, 72, 17);
         contentPane.add(lblNombre_1_1_1_1_1);
         
-        JSpinner spinner = new JSpinner();
-        spinner.setBounds(324, 208, 77, 25);
-        contentPane.add(spinner);
+        spPrecio = new JSpinner();
+        spPrecio.setBounds(324, 208, 77, 25);
+        contentPane.add(spPrecio);
         
-        JComboBox comboBox = new JComboBox();
-        comboBox.setModel(new DefaultComboBoxModel(new String[] {"Activo", "Inactivo"}));
-        comboBox.setToolTipText("");
-        comboBox.setBounds(324, 244, 239, 25);
-        contentPane.add(comboBox);
+        comboBoxActivo = new JComboBox();
+        comboBoxActivo.setModel(new DefaultComboBoxModel(new String[] {"Activo", "Inactivo"}));
+        comboBoxActivo.setToolTipText("");
+        comboBoxActivo.setBounds(324, 244, 239, 25);
+        contentPane.add(comboBoxActivo);
 
         // Centrar la ventana cuando se hace visible
         setLocationRelativeTo(null);
     }
+    
+    public JSpinner getSpPrecio() {
+		return spPrecio;
+	}
+
+	public JTextField getTxtCodigo() {
+		return txtCodigo;
+	}
+
+	public JTextField getTxtNombre() {
+		return txtNombre;
+	}
+
+	public JTextField getTxtDescripcion() {
+		return txtDescripcion;
+	}
+
+	public JButton getBtnAgregar() {
+		return btnAgregar;
+	}
+
+	public JComboBox getComboBoxActivo() {
+		return comboBoxActivo;
+	}
 }
