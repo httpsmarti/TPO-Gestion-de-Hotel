@@ -28,7 +28,7 @@ public class Interfaz_AgregarHabitacion extends JFrame {
     private JComboBox comboBoxExtras;
     
 
-Interfaz_AgregarHabitacion() {
+    public Interfaz_AgregarHabitacion() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(100, 100, 607, 408);
         contentPane = new JPanel();
@@ -122,10 +122,10 @@ Interfaz_AgregarHabitacion() {
         setLocationRelativeTo(null);
     }
     
- public JTextField getTextDNI() {
+    public JTextField getTextDNI() {
 		return textDNI;
 	}
- public JComboBox getComboBoxExtras() {
+ 	public JComboBox getComboBoxExtras() {
 		return comboBoxExtras;
 	}
 

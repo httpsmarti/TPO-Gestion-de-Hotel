@@ -25,7 +25,7 @@ public class Interfaz_HabitacionABM extends JFrame {
 	private JPanel contentPane;
 	
 	private JTable table;
-	static DefaultTableModel tablaFuncional = new DefaultTableModel();
+	private DefaultTableModel tablaFuncional = new DefaultTableModel();
 	private JButton btnAtras;
 	private JButton btnAgregarHabitacion;
 	private JButton btnModificarHabitacion;
@@ -59,7 +59,7 @@ public class Interfaz_HabitacionABM extends JFrame {
         contentPane.add(scrollPane);
 
         table = new JTable();
-        table.setForeground(new Color(255, 255, 255));
+        table.setForeground(new Color(0, 0, 0));
         table.setModel(tablaFuncional);
         scrollPane.setViewportView(table);
         
@@ -173,7 +173,7 @@ public class Interfaz_HabitacionABM extends JFrame {
 		return table;
 	}
 
-	public static DefaultTableModel getTablaFuncional() {
+	public DefaultTableModel getTablaFuncional() {
 		return tablaFuncional;
 	}
 }

@@ -235,6 +235,30 @@ public class Controller {
         JButton btnAgregar = habABM.getBtnAgregarHabitacion(); // Interfaz_AgregarHabitacion
         JButton btnModificar = habABM.getBtnModificarHabitacion(); // Interfaz_ModificarHabitacion
         JButton btnEliminar = habABM.getBtnEliminarHabitacion(); // Interfaz_EliminarHabitacion
+        DefaultTableModel tabla = habABM.getTablaFuncional();
+        
+        for (AbstractHabitacion hab : habitaciones) {
+        	String extras = "";
+        	String disponible = "";
+        	if (hab.isDisponible()) {
+        		disponible = "Si";
+        	} else {
+        		disponible = "No";
+        	}
+        	
+        	for (String e : hab.getExtras()) {
+        		extras += e;
+        	}
+        	
+        	
+			Object[] linea = {hab.getIdHabitacion(), hab.getPrecioPorNoche(), Integer.toString(hab.getCantPersonas()), hab.getTipo(), extras, disponible};
+			System.out.println(linea);
+			tabla.addRow(linea);
+			
+			tabla.fireTableDataChanged();
+			habABM.getTable().revalidate();
+			habABM.getTable().repaint();
+		}
         
         if (btnAtras != null) {
         	btnAtras.addActionListener(new ActionListener() {
@@ -248,6 +272,7 @@ public class Controller {
         if (btnAgregar != null) {
         	btnAgregar.addActionListener(new ActionListener() {
     			public void actionPerformed(ActionEvent e) {
+    				habABM.dispose();
     				iniciarVistaAgregarHabitacion(); //sin terminar
     			}
     		});
@@ -256,6 +281,7 @@ public class Controller {
         if (btnModificar != null) {
         	btnModificar.addActionListener(new ActionListener() {
     			public void actionPerformed(ActionEvent e) {
+    				habABM.dispose();
     				iniciarVistaModificarHabitacion(); //sin terminar
     			}
     		});
@@ -264,7 +290,8 @@ public class Controller {
         if (btnEliminar != null) {
         	btnEliminar.addActionListener(new ActionListener() {
     			public void actionPerformed(ActionEvent e) {
-    				iniciarVistaEliminarHabitacion();
+    				habABM.dispose();
+    				iniciarVistaEliminarHabitacion(); //sin terminar
     			}
     		});
         }   
@@ -275,21 +302,13 @@ public class Controller {
     	agrHab.setVisible(true);
     	agrHab.setLocationRelativeTo(null);
     	JSpinner spPrecio = agrHab.getSpPrecio();
-    	JTextField txtCodigo = agrHab.getTxtCodigo();
-    	JTextField txtNombre = agrHab.getTxtNombre();
-    	JTextField txtDescripcion = agrHab.getTxtDescripcion();
-    	JButton btnAgregar = agrHab.getBtnAgregar();
-    	JComboBox comboBoxActivo = agrHab.getComboBoxActivo();
+        JTextField txtCodigo = agrHab.getTxtCodigo();
+        JButton btnAgregar = agrHab.getBtnAgregar();
+    	JComboBox comboBoxDisponible = agrHab.getComboBoxDisponible();
+        JComboBox comboBoxTipo = agrHab.getComboBoxTipo();
+        JSpinner spCantPersonas = agrHab.getSpCantPersonas();
+        JComboBox comboBoxExtras = agrHab.getComboBoxExtras();
     	
-    	/*btnAgregar.addActionListener(new ActionListener() {
-    		public void actionPerformed(ActionEvent e) {
-    			if (spPrecio.getSelectedItem() != null &&
-    				txtCodigo.getText() != "" &&
-    				txtNombre) {
-    				
-    			}
-    		}
-    	});*/
     }
     
     private void iniciarVistaModificarHabitacion() { //mismo problema que en agregar habitacion
@@ -307,6 +326,8 @@ public class Controller {
     	btnEliminar.addActionListener(new ActionListener() {
     		public void actionPerformed(ActionEvent e) {
     			eliminarHabitacionById(id.getText());
+    			eliHab.dispose();
+    			iniciarVistaHabitacionABM();
     		}
     	});
     }
