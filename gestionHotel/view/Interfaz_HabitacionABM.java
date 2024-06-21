@@ -63,13 +63,12 @@ public class Interfaz_HabitacionABM extends JFrame {
         scrollPane.setViewportView(table);
         
         if (tablaFuncional.getColumnCount() == 0) {
-        tablaFuncional.addColumn("Código");
-        tablaFuncional.addColumn("Habitacion");
-        tablaFuncional.addColumn("Descripción");
+        tablaFuncional.addColumn("Código"); //id de la habitacion
+        tablaFuncional.addColumn("Precio");
         tablaFuncional.addColumn("Cantidad Personas");
         tablaFuncional.addColumn("Tipo");
-        tablaFuncional.addColumn("Precio");
-        tablaFuncional.addColumn("Activo");
+        tablaFuncional.addColumn("Extras");
+        tablaFuncional.addColumn("Disponible");
         }
 
         btnAgregarHabitacion = new JButton("Agregar Habitación");
@@ -170,7 +169,6 @@ public class Interfaz_HabitacionABM extends JFrame {
 		return btnEliminarHabitacion;
 	}
 }
-
 
 class BackgroundPanel2 extends JPanel {
 	private Image backgroundImage;

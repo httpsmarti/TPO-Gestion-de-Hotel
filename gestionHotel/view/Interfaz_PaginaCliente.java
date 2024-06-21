@@ -96,7 +96,7 @@ import java.awt.event.MouseEvent;
 	        btnReservar.addMouseListener(new MouseAdapter() {
 	            @Override
 	            public void mouseClicked(MouseEvent e) {
-	                Interfaz_Reserva reserva = new Interfaz_Reserva();
+	                Interfaz_ReservaEnGerente reserva = new Interfaz_ReservaEnGerente();
 	                reserva.setVisible(true);
 	                reserva.setLocationRelativeTo(null); // Centrar la nueva ventana
 	                dispose(); // Cerrar la ventana actual si lo deseas

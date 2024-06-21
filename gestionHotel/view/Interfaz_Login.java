@@ -76,17 +76,15 @@ public class Interfaz_Login extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JButton btnCliente = new JButton("Cliente");
+		btnCliente = new JButton("Cliente");
 		
-
 		btnCliente.setForeground(new Color(255, 255, 255));
 		btnCliente.setBackground(new Color(70, 70, 70));
 		btnCliente.setFont(new Font("Calibri", Font.BOLD, 24));
 		btnCliente.setBounds(27, 107, 215, 76);
 		panel.add(btnCliente);
 		
-		JButton btnGerente = new JButton("Gerente");
-		
+		btnGerente = new JButton("Gerente");
 		
 		btnGerente.setForeground(Color.WHITE);
 		btnGerente.setFont(new Font("Calibri", Font.BOLD, 24));
@@ -134,6 +132,14 @@ public class Interfaz_Login extends JFrame {
         }
         return null;
     }
+    
+	public void setBtnCliente(JButton btnCliente) {
+		this.btnCliente = btnCliente;
+	}
+
+	public void setBtnGerente(JButton btnGerente) {
+		this.btnGerente = btnGerente;
+	}
 }
 
 class BackgroundPanel extends JPanel {

@@ -17,16 +17,17 @@ import javax.swing.DefaultComboBoxModel;
 public class Interfaz_AgregarHabitacion extends JFrame {
 
     private JPanel contentPane;
-    
-    private JTextField textDNI;
+	private JTextField textDNI;
     private JSpinner spPrecio;
     private JTextField txtCodigo;
-    private JTextField txtNombre;
-    private JTextField txtDescripcion;
     private JButton btnAgregar;
-    private JComboBox comboBoxActivo;
-
-    public Interfaz_AgregarHabitacion() {
+	private JComboBox comboBoxDisponible;
+    private JTextField textExtras;
+    private JComboBox comboBoxTipo;
+    private JSpinner spCantPersonas;
+    
+    
+ Interfaz_AgregarHabitacion() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(100, 100, 607, 408);
         contentPane = new JPanel();
@@ -62,80 +63,91 @@ public class Interfaz_AgregarHabitacion extends JFrame {
         
         txtCodigo = new JTextField();
         txtCodigo.setColumns(10);
-        txtCodigo.setBounds(324, 53, 236, 25);
+        txtCodigo.setBounds(359, 53, 201, 25);
         contentPane.add(txtCodigo);
         
-        JLabel mensajeErrorDNI = new JLabel("* Campos vacios o Datos incorrectos");
-        mensajeErrorDNI.setForeground(Color.RED);
-        mensajeErrorDNI.setFont(new Font("Calibri", Font.BOLD, 16));
-        mensajeErrorDNI.setBounds(312, 280, 248, 26);
-        contentPane.add(mensajeErrorDNI);
-        
-        JLabel lblNombre_1_1_1 = new JLabel("Nombre:");
+        JLabel lblNombre_1_1_1 = new JLabel("Tipo:");
         lblNombre_1_1_1.setFont(new Font("Calibri", Font.PLAIN, 16));
-        lblNombre_1_1_1.setBounds(230, 107, 77, 17);
+        lblNombre_1_1_1.setBounds(230, 202, 77, 17);
         contentPane.add(lblNombre_1_1_1);
         
-        txtNombre = new JTextField();
-        txtNombre.setColumns(10);
-        txtNombre.setBounds(324, 99, 236, 25);
-        contentPane.add(txtNombre);
-        
-        JLabel lblNombre_1_1_2 = new JLabel("Descripción:");
+        JLabel lblNombre_1_1_2 = new JLabel("Cantidad \r\nPersonas:");
         lblNombre_1_1_2.setFont(new Font("Calibri", Font.PLAIN, 16));
-        lblNombre_1_1_2.setBounds(230, 145, 84, 17);
+        lblNombre_1_1_2.setBounds(230, 154, 125, 17);
         contentPane.add(lblNombre_1_1_2);
-        
-        txtDescripcion = new JTextField();
-        txtDescripcion.setColumns(10);
-        txtDescripcion.setBounds(324, 145, 236, 52);
-        contentPane.add(txtDescripcion);
         
         JLabel lblNombre_1_1_1_1 = new JLabel("Precio");
         lblNombre_1_1_1_1.setFont(new Font("Calibri", Font.PLAIN, 16));
-        lblNombre_1_1_1_1.setBounds(230, 216, 72, 17);
+        lblNombre_1_1_1_1.setBounds(230, 107, 72, 17);
         contentPane.add(lblNombre_1_1_1_1);
         
-        JLabel lblNombre_1_1_1_1_1 = new JLabel("Estado");
+        JLabel lblNombre_1_1_1_1_1 = new JLabel("Disponible:");
         lblNombre_1_1_1_1_1.setFont(new Font("Calibri", Font.PLAIN, 16));
-        lblNombre_1_1_1_1_1.setBounds(230, 252, 72, 17);
+        lblNombre_1_1_1_1_1.setBounds(230, 286, 77, 17);
         contentPane.add(lblNombre_1_1_1_1_1);
         
         spPrecio = new JSpinner();
-        spPrecio.setBounds(324, 208, 77, 25);
+        spPrecio.setBounds(359, 101, 79, 25);
         contentPane.add(spPrecio);
         
-        comboBoxActivo = new JComboBox();
-        comboBoxActivo.setModel(new DefaultComboBoxModel(new String[] {"Activo", "Inactivo"}));
-        comboBoxActivo.setToolTipText("");
-        comboBoxActivo.setBounds(324, 244, 239, 25);
-        contentPane.add(comboBoxActivo);
+        comboBoxDisponible = new JComboBox();
+        comboBoxDisponible.setModel(new DefaultComboBoxModel(new String[] {"Si", "No"}));
+        comboBoxDisponible.setToolTipText("");
+        comboBoxDisponible.setBounds(359, 280, 201, 25);
+        contentPane.add(comboBoxDisponible);
+        
+        spCantPersonas = new JSpinner();
+        spCantPersonas.setBounds(359, 148, 79, 25);
+        contentPane.add(spCantPersonas);
+        
+        comboBoxTipo = new JComboBox();
+        comboBoxTipo.setModel(new DefaultComboBoxModel(new String[] {"Habitación", "Suite"}));
+        comboBoxTipo.setToolTipText("");
+        comboBoxTipo.setBounds(359, 196, 201, 25);
+        contentPane.add(comboBoxTipo);
+        
+        textExtras = new JTextField();
+        textExtras.setColumns(10);
+        textExtras.setBounds(359, 242, 201, 25);
+        contentPane.add(textExtras);
+        
+        JLabel lblNombre_1_1_1_2 = new JLabel("Extras:");
+        lblNombre_1_1_1_2.setFont(new Font("Calibri", Font.PLAIN, 16));
+        lblNombre_1_1_1_2.setBounds(230, 248, 77, 17);
+        contentPane.add(lblNombre_1_1_1_2);
 
         // Centrar la ventana cuando se hace visible
         setLocationRelativeTo(null);
     }
     
-    public JSpinner getSpPrecio() {
-		return spPrecio;
+ public JTextField getTextDNI() {
+		return textDNI;
 	}
 
-	public JTextField getTxtCodigo() {
-		return txtCodigo;
+	public JTextField getTextExtras() {
+		return textExtras;
 	}
 
-	public JTextField getTxtNombre() {
-		return txtNombre;
+	public JComboBox getComboBoxTipo() {
+		return comboBoxTipo;
+	}
+    public JComboBox getComboBoxDisponible() {
+		return comboBoxDisponible;
 	}
 
-	public JTextField getTxtDescripcion() {
-		return txtDescripcion;
+	public JSpinner getSpCantPersonas() {
+		return spCantPersonas;
 	}
 
-	public JButton getBtnAgregar() {
-		return btnAgregar;
+	public void setSpPrecio(JSpinner spPrecio) {
+		this.spPrecio = spPrecio;
 	}
 
-	public JComboBox getComboBoxActivo() {
-		return comboBoxActivo;
+	public void setTxtCodigo(JTextField txtCodigo) {
+		this.txtCodigo = txtCodigo;
+	}
+
+	public void setBtnAgregar(JButton btnAgregar) {
+		this.btnAgregar = btnAgregar;
 	}
 }

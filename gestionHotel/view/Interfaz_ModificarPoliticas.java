@@ -29,7 +29,6 @@ public class Interfaz_ModificarPoliticas extends JFrame {
 	private JPanel contentPane;
 	private JButton btnAplicarCambios;
 	private JButton btnAtras;
-
 	private JTextField txtCantDiasTemprano;
 	private JTextField txtCantDiasTarde;
 	private JTextField txtDescuento;
@@ -39,7 +38,7 @@ public class Interfaz_ModificarPoliticas extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Interfaz_CrearCliente frame = new Interfaz_CrearCliente();
+					Interfaz_ClienteABM frame = new Interfaz_ClienteABM();
 					frame.setVisible(true);
 					frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
@@ -63,7 +62,7 @@ public class Interfaz_ModificarPoliticas extends JFrame {
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon(Interfaz_Reserva.class.getResource("/img/BostonResort (6).png")));
+		lblNewLabel_1.setIcon(new ImageIcon(Interfaz_ReservaEnGerente.class.getResource("/img/BostonResort (6).png")));
 		lblNewLabel_1.setBounds(0, 0, 1164, 115);
 		panel.add(lblNewLabel_1);
 		
@@ -86,7 +85,7 @@ public class Interfaz_ModificarPoliticas extends JFrame {
 		contentPane.add(panel_3);
 		panel_3.setLayout(null);
 		
-		JButton btnAplicarCambios = new JButton("Aplicar cambios");
+		btnAplicarCambios = new JButton("Aplicar cambios");
 		btnAplicarCambios.setForeground(Color.WHITE);
 		btnAplicarCambios.setFont(new Font("Calibri", Font.PLAIN, 15));
 		btnAplicarCambios.setBackground(new Color(63, 63, 63));

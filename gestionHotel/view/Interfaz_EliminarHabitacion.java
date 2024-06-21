@@ -38,31 +38,25 @@ public class Interfaz_EliminarHabitacion extends JFrame {
         panel_1.setBounds(0, 332, 591, 38);
         contentPane.add(panel_1);
         
-        JButton btnEliminar = new JButton("Eliminar");
+        btnEliminar = new JButton("Eliminar");
         btnEliminar.setBackground(new Color(255, 255, 255));
         btnEliminar.setBounds(473, 8, 100, 23);
         panel_1.add(btnEliminar);
         
         JLabel lblEliminarHabitacion = new JLabel("Eliminar Habitación");
         lblEliminarHabitacion.setFont(new Font("Calibri", Font.BOLD, 16));
-        lblEliminarHabitacion.setBounds(334, 83, 146, 20);
+        lblEliminarHabitacion.setBounds(335, 84, 146, 20);
         contentPane.add(lblEliminarHabitacion);
         
         JLabel lblCodigo = new JLabel("Código:");
         lblCodigo.setFont(new Font("Calibri", Font.PLAIN, 16));
-        lblCodigo.setBounds(230, 143, 62, 17);
+        lblCodigo.setBounds(231, 144, 62, 17);
         contentPane.add(lblCodigo);
         
         ID_EliminarHabitacion = new JTextField();
         ID_EliminarHabitacion.setColumns(10);
-        ID_EliminarHabitacion.setBounds(312, 137, 236, 25);
+        ID_EliminarHabitacion.setBounds(313, 138, 236, 25);
         contentPane.add(ID_EliminarHabitacion);
-        
-        JLabel mensajeErrorDNI = new JLabel("* Campos vacios o Datos incorrectos");
-        mensajeErrorDNI.setForeground(Color.RED);
-        mensajeErrorDNI.setFont(new Font("Calibri", Font.BOLD, 16));
-        mensajeErrorDNI.setBounds(300, 171, 248, 26);
-        contentPane.add(mensajeErrorDNI);
 
         // Centrar la ventana cuando se hace visible
         setLocationRelativeTo(null);

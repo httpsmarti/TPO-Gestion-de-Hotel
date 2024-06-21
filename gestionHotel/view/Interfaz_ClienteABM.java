@@ -22,12 +22,14 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Interfaz_CrearCliente extends JFrame {
+public class Interfaz_ClienteABM extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
 	static DefaultTableModel tablaFuncional = new DefaultTableModel();
 	private JButton btnAgregarCliente;
+	private JButton btnModificarCliente;
+	private JButton btnEliminarCliente;
 	private JButton btnAtras;
 	private JScrollPane scrollPane;
 
@@ -37,7 +39,7 @@ public class Interfaz_CrearCliente extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Interfaz_CrearCliente frame = new Interfaz_CrearCliente();
+					Interfaz_ClienteABM frame = new Interfaz_ClienteABM();
 					frame.setVisible(true);
 					frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
@@ -47,10 +49,10 @@ public class Interfaz_CrearCliente extends JFrame {
 		});
 	}
 
-	public Interfaz_CrearCliente() {
+	public Interfaz_ClienteABM() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1180, 683);
-		contentPane = new BackgroundPanel3();
+		contentPane = new BackgroundPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -61,7 +63,7 @@ public class Interfaz_CrearCliente extends JFrame {
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon(Interfaz_Reserva.class.getResource("/img/BostonResort (6).png")));
+		lblNewLabel_1.setIcon(new ImageIcon(Interfaz_ReservaEnGerente.class.getResource("/img/BostonResort (6).png")));
 		lblNewLabel_1.setBounds(0, 0, 1164, 115);
 		panel.add(lblNewLabel_1);
 		
@@ -122,6 +124,10 @@ public class Interfaz_CrearCliente extends JFrame {
 		scrollPane.setViewportView(table);
 		
 		btnAgregarCliente = new JButton("Agregar Cliente");
+		btnAgregarCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		/*
 		btnAgregarCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -134,8 +140,40 @@ public class Interfaz_CrearCliente extends JFrame {
 		btnAgregarCliente.setForeground(Color.WHITE);
 		btnAgregarCliente.setBackground(Color.DARK_GRAY);
 		btnAgregarCliente.setFont(new Font("Calibri", Font.PLAIN, 16));
-		btnAgregarCliente.setBounds(549, 502, 136, 43);
+		btnAgregarCliente.setBounds(348, 488, 153, 43);
 		contentPane.add(btnAgregarCliente);
+		
+		btnModificarCliente = new JButton("Modificar Cliente");
+		btnModificarCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+			/*Interfaz_ModificarCliente modificarC = new Interfaz_ModificarCliente();
+				modificarC.setVisible(true);
+				modificarC.setLocationRelativeTo(null); // Centrar la ventana secundaria*/
+		});
+		
+		
+		btnModificarCliente.setForeground(Color.WHITE);
+		btnModificarCliente.setFont(new Font("Calibri", Font.PLAIN, 16));
+		btnModificarCliente.setBackground(Color.DARK_GRAY);
+		btnModificarCliente.setBounds(536, 488, 153, 43);
+		contentPane.add(btnModificarCliente);
+		
+		btnEliminarCliente = new JButton("Eliminar Cliente");
+		btnEliminarCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		/*Interfaz_EliminarCliente eliminarC = new Interfaz_EliminarCliente();
+		eliminarC.setVisible(true);
+		eliminarC.setLocationRelativeTo(null); // Centrar la ventana secundaria*/
+		
+		btnEliminarCliente.setForeground(Color.WHITE);
+		btnEliminarCliente.setFont(new Font("Calibri", Font.PLAIN, 16));
+		btnEliminarCliente.setBackground(Color.DARK_GRAY);
+		btnEliminarCliente.setBounds(722, 488, 153, 43);
+		contentPane.add(btnEliminarCliente);
 	}
 	
 	public JTable getTable() {
@@ -149,6 +187,14 @@ public class Interfaz_CrearCliente extends JFrame {
 	public JButton getBtnAgregarCliente() {
 		return btnAgregarCliente;
 	}
+	public JButton getBtnModificarCliente() {
+		return btnModificarCliente;
+	}
+
+	public JButton getBtnEliminarCliente() {
+		return btnEliminarCliente;
+	}
+
 
 	public JButton getBtnAtras() {
 		return btnAtras;

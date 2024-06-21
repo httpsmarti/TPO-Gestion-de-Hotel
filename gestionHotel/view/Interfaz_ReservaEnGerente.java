@@ -20,21 +20,28 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.SoftBevelBorder;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.table.TableModel;
+import javax.swing.JTextField;
 
-public class Interfaz_Reserva extends JFrame {
-
-	private JPanel contentPane;
-	private JTable table;
+public class Interfaz_ReservaEnGerente extends JFrame {
 	
 	static DefaultTableModel tablaFuncional = new DefaultTableModel();
+	static DefaultTableModel tablaFuncional2 = new DefaultTableModel();
+	private JPanel contentPane;
+
+	private JTable tablaHabitacionesDispo;
+	private JScrollPane scrollPane;
+	private JScrollPane scrollPane_1;
 	private JButton btnSiguiente; 
 	private JButton btnAtras;
+	private JTable tablaHabitacionSeleccionada;
+	private JTextField textDNICliente;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Interfaz_Reserva frame = new Interfaz_Reserva();
+					Interfaz_ReservaEnGerente frame = new Interfaz_ReservaEnGerente();
 					frame.setVisible(true);
 					frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
@@ -44,7 +51,7 @@ public class Interfaz_Reserva extends JFrame {
 		});
 	}
 
-	public Interfaz_Reserva() {
+	public Interfaz_ReservaEnGerente() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1180, 683);
 		contentPane = new BackgroundPanel3();
@@ -58,7 +65,7 @@ public class Interfaz_Reserva extends JFrame {
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon(Interfaz_Reserva.class.getResource("/img/BostonResort (6).png")));
+		lblNewLabel_1.setIcon(new ImageIcon(Interfaz_ReservaEnGerente.class.getResource("/img/BostonResort (6).png")));
 		lblNewLabel_1.setBounds(0, 0, 1164, 115);
 		panel.add(lblNewLabel_1);
 		
@@ -70,8 +77,8 @@ public class Interfaz_Reserva extends JFrame {
 		contentPane.add(panel_1);
 		
 		JLabel lblNewLabel = new JLabel("Seleccione Habitación");
-		lblNewLabel.setFont(new Font("Calibri", Font.BOLD, 18));
-		lblNewLabel.setBounds(482, 8, 165, 32);
+		lblNewLabel.setFont(new Font("Calibri", Font.BOLD, 20));
+		lblNewLabel.setBounds(482, 7, 197, 32);
 		panel_1.add(lblNewLabel);
 		
 		JPanel panel_3 = new JPanel();
@@ -130,34 +137,71 @@ public class Interfaz_Reserva extends JFrame {
             }
         });*/
 		
-		btnAtras.setBackground(new Color(63, 63, 63));
-		btnAtras.setForeground(new Color(255, 255, 255));
-		btnAtras.setFont(new Font("Calibri", Font.PLAIN, 14));
-		btnAtras.setBounds(22, 177, 76, 34);
-		contentPane.add(btnAtras);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(248, 211, 649, 339);
-		contentPane.add(scrollPane);
+        btnAtras.setBackground(new Color(63, 63, 63));
+        btnAtras.setForeground(new Color(255, 255, 255));
+        btnAtras.setFont(new Font("Calibri", Font.PLAIN, 14));
+        btnAtras.setBounds(22, 177, 76, 34);
+        contentPane.add(btnAtras);
 
-		// Definir las columnas antes de establecer el modelo en la tabla
-		if (tablaFuncional.getColumnCount() == 0) {
-		tablaFuncional.addColumn("Habitacion");
-        tablaFuncional.addColumn("Descripción");
-        tablaFuncional.addColumn("Precio");
-        tablaFuncional.addColumn("Activo");
-		}
+        scrollPane = new JScrollPane();
+        scrollPane.setBounds(361, 224, 752, 136);
+        contentPane.add(scrollPane);
 
-        table = new JTable(tablaFuncional);
-        table.setFont(new Font("Calibri", Font.PLAIN, 12));
-        table.setBackground(new Color(255, 255, 255));
-		scrollPane.setViewportView(table);		
+        // Definir las columnas antes de establecer el modelo en la tabla
+        if (tablaFuncional.getColumnCount() == 0) {
+            tablaFuncional.addColumn("Código");
+            tablaFuncional.addColumn("Precio");
+            tablaFuncional.addColumn("Cantidad Personas");
+            tablaFuncional.addColumn("Extras");
+            tablaFuncional.addColumn("Disponible");
+        }
+
+        tablaHabitacionesDispo = new JTable(tablaFuncional);
+        tablaHabitacionesDispo.setFont(new Font("Calibri", Font.PLAIN, 12));
+        tablaHabitacionesDispo.setBackground(new Color(255, 255, 255));
+        scrollPane.setViewportView(tablaHabitacionesDispo);
+
+        scrollPane_1 = new JScrollPane();
+        scrollPane_1.setBounds(361, 407, 752, 136);
+        contentPane.add(scrollPane_1);
+
+        if (tablaFuncional2.getColumnCount() == 0) {
+            tablaFuncional2.addColumn("Código");
+            tablaFuncional2.addColumn("Precio");
+            tablaFuncional2.addColumn("Cantidad Personas");
+            tablaFuncional2.addColumn("Extras");
+            tablaFuncional2.addColumn("Disponible");
+        }
+
+        tablaHabitacionSeleccionada = new JTable(tablaFuncional2);
+        tablaHabitacionSeleccionada.setFont(new Font("Calibri", Font.PLAIN, 12));
+        tablaHabitacionSeleccionada.setBackground(Color.WHITE);
+        scrollPane_1.setViewportView(tablaHabitacionSeleccionada);
+
+        JPanel panel_2 = new JPanel();
+        panel_2.setBounds(22, 222, 318, 321);
+        contentPane.add(panel_2);
+        panel_2.setLayout(null);
+
+        JLabel lblNewLabel_2 = new JLabel("Ingrese DNI del Cliente:");
+        lblNewLabel_2.setFont(new Font("Calibri", Font.BOLD, 16));
+        lblNewLabel_2.setBounds(77, 113, 173, 26);
+        panel_2.add(lblNewLabel_2);
+
+        textDNICliente = new JTextField();
+        textDNICliente.setBounds(77, 150, 159, 34);
+        panel_2.add(textDNICliente);
+        textDNICliente.setColumns(10);
+
+        JLabel lblHabitacionesDisponibles = new JLabel("Habitaciones Disponibles");
+        lblHabitacionesDisponibles.setFont(new Font("Calibri", Font.BOLD, 16));
+        lblHabitacionesDisponibles.setBounds(361, 192, 224, 32);
+        contentPane.add(lblHabitacionesDisponibles);
 		
-		JLabel lblSeleccioneUna = new JLabel("* Seleccione una habitación para continuar");
-		lblSeleccioneUna.setForeground(Color.RED);
-		lblSeleccioneUna.setFont(new Font("Calibri", Font.BOLD, 16));
-		lblSeleccioneUna.setBounds(837, 561, 297, 26);
-		contentPane.add(lblSeleccioneUna);
+		JLabel lblHabitacinSeleccionada = new JLabel("Habitación Seleccionada");
+		lblHabitacinSeleccionada.setFont(new Font("Calibri", Font.BOLD, 16));
+		lblHabitacinSeleccionada.setBounds(361, 371, 224, 32);
+		contentPane.add(lblHabitacinSeleccionada);
 	}
 	
 	public DefaultTableModel getTablaFuncional() {
@@ -172,6 +216,29 @@ public class Interfaz_Reserva extends JFrame {
 		return btnAtras;
 	}
 	
+	public static DefaultTableModel getTablaFuncional2() {
+		return tablaFuncional2;
+	}
+
+	public JTable getTablaHabitacionesDispo() {
+		return tablaHabitacionesDispo;
+	}
+
+	public JScrollPane getScrollPane() {
+		return scrollPane;
+	}
+
+	public JScrollPane getScrollPane_1() {
+		return scrollPane_1;
+	}
+
+	public JTable getTablaHabitacionSeleccionada() {
+		return tablaHabitacionSeleccionada;
+	}
+
+	public JTextField getTextDNICliente() {
+		return textDNICliente;
+	}
 }
 
 class BackgroundPanel3 extends JPanel {

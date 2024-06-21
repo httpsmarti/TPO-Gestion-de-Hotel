@@ -11,9 +11,11 @@ import java.awt.Font;
 
 public class Interfaz_EliminarHuesped extends JFrame {
 
-    private JPanel contentPane;
+
+	private JPanel contentPane;
     private JTextField textDNI;
     private JTextField DNI_EliminarHuesped;
+    private JButton btnEliminar;
 
     public Interfaz_EliminarHuesped() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -34,7 +36,7 @@ public class Interfaz_EliminarHuesped extends JFrame {
         panel_1.setBounds(0, 332, 591, 38);
         contentPane.add(panel_1);
         
-        JButton btnEliminar = new JButton("Eliminar");
+        btnEliminar = new JButton("Eliminar");
         btnEliminar.setBackground(new Color(255, 255, 255));
         btnEliminar.setBounds(487, 8, 86, 23);
         panel_1.add(btnEliminar);
@@ -53,14 +55,20 @@ public class Interfaz_EliminarHuesped extends JFrame {
         DNI_EliminarHuesped.setColumns(10);
         DNI_EliminarHuesped.setBounds(294, 170, 226, 25);
         contentPane.add(DNI_EliminarHuesped);
-        
-        JLabel mensajeErrorDNI = new JLabel("* Campos vacios o Datos incorrectos");
-        mensajeErrorDNI.setForeground(Color.RED);
-        mensajeErrorDNI.setFont(new Font("Calibri", Font.BOLD, 16));
-        mensajeErrorDNI.setBounds(294, 208, 248, 26);
-        contentPane.add(mensajeErrorDNI);
 
         // Centrar la ventana cuando se hace visible
         setLocationRelativeTo(null);
     }
+    
+    public JTextField getTextDNI() {
+		return textDNI;
+	}
+
+	public JTextField getDNI_EliminarHuesped() {
+		return DNI_EliminarHuesped;
+	}
+
+	public JButton getBtnEliminar() {
+		return btnEliminar;
+	}
 }

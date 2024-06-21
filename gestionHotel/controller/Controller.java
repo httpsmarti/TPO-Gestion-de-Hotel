@@ -321,7 +321,7 @@ public class Controller {
     
     
     public void iniciarVistaReserva() { //hablar con martis ---- voy a tener que pasarle al detalle de la reserva los datos de la habitación para que desde ahí pueda crear la reserva entera
-    	Interfaz_Reserva interReserva = new Interfaz_Reserva();
+    	Interfaz_ReservaEnGerente interReserva = new Interfaz_ReservaEnGerente();
     	interReserva.setVisible(true);
     	interReserva.setLocationRelativeTo(null);
     	

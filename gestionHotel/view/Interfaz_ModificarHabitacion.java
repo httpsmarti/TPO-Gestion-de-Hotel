@@ -16,14 +16,13 @@ import javax.swing.DefaultComboBoxModel;
 public class Interfaz_ModificarHabitacion extends JFrame {
 
     private JPanel contentPane;
-    private JTextField id_ModificarHabitacion;
-    private JTextField nombre_ModificarHabitacion;
-    private JTextField descripcion_ModificarHabitacion;
-    private JSpinner spinner_ModificarHabitacion;
-    private JComboBox state_ModificarHabitacion;
+	private JComboBox comboBoxTipo;
+    private JComboBox comboBoxDisponible;
     private JButton btnGuardar;
-    
-    private JLabel mensajeErrorDNI;
+    private JSpinner spCantPersonas;
+    private JSpinner spPrecio;
+    private JTextField textExtras;
+    private JTextField textCodigo;
 
     public Interfaz_ModificarHabitacion() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -44,7 +43,7 @@ public class Interfaz_ModificarHabitacion extends JFrame {
         panel_1.setBounds(0, 332, 591, 38);
         contentPane.add(panel_1);
         
-        JButton btnGuardar = new JButton("Guardar Cambios");
+        btnGuardar = new JButton("Guardar Cambios");
         btnGuardar.setBackground(new Color(255, 255, 255));
         btnGuardar.setBounds(439, 8, 134, 23);
         panel_1.add(btnGuardar);
@@ -54,63 +53,97 @@ public class Interfaz_ModificarHabitacion extends JFrame {
         lblEliminarHusped.setBounds(337, 22, 158, 20);
         contentPane.add(lblEliminarHusped);
         
-        JLabel lblNombre_1_1 = new JLabel("Código:");
-        lblNombre_1_1.setFont(new Font("Calibri", Font.PLAIN, 16));
-        lblNombre_1_1.setBounds(230, 61, 62, 17);
-        contentPane.add(lblNombre_1_1);
+        JLabel lblNombre_1_1_1_1_1 = new JLabel("Disponible:");
+        lblNombre_1_1_1_1_1.setFont(new Font("Calibri", Font.PLAIN, 16));
+        lblNombre_1_1_1_1_1.setBounds(228, 286, 77, 17);
+        contentPane.add(lblNombre_1_1_1_1_1);
         
-        id_ModificarHabitacion = new JTextField();
-        id_ModificarHabitacion.setColumns(10);
-        id_ModificarHabitacion.setBounds(324, 53, 236, 25);
-        contentPane.add(id_ModificarHabitacion);
+        comboBoxDisponible = new JComboBox();
+        comboBoxDisponible.setModel(new DefaultComboBoxModel(new String[] {"Si", "No"}));
+        comboBoxDisponible.setToolTipText("");
+        comboBoxDisponible.setBounds(357, 280, 201, 25);
+        contentPane.add(comboBoxDisponible);
         
-        JLabel mensajeErrorDNI = new JLabel("* Campos vacios o Datos incorrectos");
-        mensajeErrorDNI.setForeground(Color.RED);
-        mensajeErrorDNI.setFont(new Font("Calibri", Font.BOLD, 16));
-        mensajeErrorDNI.setBounds(312, 280, 248, 26);
-        contentPane.add(mensajeErrorDNI);
+        textExtras = new JTextField();
+        textExtras.setColumns(10);
+        textExtras.setBounds(357, 242, 201, 25);
+        contentPane.add(textExtras);
         
-        JLabel lblNombre_1_1_1 = new JLabel("Nombre:");
+        JLabel lblNombre_1_1_1_2 = new JLabel("Extras:");
+        lblNombre_1_1_1_2.setFont(new Font("Calibri", Font.PLAIN, 16));
+        lblNombre_1_1_1_2.setBounds(228, 248, 77, 17);
+        contentPane.add(lblNombre_1_1_1_2);
+        
+        JLabel lblNombre_1_1_1 = new JLabel("Tipo:");
         lblNombre_1_1_1.setFont(new Font("Calibri", Font.PLAIN, 16));
-        lblNombre_1_1_1.setBounds(230, 107, 77, 17);
+        lblNombre_1_1_1.setBounds(228, 202, 77, 17);
         contentPane.add(lblNombre_1_1_1);
         
-        nombre_ModificarHabitacion = new JTextField();
-        nombre_ModificarHabitacion.setColumns(10);
-        nombre_ModificarHabitacion.setBounds(324, 99, 236, 25);
-        contentPane.add(nombre_ModificarHabitacion);
+        comboBoxTipo = new JComboBox();
+        comboBoxTipo.setToolTipText("");
+        comboBoxTipo.setBounds(357, 196, 201, 25);
+        contentPane.add(comboBoxTipo);
         
-        JLabel lblNombre_1_1_2 = new JLabel("Descripción:");
-        lblNombre_1_1_2.setFont(new Font("Calibri", Font.PLAIN, 16));
-        lblNombre_1_1_2.setBounds(230, 145, 84, 17);
-        contentPane.add(lblNombre_1_1_2);
+        spCantPersonas = new JSpinner();
+        spCantPersonas.setBounds(357, 148, 79, 25);
+        contentPane.add(spCantPersonas);
         
-        descripcion_ModificarHabitacion = new JTextField();
-        descripcion_ModificarHabitacion.setColumns(10);
-        descripcion_ModificarHabitacion.setBounds(324, 145, 236, 52);
-        contentPane.add(descripcion_ModificarHabitacion);
+        spPrecio = new JSpinner();
+        spPrecio.setBounds(357, 101, 79, 25);
+        contentPane.add(spPrecio);
+        
+        textCodigo = new JTextField();
+        textCodigo.setColumns(10);
+        textCodigo.setBounds(357, 53, 201, 25);
+        contentPane.add(textCodigo);
+        
+        JLabel lblNombre_1_1 = new JLabel("Código:");
+        lblNombre_1_1.setFont(new Font("Calibri", Font.PLAIN, 16));
+        lblNombre_1_1.setBounds(228, 61, 62, 17);
+        contentPane.add(lblNombre_1_1);
         
         JLabel lblNombre_1_1_1_1 = new JLabel("Precio");
         lblNombre_1_1_1_1.setFont(new Font("Calibri", Font.PLAIN, 16));
-        lblNombre_1_1_1_1.setBounds(230, 216, 72, 17);
+        lblNombre_1_1_1_1.setBounds(228, 107, 72, 17);
         contentPane.add(lblNombre_1_1_1_1);
         
-        JLabel lblNombre_1_1_1_1_1 = new JLabel("Estado");
-        lblNombre_1_1_1_1_1.setFont(new Font("Calibri", Font.PLAIN, 16));
-        lblNombre_1_1_1_1_1.setBounds(230, 252, 72, 17);
-        contentPane.add(lblNombre_1_1_1_1_1);
-        
-        JSpinner spinner_ModificarHabitacion = new JSpinner();
-        spinner_ModificarHabitacion.setBounds(324, 208, 77, 25);
-        contentPane.add(spinner_ModificarHabitacion);
-        
-        JComboBox state_ModificarHabitacion = new JComboBox();
-        state_ModificarHabitacion.setModel(new DefaultComboBoxModel(new String[] {"Activo", "Inactivo"}));
-        state_ModificarHabitacion.setToolTipText("");
-        state_ModificarHabitacion.setBounds(324, 244, 239, 25);
-        contentPane.add(state_ModificarHabitacion);
+        JLabel lblNombre_1_1_2 = new JLabel("Cantidad \r\nPersonas:");
+        lblNombre_1_1_2.setFont(new Font("Calibri", Font.PLAIN, 16));
+        lblNombre_1_1_2.setBounds(228, 154, 125, 17);
+        contentPane.add(lblNombre_1_1_2);
 
         // Centrar la ventana cuando se hace visible
         setLocationRelativeTo(null);
     }
+    public JPanel getContentPane() {
+		return contentPane;
+	}
+
+	public JComboBox getComboBoxTipo() {
+		return comboBoxTipo;
+	}
+
+	public JComboBox getComboBoxDisponible() {
+		return comboBoxDisponible;
+	}
+
+	public JButton getBtnGuardar() {
+		return btnGuardar;
+	}
+
+	public JSpinner getSpCantPersonas() {
+		return spCantPersonas;
+	}
+
+	public JSpinner getSpPrecio() {
+		return spPrecio;
+	}
+
+	public JTextField getTextExtras() {
+		return textExtras;
+	}
+
+	public JTextField getTextCodigo() {
+		return textCodigo;
+	}
 }

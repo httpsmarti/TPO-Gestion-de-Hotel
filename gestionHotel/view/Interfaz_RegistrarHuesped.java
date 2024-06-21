@@ -12,11 +12,10 @@ import java.awt.Color;
 public class Interfaz_RegistrarHuesped extends JFrame {
 
     private JPanel contentPane;
-    private JTextField textNombre;
+	private JTextField textNombre;
     private JTextField textApellido;
     private JTextField textDNI;
     private JButton btnRegistrar;
-    private JLabel mensajeYaExisteDNI;
 
     public Interfaz_RegistrarHuesped() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -53,7 +52,7 @@ public class Interfaz_RegistrarHuesped extends JFrame {
         contentPane.add(panel_1);
         panel_1.setLayout(null);
         
-        JButton btnRegistrar = new JButton("Registrar");
+        btnRegistrar = new JButton("Registrar");
         btnRegistrar.setBackground(new Color(255, 255, 255));
         btnRegistrar.setBounds(480, 8, 93, 23);
         panel_1.add(btnRegistrar);
@@ -77,11 +76,22 @@ public class Interfaz_RegistrarHuesped extends JFrame {
         textDNI.setColumns(10);
         textDNI.setBounds(302, 202, 247, 20);
         contentPane.add(textDNI);
-        
-        JLabel mensajeYaExisteDNI = new JLabel("* Este DNI ya esta en uso");
-        mensajeYaExisteDNI.setForeground(Color.RED);
-        mensajeYaExisteDNI.setFont(new Font("Calibri", Font.BOLD, 16));
-        mensajeYaExisteDNI.setBounds(302, 233, 248, 26);
-        contentPane.add(mensajeYaExisteDNI);
     }
+
+	public JTextField getTextNombre() {
+		return textNombre;
+	}
+
+	public JTextField getTextApellido() {
+		return textApellido;
+	}
+
+	public JTextField getTextDNI() {
+		return textDNI;
+	}
+
+	public JButton getBtnRegistrar() {
+		return btnRegistrar;
+	}
+
 }
