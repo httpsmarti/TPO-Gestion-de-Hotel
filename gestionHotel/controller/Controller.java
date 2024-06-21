@@ -7,6 +7,7 @@ import java.util.*;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -16,6 +17,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class Controller {
 
@@ -237,6 +240,7 @@ public class Controller {
         JButton btnEliminar = habABM.getBtnEliminarHabitacion(); // Interfaz_EliminarHabitacion
         DefaultTableModel tabla = habABM.getTablaFuncional();
         
+        tabla.setRowCount(0);
         for (AbstractHabitacion hab : habitaciones) {
         	String extras = "";
         	String disponible = "";
@@ -247,12 +251,14 @@ public class Controller {
         	}
         	
         	for (String e : hab.getExtras()) {
-        		extras += e;
+        		if (extras == "") {
+        			extras += e;
+        		} else {
+        			extras += ", " + e;
+        		}
         	}
         	
-        	
 			Object[] linea = {hab.getIdHabitacion(), hab.getPrecioPorNoche(), Integer.toString(hab.getCantPersonas()), hab.getTipo(), extras, disponible};
-			System.out.println(linea);
 			tabla.addRow(linea);
 			
 			tabla.fireTableDataChanged();
@@ -273,7 +279,7 @@ public class Controller {
         	btnAgregar.addActionListener(new ActionListener() {
     			public void actionPerformed(ActionEvent e) {
     				habABM.dispose();
-    				iniciarVistaAgregarHabitacion(); //sin terminar
+    				iniciarVistaAgregarHabitacion();
     			}
     		});
         }
@@ -291,13 +297,13 @@ public class Controller {
         	btnEliminar.addActionListener(new ActionListener() {
     			public void actionPerformed(ActionEvent e) {
     				habABM.dispose();
-    				iniciarVistaEliminarHabitacion(); //sin terminar
+    				iniciarVistaEliminarHabitacion();
     			}
     		});
         }   
     }
     
-    private void iniciarVistaAgregarHabitacion() { //HABLAR DESPUES CON MARTIS, VER NOTAS
+    private void iniciarVistaAgregarHabitacion() {
     	Interfaz_AgregarHabitacion agrHab = new Interfaz_AgregarHabitacion();
     	agrHab.setVisible(true);
     	agrHab.setLocationRelativeTo(null);
@@ -307,13 +313,111 @@ public class Controller {
     	JComboBox comboBoxDisponible = agrHab.getComboBoxDisponible();
         JComboBox comboBoxTipo = agrHab.getComboBoxTipo();
         JSpinner spCantPersonas = agrHab.getSpCantPersonas();
-    	
+        JRadioButton rdbtnInternet = agrHab.getRdbtnInternet();
+        JRadioButton rdbtnMinibar = agrHab.getRdbtnMinibar();
+        JRadioButton rdbtnServicioDespertador = agrHab.getRdbtnServicioDespertador();
+        JRadioButton rdbtnTv = agrHab.getRdbtnTv();
+        
+        List<String> extras = new ArrayList<String>();
+                
+        btnAgregar.addActionListener(new ActionListener() {
+    		public void actionPerformed(ActionEvent e) {
+    			boolean disponible = true;
+    			if (comboBoxDisponible.getSelectedItem() == "No") {
+    	        	disponible = false;
+    	        }
+    			if (rdbtnInternet.isSelected()) {
+    	        	extras.add("Internet");
+    	        }
+    	        if (rdbtnMinibar.isSelected()) {
+    	        	extras.add("Minibar");
+    	        }
+    	        if (rdbtnServicioDespertador.isSelected()) {
+    	        	extras.add("Servicio despertador");
+    	        }
+    	        if (rdbtnTv.isSelected()) {
+    	        	extras.add("TV");
+    	        }
+    			if (comboBoxTipo.getSelectedItem() == "Suite") {
+    	        	habitaciones.add(gerente.crearSuite(txtCodigo.getText(), ((Number) spPrecio.getValue()).doubleValue(), (int) spCantPersonas.getValue(), "Suite", extras, disponible));
+    	        } else {
+    	        	habitaciones.add(gerente.crearHabitacion(txtCodigo.getText(), ((Number) spPrecio.getValue()).doubleValue(), (int) spCantPersonas.getValue(), "Habitacion", extras, disponible));
+    	        }
+    			agrHab.dispose();
+    			iniciarVistaHabitacionABM();
+    		}
+    	});
+        
+        agrHab.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                agrHab.dispose();
+                iniciarVistaHabitacionABM();
+            }
+        });
     }
     
-    private void iniciarVistaModificarHabitacion() { //mismo problema que en agregar habitacion
+    private void iniciarVistaModificarHabitacion() {
     	Interfaz_ModificarHabitacion modHab = new Interfaz_ModificarHabitacion();
     	modHab.setVisible(true);
     	modHab.setLocationRelativeTo(null);
+    	JSpinner spPrecio = modHab.getSpPrecio();
+        JButton btnGuardar = modHab.getBtnGuardar();
+    	JComboBox comboBoxDisponible = modHab.getComboBoxDisponible();
+        JComboBox comboBoxTipo = modHab.getComboBoxTipo();
+        JSpinner spCantPersonas = modHab.getSpCantPersonas();
+        JRadioButton rdbtnInternet = modHab.getRdbtnInternet();
+        JRadioButton rdbtnMinibar = modHab.getRdbtnMinibar();
+        JRadioButton rdbtnServicioDespertador = modHab.getRdbtnServicioDespertador();
+        JRadioButton rdbtnTv = modHab.getRdbtnTv();
+        JTextField txtCodigo = modHab.getTextCodigo();
+        
+        List<String> extras = new ArrayList<String>();
+        
+        btnGuardar.addActionListener(new ActionListener() {
+    		public void actionPerformed(ActionEvent e) {
+    			boolean disponible = true;
+    			if (comboBoxDisponible.getSelectedItem() == "No") {
+    	        	disponible = false;
+    	        }
+    			if (rdbtnInternet.isSelected()) {
+    	        	extras.add("Internet");
+    	        }
+    	        if (rdbtnMinibar.isSelected()) {
+    	        	extras.add("Minibar");
+    	        }
+    	        if (rdbtnServicioDespertador.isSelected()) {
+    	        	extras.add("Servicio despertador");
+    	        }
+    	        if (rdbtnTv.isSelected()) {
+    	        	extras.add("TV");
+    	        }
+    			if (comboBoxTipo.getSelectedItem() == "Suite") {
+    				modificarHabitacionPorId(txtCodigo.getText(), new Suite(txtCodigo.getText(), ((Number) spPrecio.getValue()).doubleValue(), (int) spCantPersonas.getValue(), "Suite", extras, disponible));
+    	        } else {
+    				modificarHabitacionPorId(txtCodigo.getText(), new Suite(txtCodigo.getText(), ((Number) spPrecio.getValue()).doubleValue(), (int) spCantPersonas.getValue(), "Habitacion", extras, disponible));
+    	        }
+    			modHab.dispose();
+    			iniciarVistaHabitacionABM();
+    		}
+    	});
+        
+        
+        modHab.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+            	modHab.dispose();
+                iniciarVistaHabitacionABM();
+            }
+        });
+    }
+    
+    private void modificarHabitacionPorId(String id, AbstractHabitacion datosHabitacion) {
+    	for (AbstractHabitacion hab : habitaciones) {
+    		if (hab.getIdHabitacion() == id) {
+    			hab = datosHabitacion;
+    		}
+    	}
     }
     
     private void iniciarVistaEliminarHabitacion() {

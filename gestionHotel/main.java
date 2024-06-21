@@ -27,10 +27,13 @@ public class main {
 		clientes.add(cliente2);
 		clientes.add(cliente3);
 	    
-		AbstractHabitacion habitacion1 = new Habitacion("1", (double) 1500, 2, "Habitacion", new ArrayList<String>());
-		AbstractHabitacion suite1 = new Suite("2", (double) 3000, 3, "Suite", new ArrayList<String>());
-		AbstractHabitacion habitacion2 = new Habitacion("3", (double) 1350, 1, "Habitacion", new ArrayList<String>());
-		AbstractHabitacion suite2 = new Suite("4", (double) 4500, 4, "Suite", new ArrayList<String>());
+		ArrayList<String> extras1 = new ArrayList<String>();
+		extras1.add("Minibar");
+		extras1.add("Servicio despertador");
+		Habitacion habitacion1 = new Habitacion("1", (double) 1500, 2, "Habitacion", extras1, true);
+		Suite suite1 = new Suite("2", (double) 3000, 3, "Suite", new ArrayList<String>(), true);
+		Habitacion habitacion2 = new Habitacion("3", (double) 1350, 1, "Habitacion", new ArrayList<String>(), false);
+		Suite suite2 = new Suite("4", (double) 4500, 4, "Suite", new ArrayList<String>(), true);
 		
 		habitaciones.add(habitacion1);
 		habitaciones.add(suite1);

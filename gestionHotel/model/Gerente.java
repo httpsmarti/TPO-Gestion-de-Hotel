@@ -12,12 +12,12 @@ public class Gerente extends AbstractCuenta {
         return new Factura(idFactura, reserva);
     }
 
-    public Habitacion crearHabitacion(String idHabitacion, Double precio, int cantPersonas, String tipo, List<String> extras) {
-    	return new Habitacion(idHabitacion, precio, cantPersonas, tipo, extras);
+    public Habitacion crearHabitacion(String idHabitacion, Double precio, int cantPersonas, String tipo, List<String> extras, boolean disponible) {
+    	return new Habitacion(idHabitacion, precio, cantPersonas, tipo, extras, disponible);
     }
     
-    public Suite crearSuite(String idHabitacion, Double precio, int cantPersonas, String tipo, List<String> extras) {
-    	return new Suite(idHabitacion, precio, cantPersonas, tipo, extras);
+    public Suite crearSuite(String idHabitacion, Double precio, int cantPersonas, String tipo, List<String> extras, boolean disponible) {
+    	return new Suite(idHabitacion, precio, cantPersonas, tipo, extras, disponible);
     }
 
     public void modificarHabitacion(Habitacion habitacion, int nuevaCantPersonas, Double nuevoPrecioPorNoche, List<String> nuevosExtras) {

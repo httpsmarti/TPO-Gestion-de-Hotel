@@ -10,13 +10,13 @@ public class AbstractHabitacion {
     private List<String> extras;
     private boolean disponible;
 
-    public AbstractHabitacion(String idHabitacion, Double precioPorNoche, int cantPersonas, String tipo, List<String> extras) {
+    public AbstractHabitacion(String idHabitacion, Double precioPorNoche, int cantPersonas, String tipo, List<String> extras, boolean disponible) {
         this.idHabitacion = idHabitacion;
         this.precioPorNoche = precioPorNoche;
         this.cantPersonas = cantPersonas;
         this.tipo = tipo;
         this.extras = extras;
-        this.disponible = true; // Por defecto, la habitación está disponible
+        this.disponible = disponible;
     }
 
     public String getTipo() {
