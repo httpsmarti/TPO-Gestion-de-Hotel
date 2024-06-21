@@ -38,6 +38,7 @@ import java.awt.event.MouseEvent;
 public class Interfaz_Detalle extends JFrame {
 
 private JPanel contentPane;
+
 private JTable table;
 private JTable table_1;
 private JButton btnReservar;
@@ -51,8 +52,10 @@ private ButtonGroup grupoMetodoPago = new ButtonGroup();
 private JButton btnAtras;
 private JDateChooser dateCheckIn;
 private JDateChooser dateCheckOut;
-private JComboBox comboCantHuesped;
-private JComboBox comboTipo;
+private JRadioButton rdbtnInternet;
+private JRadioButton rdbtnMinibar;
+private JRadioButton rdbtnServicioDespertador;
+private JRadioButton rdbtnTv;
 
 static DefaultTableModel tablaFuncional = new DefaultTableModel();
 static DefaultTableModel tablaFuncional1 = new DefaultTableModel();
@@ -91,7 +94,7 @@ public Interfaz_Detalle() {
     lblDetalle.setBounds(482, 12, 175, 32);
     panel_1.add(lblDetalle);
     
-    JButton btnAtras = new JButton("Atrás");/*
+    btnAtras = new JButton("Atrás");/*
     btnAtras.addMouseListener(new MouseAdapter() {
     	@Override
     	public void mouseClicked(MouseEvent e) {
@@ -125,7 +128,7 @@ public Interfaz_Detalle() {
     panel_3.setBounds(0, 588, 1164, 56);
     contentPane.add(panel_3);
     
-    JButton btnReservar = new JButton("Reservar");
+    btnReservar = new JButton("Reservar");
     /*
     btnReservar.addActionListener((ActionListener) new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
@@ -176,18 +179,18 @@ public Interfaz_Detalle() {
     lblNewLabel.setBounds(23, 35, 68, 20);
     panel_2.add(lblNewLabel);
     
-    //elije las fechas
+    //elije las fechas check in check out
     JLabel lblCheckOut = new JLabel("Check Out\r\n");
     lblCheckOut.setFont(new Font("Calibri", Font.BOLD, 16));
     lblCheckOut.setBounds(247, 35, 82, 20);
     panel_2.add(lblCheckOut);
     
-    JDateChooser dateCheckIn = new JDateChooser();
+    dateCheckIn = new JDateChooser();
     dateCheckIn.getCalendarButton().setForeground(new Color(206, 157, 255));
     dateCheckIn.setBounds(23, 66, 170, 32);
     panel_2.add(dateCheckIn);
     
-    JDateChooser dateCheckOut = new JDateChooser();
+    dateCheckOut = new JDateChooser();
     dateCheckOut.getCalendarButton().setForeground(new Color(206, 157, 255));
     dateCheckOut.setBounds(247, 66, 170, 32);
     panel_2.add(dateCheckOut);
@@ -207,26 +210,35 @@ public Interfaz_Detalle() {
     lblExtra_1.setBounds(23, 134, 68, 20);
     panel_2.add(lblExtra_1);
     
-    JRadioButton rdbtnMinibar = new JRadioButton("Minibar");
+    //Botones EXTRAS 
+    
+    rdbtnMinibar = new JRadioButton("Minibar");
     rdbtnMinibar.setFont(new Font("Calibri", Font.PLAIN, 15));
     rdbtnMinibar.setBackground(Color.WHITE);
     rdbtnMinibar.setActionCommand("rdbtnCredito");
-    rdbtnMinibar.setBounds(46, 164, 109, 23);
+    rdbtnMinibar.setBounds(23, 162, 82, 23);
     panel_2.add(rdbtnMinibar);
     
-    JRadioButton rdbtnServicioDespertador = new JRadioButton("Servicio Despertador");
+    rdbtnServicioDespertador = new JRadioButton("Servicio Despertador");
     rdbtnServicioDespertador.setFont(new Font("Calibri", Font.PLAIN, 15));
     rdbtnServicioDespertador.setBackground(Color.WHITE);
     rdbtnServicioDespertador.setActionCommand("rdbtnDebito");
-    rdbtnServicioDespertador.setBounds(157, 164, 160, 23);
+    rdbtnServicioDespertador.setBounds(107, 162, 160, 23);
     panel_2.add(rdbtnServicioDespertador);
     
-    JRadioButton rdbtnTv = new JRadioButton("TV");
+    rdbtnTv = new JRadioButton("TV");
     rdbtnTv.setFont(new Font("Calibri", Font.PLAIN, 15));
     rdbtnTv.setBackground(Color.WHITE);
     rdbtnTv.setActionCommand("rdbtnTransferencia");
-    rdbtnTv.setBounds(345, 164, 72, 23);
+    rdbtnTv.setBounds(354, 162, 47, 23);
     panel_2.add(rdbtnTv);
+    
+    rdbtnInternet = new JRadioButton("Internet");
+    rdbtnInternet.setFont(new Font("Calibri", Font.PLAIN, 15));
+    rdbtnInternet.setBackground(Color.WHITE);
+    rdbtnInternet.setActionCommand("rdbtnDebito");
+    rdbtnInternet.setBounds(269, 162, 93, 23);
+    panel_2.add(rdbtnInternet);
     
     JPanel panel_2_1 = new JPanel();
     panel_2_1.setBackground(new Color(255, 255, 255));
@@ -249,7 +261,7 @@ public Interfaz_Detalle() {
     cliente.setBounds(370, 20, 74, 14);
     panel_2_1.add(cliente);
     
-    JButton  btnResgistrarHuesped = new JButton("Registrar Huésped");
+    btnResgistrarHuesped = new JButton("Registrar Huésped");
     btnResgistrarHuesped.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             // Mostrar la ventana de Registrar Huésped
@@ -266,7 +278,7 @@ public Interfaz_Detalle() {
     btnResgistrarHuesped.setBounds(495, 81, 143, 34);
     panel_2_1.add(btnResgistrarHuesped);
     
-    JButton btnEliminarHuesped = new JButton("Eliminar Huésped");
+    btnEliminarHuesped = new JButton("Eliminar Huésped");
     btnEliminarHuesped.addActionListener(new ActionListener() {
     	public void actionPerformed(ActionEvent e) {
     		// Mostrar la ventana de Eliminar Huésped
@@ -391,6 +403,20 @@ class CustomTableCellRenderer extends JPanel implements TableCellRenderer {
 	public JButton getBtnReservar() {
 		return btnReservar;
 	}
+	public JRadioButton getRdbtnInternet() {
+		return rdbtnInternet;
+	}
+	public JRadioButton getRdbtnMinibar() {
+		return rdbtnMinibar;
+	}
+
+	public JRadioButton getRdbtnServicioDespertador() {
+		return rdbtnServicioDespertador;
+	}
+
+	public JRadioButton getRdbtnTv() {
+		return rdbtnTv;
+	}
 
 	public JButton getBtnResgistrarHuesped() {
 		return btnResgistrarHuesped;
@@ -431,15 +457,7 @@ class CustomTableCellRenderer extends JPanel implements TableCellRenderer {
 	public JDateChooser getDateCheckOut() {
 		return dateCheckOut;
 	}
-
-	public JComboBox getComboCantHuesped() {
-		return comboCantHuesped;
-	}
-
-	public JComboBox getComboTipo() {
-		return comboTipo;
-	}
-
+	
 	public static DefaultTableModel getTablaFuncional() {
 		return tablaFuncional;
 	}

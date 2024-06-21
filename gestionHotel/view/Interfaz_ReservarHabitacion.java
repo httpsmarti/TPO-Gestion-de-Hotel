@@ -23,7 +23,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.table.TableModel;
 import javax.swing.JTextField;
 
-public class Interfaz_ReservaEnGerente extends JFrame {
+public class Interfaz_ReservarHabitacion extends JFrame {
 	
 	static DefaultTableModel tablaFuncional = new DefaultTableModel();
 	static DefaultTableModel tablaFuncional2 = new DefaultTableModel();
@@ -41,7 +41,7 @@ public class Interfaz_ReservaEnGerente extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Interfaz_ReservaEnGerente frame = new Interfaz_ReservaEnGerente();
+					Interfaz_ReservarHabitacion frame = new Interfaz_ReservarHabitacion();
 					frame.setVisible(true);
 					frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
@@ -51,7 +51,7 @@ public class Interfaz_ReservaEnGerente extends JFrame {
 		});
 	}
 
-	public Interfaz_ReservaEnGerente() {
+	public Interfaz_ReservarHabitacion() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1180, 683);
 		contentPane = new BackgroundPanel3();
@@ -65,7 +65,7 @@ public class Interfaz_ReservaEnGerente extends JFrame {
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon(Interfaz_ReservaEnGerente.class.getResource("/img/BostonResort (6).png")));
+		lblNewLabel_1.setIcon(new ImageIcon(Interfaz_ReservarHabitacion.class.getResource("/img/BostonResort (6).png")));
 		lblNewLabel_1.setBounds(0, 0, 1164, 115);
 		panel.add(lblNewLabel_1);
 		
@@ -144,7 +144,7 @@ public class Interfaz_ReservaEnGerente extends JFrame {
         contentPane.add(btnAtras);
 
         scrollPane = new JScrollPane();
-        scrollPane.setBounds(361, 224, 752, 136);
+        scrollPane.setBounds(231, 240, 752, 136);
         contentPane.add(scrollPane);
 
         // Definir las columnas antes de establecer el modelo en la tabla
@@ -162,7 +162,7 @@ public class Interfaz_ReservaEnGerente extends JFrame {
         scrollPane.setViewportView(tablaHabitacionesDispo);
 
         scrollPane_1 = new JScrollPane();
-        scrollPane_1.setBounds(361, 407, 752, 136);
+        scrollPane_1.setBounds(231, 423, 752, 136);
         contentPane.add(scrollPane_1);
 
         if (tablaFuncional2.getColumnCount() == 0) {
@@ -179,28 +179,29 @@ public class Interfaz_ReservaEnGerente extends JFrame {
         scrollPane_1.setViewportView(tablaHabitacionSeleccionada);
 
         JPanel panel_2 = new JPanel();
-        panel_2.setBounds(22, 222, 318, 321);
+        panel_2.setBounds(22, 349, 186, 94);
         contentPane.add(panel_2);
         panel_2.setLayout(null);
 
-        JLabel lblNewLabel_2 = new JLabel("Ingrese DNI del Cliente:");
-        lblNewLabel_2.setFont(new Font("Calibri", Font.BOLD, 16));
-        lblNewLabel_2.setBounds(77, 113, 173, 26);
-        panel_2.add(lblNewLabel_2);
-
         textDNICliente = new JTextField();
-        textDNICliente.setBounds(77, 150, 159, 34);
+        textDNICliente.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        textDNICliente.setBounds(15, 38, 159, 34);
         panel_2.add(textDNICliente);
         textDNICliente.setColumns(10);
+        
+                JLabel lblNewLabel_2 = new JLabel("Ingrese DNI del Cliente:");
+                lblNewLabel_2.setBounds(14, 11, 173, 26);
+                panel_2.add(lblNewLabel_2);
+                lblNewLabel_2.setFont(new Font("Calibri", Font.BOLD, 16));
 
         JLabel lblHabitacionesDisponibles = new JLabel("Habitaciones Disponibles");
         lblHabitacionesDisponibles.setFont(new Font("Calibri", Font.BOLD, 16));
-        lblHabitacionesDisponibles.setBounds(361, 192, 224, 32);
+        lblHabitacionesDisponibles.setBounds(231, 208, 224, 32);
         contentPane.add(lblHabitacionesDisponibles);
 		
 		JLabel lblHabitacinSeleccionada = new JLabel("Habitación Seleccionada");
 		lblHabitacinSeleccionada.setFont(new Font("Calibri", Font.BOLD, 16));
-		lblHabitacinSeleccionada.setBounds(361, 371, 224, 32);
+		lblHabitacinSeleccionada.setBounds(231, 387, 224, 32);
 		contentPane.add(lblHabitacinSeleccionada);
 	}
 	

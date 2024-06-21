@@ -16,6 +16,7 @@ import javax.swing.DefaultComboBoxModel;
 public class Interfaz_EliminarHabitacion extends JFrame {
 
     private JPanel contentPane;
+    
     private JTextField ID_EliminarHabitacion;
     private JButton btnEliminar;
 

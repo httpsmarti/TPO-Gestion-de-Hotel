@@ -17,17 +17,18 @@ import javax.swing.DefaultComboBoxModel;
 public class Interfaz_AgregarHabitacion extends JFrame {
 
     private JPanel contentPane;
+    
 	private JTextField textDNI;
     private JSpinner spPrecio;
     private JTextField txtCodigo;
     private JButton btnAgregar;
 	private JComboBox comboBoxDisponible;
-    private JTextField textExtras;
     private JComboBox comboBoxTipo;
     private JSpinner spCantPersonas;
+    private JComboBox comboBoxExtras;
     
-    
- Interfaz_AgregarHabitacion() {
+
+Interfaz_AgregarHabitacion() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(100, 100, 607, 408);
         contentPane = new JPanel();
@@ -106,15 +107,16 @@ public class Interfaz_AgregarHabitacion extends JFrame {
         comboBoxTipo.setBounds(359, 196, 201, 25);
         contentPane.add(comboBoxTipo);
         
-        textExtras = new JTextField();
-        textExtras.setColumns(10);
-        textExtras.setBounds(359, 242, 201, 25);
-        contentPane.add(textExtras);
-        
         JLabel lblNombre_1_1_1_2 = new JLabel("Extras:");
         lblNombre_1_1_1_2.setFont(new Font("Calibri", Font.PLAIN, 16));
         lblNombre_1_1_1_2.setBounds(230, 248, 77, 17);
         contentPane.add(lblNombre_1_1_1_2);
+        
+        comboBoxExtras = new JComboBox();
+        comboBoxExtras.setModel(new DefaultComboBoxModel(new String[] {"Servicio Despertador", "TV ", "Internet", "Minibar"}));
+        comboBoxExtras.setToolTipText("");
+        comboBoxExtras.setBounds(359, 244, 201, 25);
+        contentPane.add(comboBoxExtras);
 
         // Centrar la ventana cuando se hace visible
         setLocationRelativeTo(null);
@@ -123,9 +125,8 @@ public class Interfaz_AgregarHabitacion extends JFrame {
  public JTextField getTextDNI() {
 		return textDNI;
 	}
-
-	public JTextField getTextExtras() {
-		return textExtras;
+ public JComboBox getComboBoxExtras() {
+		return comboBoxExtras;
 	}
 
 	public JComboBox getComboBoxTipo() {
@@ -138,16 +139,15 @@ public class Interfaz_AgregarHabitacion extends JFrame {
 	public JSpinner getSpCantPersonas() {
 		return spCantPersonas;
 	}
-
-	public void setSpPrecio(JSpinner spPrecio) {
-		this.spPrecio = spPrecio;
+	public JSpinner getSpPrecio() {
+		return spPrecio;
 	}
 
-	public void setTxtCodigo(JTextField txtCodigo) {
-		this.txtCodigo = txtCodigo;
+	public JTextField getTxtCodigo() {
+		return txtCodigo;
 	}
 
-	public void setBtnAgregar(JButton btnAgregar) {
-		this.btnAgregar = btnAgregar;
+	public JButton getBtnAgregar() {
+		return btnAgregar;
 	}
 }

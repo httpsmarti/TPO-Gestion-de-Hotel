@@ -16,15 +16,16 @@ import javax.swing.DefaultComboBoxModel;
 public class Interfaz_ModificarHabitacion extends JFrame {
 
     private JPanel contentPane;
+    
 	private JComboBox comboBoxTipo;
     private JComboBox comboBoxDisponible;
     private JButton btnGuardar;
     private JSpinner spCantPersonas;
     private JSpinner spPrecio;
-    private JTextField textExtras;
     private JTextField textCodigo;
+    private JComboBox comboBoxExtras;
 
-    public Interfaz_ModificarHabitacion() {
+	public Interfaz_ModificarHabitacion() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(100, 100, 607, 408);
         contentPane = new JPanel();
@@ -63,11 +64,6 @@ public class Interfaz_ModificarHabitacion extends JFrame {
         comboBoxDisponible.setToolTipText("");
         comboBoxDisponible.setBounds(357, 280, 201, 25);
         contentPane.add(comboBoxDisponible);
-        
-        textExtras = new JTextField();
-        textExtras.setColumns(10);
-        textExtras.setBounds(357, 242, 201, 25);
-        contentPane.add(textExtras);
         
         JLabel lblNombre_1_1_1_2 = new JLabel("Extras:");
         lblNombre_1_1_1_2.setFont(new Font("Calibri", Font.PLAIN, 16));
@@ -111,6 +107,12 @@ public class Interfaz_ModificarHabitacion extends JFrame {
         lblNombre_1_1_2.setFont(new Font("Calibri", Font.PLAIN, 16));
         lblNombre_1_1_2.setBounds(228, 154, 125, 17);
         contentPane.add(lblNombre_1_1_2);
+        
+        JComboBox comboBoxExtras = new JComboBox();
+        comboBoxExtras.setModel(new DefaultComboBoxModel(new String[] {"Servicio Despertador", "TV ", "Internet", "Minibar"}));
+        comboBoxExtras.setToolTipText("");
+        comboBoxExtras.setBounds(357, 242, 201, 25);
+        contentPane.add(comboBoxExtras);
 
         // Centrar la ventana cuando se hace visible
         setLocationRelativeTo(null);
@@ -139,8 +141,8 @@ public class Interfaz_ModificarHabitacion extends JFrame {
 		return spPrecio;
 	}
 
-	public JTextField getTextExtras() {
-		return textExtras;
+	public JComboBox getComboBoxExtras() {
+		return comboBoxExtras;
 	}
 
 	public JTextField getTextCodigo() {

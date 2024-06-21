@@ -13,6 +13,7 @@ public class Interfaz_EliminarHuesped extends JFrame {
 
 
 	private JPanel contentPane;
+	
     private JTextField textDNI;
     private JTextField DNI_EliminarHuesped;
     private JButton btnEliminar;

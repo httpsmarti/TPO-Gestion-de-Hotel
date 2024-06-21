@@ -23,6 +23,7 @@ import java.awt.event.MouseEvent;
 public class Interfaz_HabitacionABM extends JFrame {
 
 	private JPanel contentPane;
+	
 	private JTable table;
 	static DefaultTableModel tablaFuncional = new DefaultTableModel();
 	private JButton btnAtras;
@@ -167,6 +168,13 @@ public class Interfaz_HabitacionABM extends JFrame {
 
 	public JButton getBtnEliminarHabitacion() {
 		return btnEliminarHabitacion;
+	}
+	public JTable getTable() {
+		return table;
+	}
+
+	public static DefaultTableModel getTablaFuncional() {
+		return tablaFuncional;
 	}
 }
 

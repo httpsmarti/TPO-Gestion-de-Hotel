@@ -21,6 +21,7 @@ import java.awt.event.MouseEvent;
 	public class Interfaz_PaginaCliente extends JFrame {
 
 		private JPanel contentPane;
+		
 		private JButton btnVerMisReservas;
 	    private JButton btnReservar;
 	    private JButton btnCerrarSesion;
@@ -96,7 +97,7 @@ import java.awt.event.MouseEvent;
 	        btnReservar.addMouseListener(new MouseAdapter() {
 	            @Override
 	            public void mouseClicked(MouseEvent e) {
-	                Interfaz_ReservaEnGerente reserva = new Interfaz_ReservaEnGerente();
+	                Interfaz_ReservarHabitacion reserva = new Interfaz_ReservarHabitacion();
 	                reserva.setVisible(true);
 	                reserva.setLocationRelativeTo(null); // Centrar la nueva ventana
 	                dispose(); // Cerrar la ventana actual si lo deseas

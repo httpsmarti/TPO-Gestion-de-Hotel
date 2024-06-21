@@ -27,6 +27,7 @@ import javax.swing.DropMode;
 public class Interfaz_ModificarPoliticas extends JFrame {
 
 	private JPanel contentPane;
+	
 	private JButton btnAplicarCambios;
 	private JButton btnAtras;
 	private JTextField txtCantDiasTemprano;
@@ -62,7 +63,7 @@ public class Interfaz_ModificarPoliticas extends JFrame {
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon(Interfaz_ReservaEnGerente.class.getResource("/img/BostonResort (6).png")));
+		lblNewLabel_1.setIcon(new ImageIcon(Interfaz_ReservarHabitacion.class.getResource("/img/BostonResort (6).png")));
 		lblNewLabel_1.setBounds(0, 0, 1164, 115);
 		panel.add(lblNewLabel_1);
 		

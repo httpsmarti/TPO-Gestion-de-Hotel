@@ -28,6 +28,7 @@ import javax.swing.table.TableCellRenderer;
 public class Interfaz_SelectClient extends JFrame {
 
     private JPanel contentPane;
+    
     private JButton btnSiguiente;
     private JButton button;
     private JTable table;

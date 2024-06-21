@@ -28,6 +28,7 @@ import java.awt.event.ActionEvent;
 public class Interfaz_Login extends JFrame {
 
 	private JPanel contentPane;
+
 	private JButton btnCliente;
 	private JButton btnGerente;
 
@@ -132,14 +133,15 @@ public class Interfaz_Login extends JFrame {
         }
         return null;
     }
-    
-	public void setBtnCliente(JButton btnCliente) {
-		this.btnCliente = btnCliente;
+
+	public JButton btnCliente() {
+		return btnCliente;
 	}
 
-	public void setBtnGerente(JButton btnGerente) {
-		this.btnGerente = btnGerente;
+	public JButton btnGerente() {
+		return btnGerente;
 	}
+
 }
 
 class BackgroundPanel extends JPanel {

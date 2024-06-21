@@ -25,6 +25,7 @@ import java.awt.event.ActionEvent;
 public class Interfaz_ClienteABM extends JFrame {
 
 	private JPanel contentPane;
+	
 	private JTable table;
 	static DefaultTableModel tablaFuncional = new DefaultTableModel();
 	private JButton btnAgregarCliente;
@@ -63,7 +64,7 @@ public class Interfaz_ClienteABM extends JFrame {
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon(Interfaz_ReservaEnGerente.class.getResource("/img/BostonResort (6).png")));
+		lblNewLabel_1.setIcon(new ImageIcon(Interfaz_ReservarHabitacion.class.getResource("/img/BostonResort (6).png")));
 		lblNewLabel_1.setBounds(0, 0, 1164, 115);
 		panel.add(lblNewLabel_1);
 		
@@ -194,7 +195,6 @@ public class Interfaz_ClienteABM extends JFrame {
 	public JButton getBtnEliminarCliente() {
 		return btnEliminarCliente;
 	}
-
 
 	public JButton getBtnAtras() {
 		return btnAtras;
