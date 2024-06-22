@@ -364,7 +364,6 @@ public class Controller {
     	JSpinner spPrecio = modHab.getSpPrecio();
         JButton btnGuardar = modHab.getBtnGuardar();
     	JComboBox comboBoxDisponible = modHab.getComboBoxDisponible();
-        JComboBox comboBoxTipo = modHab.getComboBoxTipo();
         JSpinner spCantPersonas = modHab.getSpCantPersonas();
         JRadioButton rdbtnInternet = modHab.getRdbtnInternet();
         JRadioButton rdbtnMinibar = modHab.getRdbtnMinibar();
