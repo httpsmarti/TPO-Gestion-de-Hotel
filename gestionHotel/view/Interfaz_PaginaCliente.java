@@ -86,6 +86,15 @@ import java.awt.event.MouseEvent;
 	        panel_1.add(lblIniciasteSesinComo);
 
 	        btnVerMisReservas = new JButton("");
+	        /*btnVerMisReservas.addActionListener(new ActionListener() {
+	        	public void actionPerformed(ActionEvent e) {
+	        		Interfaz_MiReserva miReserva = new Interfaz_MiReserva();
+	        		miReserva.setVisible(true);
+	        		miReserva.setLocationRelativeTo(null); // Centrar la nueva ventana
+	                dispose(); // Cerrar la ventana actual si lo deseas
+	        	}
+	        });*/
+	        
 	        btnVerMisReservas.setIcon(new ImageIcon(Interfaz_PaginaCliente.class.getResource("/img/misReservas.png")));
 	        btnVerMisReservas.setBackground(new Color(255, 255, 255));
 	        btnVerMisReservas.setFont(new Font("Calibri", Font.PLAIN, 15));

@@ -89,7 +89,7 @@ public class Interfaz_PaginaGerente extends JFrame {
         btnABMHabitacion.setIcon(new ImageIcon(Interfaz_PaginaGerente.class.getResource("/img/ambHabitacion.png")));
         btnABMHabitacion.setBackground(new Color(255, 255, 255));
         btnABMHabitacion.setFont(new Font("Calibri", Font.PLAIN, 15));
-        btnABMHabitacion.setBounds(340, 409, 168, 162);
+        btnABMHabitacion.setBounds(491, 421, 168, 162);
         contentPane.add(btnABMHabitacion);
         
         btnReserva = new JButton("");
@@ -124,12 +124,12 @@ public class Interfaz_PaginaGerente extends JFrame {
         
         JLabel lblNewLabel_2_1_1_1 = new JLabel("ABM Habitación");
         lblNewLabel_2_1_1_1.setFont(new Font("Calibri", Font.BOLD, 16));
-        lblNewLabel_2_1_1_1.setBounds(368, 582, 119, 20);
+        lblNewLabel_2_1_1_1.setBounds(519, 594, 119, 20);
         contentPane.add(lblNewLabel_2_1_1_1);
         
         JLabel lblNewLabel_2_1_1_2 = new JLabel("Modificar Políticas");
         lblNewLabel_2_1_1_2.setFont(new Font("Calibri", Font.BOLD, 16));
-        lblNewLabel_2_1_1_2.setBounds(665, 582, 132, 20);
+        lblNewLabel_2_1_1_2.setBounds(803, 594, 132, 20);
         contentPane.add(lblNewLabel_2_1_1_2);
         
         btnModificarPoliticas = new JButton("");
@@ -144,8 +144,28 @@ public class Interfaz_PaginaGerente extends JFrame {
         btnModificarPoliticas.setIcon(new ImageIcon(Interfaz_PaginaGerente.class.getResource("/img/ModificarPoliticas.png")));
         btnModificarPoliticas.setFont(new Font("Calibri", Font.PLAIN, 15));
         btnModificarPoliticas.setBackground(Color.WHITE);
-        btnModificarPoliticas.setBounds(645, 409, 168, 162);
+        btnModificarPoliticas.setBounds(783, 421, 168, 162);
         contentPane.add(btnModificarPoliticas);
+        
+        JLabel lblNewLabel_2_1_1_3 = new JLabel("Reservas Realizadas");
+        lblNewLabel_2_1_1_3.setFont(new Font("Calibri", Font.BOLD, 16));
+        lblNewLabel_2_1_1_3.setBounds(217, 594, 133, 20);
+        contentPane.add(lblNewLabel_2_1_1_3);
+        
+        JButton btnABMClientes_2 = new JButton("");
+        btnABMClientes_2.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		Interfaz_MiReserva miReserva = new Interfaz_MiReserva();
+        		miReserva.setVisible(true);
+        		miReserva.setLocationRelativeTo(null); // Centrar la nueva ventana
+                dispose(); // Cerrar la ventana actual si lo deseas
+        	}
+        });
+        btnABMClientes_2.setIcon(new ImageIcon(Interfaz_PaginaGerente.class.getResource("/img/reservaRealizada1.png")));
+        btnABMClientes_2.setFont(new Font("Calibri", Font.PLAIN, 15));
+        btnABMClientes_2.setBackground(Color.WHITE);
+        btnABMClientes_2.setBounds(196, 421, 168, 162);
+        contentPane.add(btnABMClientes_2);
     }
 
     public JButton getBtnABM() {

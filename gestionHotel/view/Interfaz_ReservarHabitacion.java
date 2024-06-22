@@ -22,6 +22,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.table.TableModel;
 import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.JRadioButton;
+import javax.swing.JCheckBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class Interfaz_ReservarHabitacion extends JFrame {
 	
@@ -36,6 +40,14 @@ public class Interfaz_ReservarHabitacion extends JFrame {
 	private JButton btnAtras;
 	private JTable tablaHabitacionSeleccionada;
 	private JTextField textDNICliente;
+
+	private JCheckBox chckbxServicioDespertador;
+	private JComboBox comboBoxTipo;
+	private JCheckBox chckbxTv;
+	private JCheckBox chckbxInternet;
+	private JCheckBox chckbxMinibar;
+	private JButton btnFiltrar;
+	private JComboBox comboBoxCantPers;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -73,13 +85,74 @@ public class Interfaz_ReservarHabitacion extends JFrame {
 		panel_1.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, new Color(206, 157, 255), new Color(226, 198, 255), new Color(226, 198, 255), new Color(226, 198, 255)));
 		panel_1.setBackground(new Color(206, 157, 255));
 		panel_1.setLayout(null);
-		panel_1.setBounds(0, 123, 1164, 43);
+		panel_1.setBounds(-3, 121, 1170, 71);
 		contentPane.add(panel_1);
 		
-		JLabel lblNewLabel = new JLabel("Seleccione Habitación");
-		lblNewLabel.setFont(new Font("Calibri", Font.BOLD, 20));
-		lblNewLabel.setBounds(482, 7, 197, 32);
-		panel_1.add(lblNewLabel);
+		btnAtras = new JButton("Atrás");
+		btnAtras.setBounds(21, 18, 76, 34);
+		panel_1.add(btnAtras);
+		
+        btnAtras.setBackground(new Color(63, 63, 63));
+        btnAtras.setForeground(new Color(255, 255, 255));
+        btnAtras.setFont(new Font("Calibri", Font.PLAIN, 14));
+        
+        comboBoxTipo = new JComboBox();
+        comboBoxTipo.setModel(new DefaultComboBoxModel(new String[] {"Habitación", "Suite"}));
+        comboBoxTipo.setFont(new Font("Calibri", Font.PLAIN, 14));
+        comboBoxTipo.setBounds(430, 33, 151, 27);
+        panel_1.add(comboBoxTipo);
+        
+        chckbxServicioDespertador = new JCheckBox("Servicio Despertador");
+        chckbxServicioDespertador.setBackground(new Color(206, 157, 255));
+        chckbxServicioDespertador.setFont(new Font("Calibri", Font.PLAIN, 16));
+        chckbxServicioDespertador.setBounds(602, 33, 161, 23);
+        panel_1.add(chckbxServicioDespertador);
+        
+        chckbxTv = new JCheckBox("TV");
+        chckbxTv.setBackground(new Color(206, 157, 255));
+        chckbxTv.setFont(new Font("Calibri", Font.PLAIN, 16));
+        chckbxTv.setBounds(768, 33, 44, 23);
+        panel_1.add(chckbxTv);
+        
+        chckbxInternet = new JCheckBox("Internet");
+        chckbxInternet.setBackground(new Color(206, 157, 255));
+        chckbxInternet.setFont(new Font("Calibri", Font.PLAIN, 16));
+        chckbxInternet.setBounds(817, 33, 81, 23);
+        panel_1.add(chckbxInternet);
+        
+        chckbxMinibar = new JCheckBox("Minibar");
+        chckbxMinibar.setBackground(new Color(206, 157, 255));
+        chckbxMinibar.setFont(new Font("Calibri", Font.PLAIN, 16));
+        chckbxMinibar.setBounds(902, 33, 81, 23);
+        panel_1.add(chckbxMinibar);
+        
+        btnFiltrar = new JButton("Filtrar");
+        btnFiltrar.setForeground(Color.WHITE);
+        btnFiltrar.setFont(new Font("Calibri", Font.PLAIN, 14));
+        btnFiltrar.setBackground(new Color(63, 63, 63));
+        btnFiltrar.setBounds(995, 20, 76, 34);
+        panel_1.add(btnFiltrar);
+        
+        JLabel lblCantidadPersonas = new JLabel("Tipo");
+        lblCantidadPersonas.setFont(new Font("Calibri", Font.BOLD, 14));
+        lblCantidadPersonas.setBounds(429, 4, 122, 32);
+        panel_1.add(lblCantidadPersonas);
+        
+        JLabel lblCantidadPersonas_1 = new JLabel("Cantidad Personas");
+        lblCantidadPersonas_1.setFont(new Font("Calibri", Font.BOLD, 14));
+        lblCantidadPersonas_1.setBounds(233, 4, 122, 32);
+        panel_1.add(lblCantidadPersonas_1);
+        
+        comboBoxCantPers = new JComboBox();
+        comboBoxCantPers.setFont(new Font("Tahoma", Font.PLAIN, 13));
+        comboBoxCantPers.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6"}));
+        comboBoxCantPers.setBounds(233, 33, 151, 27);
+        panel_1.add(comboBoxCantPers);
+        
+        JLabel lblExtras = new JLabel("Extras");
+        lblExtras.setFont(new Font("Calibri", Font.BOLD, 14));
+        lblExtras.setBounds(602, 4, 122, 32);
+        panel_1.add(lblExtras);
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -105,8 +178,6 @@ public class Interfaz_ReservarHabitacion extends JFrame {
 		btnSiguiente.setFont(new Font("Calibri", Font.BOLD, 14));
 		btnSiguiente.setBounds(1042, 11, 89, 34);
 		panel_3.add(btnSiguiente);
-		
-		btnAtras = new JButton("Atrás");
 		/*
 		btnAtras.addMouseListener(new MouseAdapter() {
 			@Override
@@ -136,12 +207,6 @@ public class Interfaz_ReservarHabitacion extends JFrame {
 
             }
         });*/
-		
-        btnAtras.setBackground(new Color(63, 63, 63));
-        btnAtras.setForeground(new Color(255, 255, 255));
-        btnAtras.setFont(new Font("Calibri", Font.PLAIN, 14));
-        btnAtras.setBounds(22, 177, 76, 34);
-        contentPane.add(btnAtras);
 
         scrollPane = new JScrollPane();
         scrollPane.setBounds(231, 240, 752, 136);
@@ -203,6 +268,33 @@ public class Interfaz_ReservarHabitacion extends JFrame {
 		lblHabitacinSeleccionada.setFont(new Font("Calibri", Font.BOLD, 16));
 		lblHabitacinSeleccionada.setBounds(231, 387, 224, 32);
 		contentPane.add(lblHabitacinSeleccionada);
+	}
+	public JCheckBox getChckbxServicioDespertador() {
+		return chckbxServicioDespertador;
+	}
+
+	public JComboBox getComboBoxTipo() {
+		return comboBoxTipo;
+	}
+
+	public JCheckBox getChckbxTv() {
+		return chckbxTv;
+	}
+
+	public JCheckBox getChckbxInternet() {
+		return chckbxInternet;
+	}
+
+	public JCheckBox getChckbxMinibar() {
+		return chckbxMinibar;
+	}
+
+	public JButton getBtnFiltrar() {
+		return btnFiltrar;
+	}
+
+	public JComboBox getComboBoxCantPers() {
+		return comboBoxCantPers;
 	}
 	
 	public DefaultTableModel getTablaFuncional() {

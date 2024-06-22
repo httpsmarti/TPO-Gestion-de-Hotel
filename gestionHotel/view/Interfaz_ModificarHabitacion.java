@@ -17,8 +17,7 @@ import javax.swing.DefaultComboBoxModel;
 public class Interfaz_ModificarHabitacion extends JFrame {
 
     private JPanel contentPane;
-
-	private JComboBox comboBoxTipo;
+    
     private JComboBox comboBoxDisponible;
     private JButton btnGuardar;
     private JSpinner spCantPersonas;
@@ -31,7 +30,7 @@ public class Interfaz_ModificarHabitacion extends JFrame {
 
 	public Interfaz_ModificarHabitacion() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBounds(100, 100, 607, 469);
+        setBounds(100, 100, 607, 415);
         contentPane = new JPanel();
         contentPane.setBackground(new Color(206, 140, 255));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -45,7 +44,7 @@ public class Interfaz_ModificarHabitacion extends JFrame {
         JPanel panel_1 = new JPanel();
         panel_1.setLayout(null);
         panel_1.setBackground(new Color(231, 198, 255));
-        panel_1.setBounds(-2, 393, 596, 38);
+        panel_1.setBounds(-2, 340, 596, 38);
         contentPane.add(panel_1);
         
         btnGuardar = new JButton("Guardar Cambios");
@@ -60,29 +59,19 @@ public class Interfaz_ModificarHabitacion extends JFrame {
         
         JLabel lblNombre_1_1_1_1_1 = new JLabel("Disponible:");
         lblNombre_1_1_1_1_1.setFont(new Font("Calibri", Font.PLAIN, 16));
-        lblNombre_1_1_1_1_1.setBounds(228, 341, 77, 17);
+        lblNombre_1_1_1_1_1.setBounds(226, 284, 77, 17);
         contentPane.add(lblNombre_1_1_1_1_1);
         
         comboBoxDisponible = new JComboBox();
         comboBoxDisponible.setModel(new DefaultComboBoxModel(new String[] {"Si", "No"}));
         comboBoxDisponible.setToolTipText("");
-        comboBoxDisponible.setBounds(357, 335, 201, 25);
+        comboBoxDisponible.setBounds(356, 287, 201, 25);
         contentPane.add(comboBoxDisponible);
         
         JLabel lblNombre_1_1_1_2 = new JLabel("Extras:");
         lblNombre_1_1_1_2.setFont(new Font("Calibri", Font.PLAIN, 16));
-        lblNombre_1_1_1_2.setBounds(228, 248, 77, 17);
+        lblNombre_1_1_1_2.setBounds(227, 201, 77, 17);
         contentPane.add(lblNombre_1_1_1_2);
-        
-        JLabel lblNombre_1_1_1 = new JLabel("Tipo:");
-        lblNombre_1_1_1.setFont(new Font("Calibri", Font.PLAIN, 16));
-        lblNombre_1_1_1.setBounds(228, 202, 77, 17);
-        contentPane.add(lblNombre_1_1_1);
-        
-        comboBoxTipo = new JComboBox();
-        comboBoxTipo.setToolTipText("");
-        comboBoxTipo.setBounds(357, 196, 201, 25);
-        contentPane.add(comboBoxTipo);
         
         spCantPersonas = new JSpinner();
         spCantPersonas.setBounds(357, 148, 79, 25);
@@ -116,28 +105,28 @@ public class Interfaz_ModificarHabitacion extends JFrame {
         rdbtnServicioDespertador.setFont(new Font("Calibri", Font.PLAIN, 15));
         rdbtnServicioDespertador.setBackground(new Color(206, 140, 255));
         rdbtnServicioDespertador.setActionCommand("rdbtnDebito");
-        rdbtnServicioDespertador.setBounds(349, 245, 160, 23);
+        rdbtnServicioDespertador.setBounds(355, 201, 160, 23);
         contentPane.add(rdbtnServicioDespertador);
         
         rdbtnMinibar = new JRadioButton("Minibar");
         rdbtnMinibar.setFont(new Font("Calibri", Font.PLAIN, 15));
         rdbtnMinibar.setBackground(new Color(206, 140, 255));
         rdbtnMinibar.setActionCommand("rdbtnCredito");
-        rdbtnMinibar.setBounds(349, 285, 82, 23);
+        rdbtnMinibar.setBounds(355, 241, 82, 23);
         contentPane.add(rdbtnMinibar);
         
         rdbtnTv = new JRadioButton("TV");
         rdbtnTv.setFont(new Font("Calibri", Font.PLAIN, 15));
         rdbtnTv.setBackground(new Color(206, 140, 255));
         rdbtnTv.setActionCommand("rdbtnTransferencia");
-        rdbtnTv.setBounds(511, 245, 47, 23);
+        rdbtnTv.setBounds(517, 201, 47, 23);
         contentPane.add(rdbtnTv);
         
         rdbtnInternet = new JRadioButton("Internet");
         rdbtnInternet.setFont(new Font("Calibri", Font.PLAIN, 15));
         rdbtnInternet.setBackground(new Color(206, 140, 255));
         rdbtnInternet.setActionCommand("rdbtnDebito");
-        rdbtnInternet.setBounds(447, 285, 93, 23);
+        rdbtnInternet.setBounds(453, 241, 93, 23);
         contentPane.add(rdbtnInternet);
 
         // Centrar la ventana cuando se hace visible
@@ -145,10 +134,6 @@ public class Interfaz_ModificarHabitacion extends JFrame {
     }
     public JPanel getContentPane() {
 		return contentPane;
-	}
-
-	public JComboBox getComboBoxTipo() {
-		return comboBoxTipo;
 	}
 
 	public JComboBox getComboBoxDisponible() {
