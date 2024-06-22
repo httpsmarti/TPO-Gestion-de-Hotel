@@ -23,6 +23,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.time.LocalDate;
+import java.time.ZoneId;
 
 public class Controller {
 
@@ -268,7 +270,7 @@ public class Controller {
 		});
     }
     
-    public void iniciarVistaReserva() {
+    public void iniciarVistaReserva() { //se puede avanzar sin haber seleccionado habitaciones CORREGIR
     	Interfaz_ReservarHabitacion interReserva = new Interfaz_ReservarHabitacion();
     	interReserva.setVisible(true);
     	interReserva.setLocationRelativeTo(null);
@@ -471,6 +473,7 @@ public class Controller {
 		});	
     }
     
+    
     private AbstractHabitacion getHabitacionByCodigo(String codigo) {
     	for (AbstractHabitacion h : habitaciones) {
     		if(h.getIdHabitacion() == codigo) {
@@ -480,7 +483,7 @@ public class Controller {
     	return null;
     }
     
-    private void iniciarVistaReservaDetalle(List<AbstractHabitacion> listaHabitaciones, String DNI) {
+    private void iniciarVistaReservaDetalle(List<AbstractHabitacion> listaHabitaciones, String DNI) { //SIN TERMINAR
     	Interfaz_Detalle detalle = new Interfaz_Detalle();
     	detalle.setVisible(true);
     	detalle.setLocationRelativeTo(null);
@@ -507,6 +510,32 @@ public class Controller {
 			tablaHabitaciones.fireTableDataChanged();
 		}
         
+        btnReservar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+		        LocalDate fechaActual = LocalDate.now();
+		        LocalDate fechaMasUnDia = fechaActual.plusDays(1);
+		        Date fechaMaxima = Date.from(fechaMasUnDia.atStartOfDay(ZoneId.systemDefault()).toInstant());
+				Double precioTotal;
+				PagoContexto pc = new PagoContexto();
+				if (rdbtnCredito.isSelected()) {
+					pc.setEstrategia(new PagoCredito(fechaMaxima, idCredito, banco));
+				}
+				if (rdbtnDebito.isSelected()) {
+					pc.setEstrategia(new PagoCredito(fechaMaxima, idDebito, banco));
+				}
+				if (rdbtnTransferencia.isSelected()) {
+					pc.setEstrategia(new PagoCredito(fechaMaxima, idTransferencia, alias));
+				}
+				if (rdbtnEfectivo.isSelected()) {
+					pc.setEstrategia(new PagoCredito(fechaMaxima, tipoDeCambio));
+				}
+				
+				//calcular monto para mostrar el precio final en la vista
+				
+				reservas.add(new Reserva(generarIdReserva(), precioTotal, dateCheckIn.getDate(), dateCheckOut.getDate(), Calendar.getInstance().getTime(), listaHabitaciones, DNI, huespedes, pc, "Pendiente de pago"));
+			}
+		});
+        
         btnResgistrarHuesped.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Interfaz_RegistrarHuesped regHue = new Interfaz_RegistrarHuesped();
@@ -531,13 +560,55 @@ public class Controller {
 			}
 		});
         
-    	
+    	btnEliminarHuesped.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Interfaz_EliminarHuesped eliHue = new Interfaz_EliminarHuesped();
+				eliHue.setVisible(true);
+				eliHue.setLocationRelativeTo(null);
+				
+				JButton btnEliminar = eliHue.getBtnEliminar();
+				JTextField txtDNI = eliHue.getDNI_EliminarHuesped();
+				
+				btnEliminar.addActionListener(new ActionListener() {
+		            public void actionPerformed(ActionEvent ev) {
+		            	if (getHuespedByDNI(huespedes, txtDNI.getText()) != null) {
+		            		huespedes.remove(getHuespedByDNI(huespedes, txtDNI.getText()));
+		            		tablaHuespedes.setRowCount(0);
+			                for (Huesped hue : huespedes) {
+			                    Object[] linea = {hue.getDNI(), hue.getNombre(), hue.getApellido()};
+			                    tablaHuespedes.addRow(linea);
+			                }
+			                tablaHuespedes.fireTableDataChanged();
+			            	eliHue.dispose();
+		            	}
+		            }
+		        });
+			}
+		});
+        
     	btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				detalle.dispose();
                 iniciarVistaReserva();
 			}
 		});
+    }
+    
+    private String generarIdReserva() {
+    	if (reservas.size() == 0) {
+    		return "1";
+    	} else {
+    		return String.valueOf(Integer.parseInt(reservas.get(reservas.size() - 1).getIdReserva()) + 1); 
+    	}
+    }
+    
+    private Huesped getHuespedByDNI(List<Huesped> huespedes, String DNI) {
+    	for (Huesped h : huespedes) {
+    		if (h.getDNI().equals(DNI)){
+    			return h;
+    		}
+    	}
+    	return null;
     }
     
     private void iniciarVistaEliminarReserva() { //checkear si anda
@@ -842,9 +913,81 @@ public class Controller {
     }
     
     public void iniciarVistaClientesABM() {
-    	//me faltaría la pantalla de clientes abm...
+    	Interfaz_ClienteABM cABM = new Interfaz_ClienteABM();
+    	cABM.setVisible(true);
+    	cABM.setLocationRelativeTo(null);
+    	JButton btnAtras = cABM.getBtnAtras();
+    	DefaultTableModel tabla = cABM.getTablaFuncional();
+    	JButton btnAgregar = cABM.getBtnAgregarCliente();
+    	JButton btnModificar = cABM.getBtnModificarCliente();
+    	JButton btnEliminar = cABM.getBtnEliminarCliente();
+    	
+    	for (Cliente c : clientes) {
+			Object[] linea = {c.getNombre(), c.getApellido(), c.getDNI(), c.getEdad(), c.getMail(), c.getTelefono()};
+			tabla.addRow(linea);
+		}
+    	
+    	btnAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cABM.dispose();
+                iniciarVistaGerente();
+			}
+		});
+    	
+    	btnAgregar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cABM.dispose();
+                iniciarVistaAgregarCliente();
+			}
+		});
+    	
+    	btnModificar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cABM.dispose();
+                iniciarVistaModificarCliente();
+			}
+		});
+    	
+    	btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cABM.dispose();
+                iniciarVistaEliminarCliente();
+			}
+		});    	
     }
     
+    private void iniciarVistaAgregarCliente() {
+    	Interfaz_AgregarCliente agrCli = new Interfaz_AgregarCliente();
+    	agrCli.setVisible(true);
+    	agrCli.setLocationRelativeTo(null);
+    	JTextField txtNombre = agrCli.getTextNombre();
+    	JTextField txtApellido = agrCli.getTextApellido();
+    	JTextField txtDNI = agrCli.getTextDNI();
+    	JTextField txtEdad = agrCli.getTextEdad();
+    	JTextField txtTelefono = agrCli.getTextTelefono();
+    	JTextField txtMail = agrCli.getTextMail();
+    	JButton btnRegistrar = agrCli.getBtnRegistrar();
+    	JComboBox comboBoxContactoPref = agrCli.getContactPreferece();
+    	
+    	btnRegistrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (txtNombre.getText() != "" && txtApellido.getText() != "" && txtDNI.getText() != "" && txtEdad.getText() != "" && txtTelefono.getText() != "" && txtMail.getText() != "") {
+					clientes.add(new Cliente(txtNombre.getText(), txtApellido.getText(), txtDNI.getText(), Integer.parseInt(txtEdad.getText()), txtMail.getText(), txtContactoPref.getText()));					
+					agrCli.dispose();
+					iniciarVistaClientesABM();
+				}				
+			}
+		});
+    	
+    	
+    	agrCli.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+            	agrCli.dispose();
+                iniciarVistaClientesABM();
+            }
+        });
+    }
     
     private void iniciarVistaCliente() { //LO SIGO CUANDO TERMINE CON LA PARTE DEL GERENTE
     	Interfaz_PaginaCliente pagCliente = new Interfaz_PaginaCliente();
@@ -858,7 +1001,7 @@ public class Controller {
     		btnVerMisReservas.addActionListener(new ActionListener() {
     			public void actionPerformed(ActionEvent e) {
     				pagCliente.dispose();
-    				//martis haceme la view porfa D:
+    				//martis haceme la view porfa D: Interfaz_MiReserva
     			}
     		});
     	}
