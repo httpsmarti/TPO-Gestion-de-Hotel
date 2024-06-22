@@ -40,13 +40,13 @@ public class main {
 		habitaciones.add(habitacion2);
 		habitaciones.add(suite2);
 		
-		Huesped huesped1 = new Huesped("1", "Juan", "Perez", "12345678");
-        Huesped huesped2 = new Huesped("2", "Maria", "Gomez", "87654321");
-        Huesped huesped3 = new Huesped("3", "Carlos", "Lopez", "11223344");
-        Huesped huesped4 = new Huesped("4", "Ana", "Martinez", "44332211");
-        Huesped huesped5 = new Huesped("5", "Luis", "Garcia", "55667788");
-        Huesped huesped6 = new Huesped("6", "Sofia", "Fernandez", "99887766");
-        Huesped huesped7 = new Huesped("7", "Pedro", "Gonzalez", "88776655");
+		Huesped huesped1 = new Huesped("Juan", "Perez", "12345678");
+        Huesped huesped2 = new Huesped("Maria", "Gomez", "87654321");
+        Huesped huesped3 = new Huesped("Carlos", "Lopez", "11223344");
+        Huesped huesped4 = new Huesped("Ana", "Martinez", "44332211");
+        Huesped huesped5 = new Huesped("Luis", "Garcia", "55667788");
+        Huesped huesped6 = new Huesped("Sofia", "Fernandez", "99887766");
+        Huesped huesped7 = new Huesped("Pedro", "Gonzalez", "88776655");
         
         huespedes.add(huesped1);
         huespedes.add(huesped2);
@@ -78,6 +78,6 @@ public class main {
         
         PoliticasReserva politicas = new PoliticasReserva(7, 7, 10, 20);
         
-		Controller controller = new Controller(clientes, gerente, habitaciones, reservas, huespedes, gestorNotif, auditoria, politicas, vista);
+		Controller controller = new Controller(clientes, gerente, habitaciones, reservas, gestorNotif, auditoria, politicas, vista);
 	}
 }

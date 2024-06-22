@@ -121,7 +121,7 @@ public class Interfaz_MiReserva extends JFrame {
         tablaHabitacionesDispo.setBackground(new Color(255, 255, 255));
         scrollPane.setViewportView(tablaHabitacionesDispo);
 
-        JButton btnEliminarReserva = new JButton("Eliminar Reserva");
+        btnEliminarReserva = new JButton("Eliminar Reserva");
         /*btnEliminarReserva.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		Interfaz_EliminarReserva eReserva = new Interfaz_EliminarReserva();
@@ -135,6 +135,7 @@ public class Interfaz_MiReserva extends JFrame {
         btnEliminarReserva.setBounds(523, 471, 142, 39);
         contentPane.add(btnEliminarReserva);
 	}	
+	
 	public DefaultTableModel getTablaFuncional() {
 		return tablaFuncional;
 	}

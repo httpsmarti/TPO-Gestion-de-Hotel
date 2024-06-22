@@ -30,8 +30,9 @@ public class Interfaz_PaginaGerente extends JFrame {
     private JButton btnCerrarSession;
     private JButton btnABMClientes;
     private JButton btnModificarPoliticas;
+    private JButton btnABMClientes_2;
 
-    public static void main(String[] args) {
+	public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -152,15 +153,15 @@ public class Interfaz_PaginaGerente extends JFrame {
         lblNewLabel_2_1_1_3.setBounds(217, 594, 133, 20);
         contentPane.add(lblNewLabel_2_1_1_3);
         
-        JButton btnABMClientes_2 = new JButton("");
-        btnABMClientes_2.addActionListener(new ActionListener() {
+        btnABMClientes_2 = new JButton("");
+        /*btnABMClientes_2.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		Interfaz_MiReserva miReserva = new Interfaz_MiReserva();
         		miReserva.setVisible(true);
         		miReserva.setLocationRelativeTo(null); // Centrar la nueva ventana
                 dispose(); // Cerrar la ventana actual si lo deseas
         	}
-        });
+        });*/
         btnABMClientes_2.setIcon(new ImageIcon(Interfaz_PaginaGerente.class.getResource("/img/reservaRealizada1.png")));
         btnABMClientes_2.setFont(new Font("Calibri", Font.PLAIN, 15));
         btnABMClientes_2.setBackground(Color.WHITE);
@@ -187,6 +188,10 @@ public class Interfaz_PaginaGerente extends JFrame {
     public JButton getBtnModificarPoliticas() {
     	return btnModificarPoliticas;
     }
+    
+	public JButton getBtnVerReservas() {
+		return btnABMClientes_2;
+	}
 }
 
 class BackgroundPanel7 extends JPanel {

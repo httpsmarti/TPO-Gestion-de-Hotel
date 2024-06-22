@@ -29,20 +29,20 @@ import javax.swing.DefaultComboBoxModel;
 
 public class Interfaz_ReservarHabitacion extends JFrame {
 	
-	static DefaultTableModel tablaFuncional = new DefaultTableModel();
-	static DefaultTableModel tablaFuncional2 = new DefaultTableModel();
+	
 	private JPanel contentPane;
-
-	private JTable tablaHabitacionesDispo;
 	private JScrollPane scrollPane;
 	private JScrollPane scrollPane_1;
+	private JTable tablaHabitacionesDispo;
+	
 	private JButton btnSiguiente; 
 	private JButton btnAtras;
 	private JTable tablaHabitacionSeleccionada;
 	private JTextField textDNICliente;
-
-	private JCheckBox chckbxServicioDespertador;
+	static DefaultTableModel tablaFuncional = new DefaultTableModel();
+	static DefaultTableModel tablaFuncional2 = new DefaultTableModel();
 	private JComboBox comboBoxTipo;
+	private JCheckBox chckbxServicioDespertador;
 	private JCheckBox chckbxTv;
 	private JCheckBox chckbxInternet;
 	private JCheckBox chckbxMinibar;
@@ -97,7 +97,7 @@ public class Interfaz_ReservarHabitacion extends JFrame {
         btnAtras.setFont(new Font("Calibri", Font.PLAIN, 14));
         
         comboBoxTipo = new JComboBox();
-        comboBoxTipo.setModel(new DefaultComboBoxModel(new String[] {"Habitación", "Suite"}));
+        comboBoxTipo.setModel(new DefaultComboBoxModel(new String[] {"Habitacion", "Suite"}));
         comboBoxTipo.setFont(new Font("Calibri", Font.PLAIN, 14));
         comboBoxTipo.setBounds(430, 33, 151, 27);
         panel_1.add(comboBoxTipo);
@@ -149,7 +149,7 @@ public class Interfaz_ReservarHabitacion extends JFrame {
         comboBoxCantPers.setBounds(233, 33, 151, 27);
         panel_1.add(comboBoxCantPers);
         
-        JLabel lblExtras = new JLabel("Extras");
+        JLabel lblExtras = new JLabel("Tipo");
         lblExtras.setFont(new Font("Calibri", Font.BOLD, 14));
         lblExtras.setBounds(602, 4, 122, 32);
         panel_1.add(lblExtras);
@@ -217,8 +217,8 @@ public class Interfaz_ReservarHabitacion extends JFrame {
             tablaFuncional.addColumn("Código");
             tablaFuncional.addColumn("Precio");
             tablaFuncional.addColumn("Cantidad Personas");
+            tablaFuncional.addColumn("Tipo");
             tablaFuncional.addColumn("Extras");
-            tablaFuncional.addColumn("Disponible");
         }
 
         tablaHabitacionesDispo = new JTable(tablaFuncional);
@@ -234,8 +234,8 @@ public class Interfaz_ReservarHabitacion extends JFrame {
             tablaFuncional2.addColumn("Código");
             tablaFuncional2.addColumn("Precio");
             tablaFuncional2.addColumn("Cantidad Personas");
+            tablaFuncional2.addColumn("Tipo");
             tablaFuncional2.addColumn("Extras");
-            tablaFuncional2.addColumn("Disponible");
         }
 
         tablaHabitacionSeleccionada = new JTable(tablaFuncional2);

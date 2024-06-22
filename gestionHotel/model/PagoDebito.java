@@ -40,4 +40,8 @@ public class PagoDebito implements PagoStrategy {
     public String getBanco() {
         return banco;
     }
+    
+    public String getTipo() {
+    	return "Debito";
+    }
 }

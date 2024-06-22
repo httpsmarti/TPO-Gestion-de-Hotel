@@ -262,6 +262,7 @@ public Interfaz_Detalle() {
     panel_2_1.add(cliente);
     
     btnResgistrarHuesped = new JButton("Registrar Huésped");
+    /*
     btnResgistrarHuesped.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             // Mostrar la ventana de Registrar Huésped
@@ -270,7 +271,7 @@ public Interfaz_Detalle() {
             registrarHuespedFrame.setLocationRelativeTo(null); // Centrar la ventana secundaria
         }
     });
-    
+    */
     
     btnResgistrarHuesped.setForeground(Color.WHITE);
     btnResgistrarHuesped.setFont(new Font("Calibri", Font.PLAIN, 14));
@@ -279,6 +280,7 @@ public Interfaz_Detalle() {
     panel_2_1.add(btnResgistrarHuesped);
     
     btnEliminarHuesped = new JButton("Eliminar Huésped");
+    /*
     btnEliminarHuesped.addActionListener(new ActionListener() {
     	public void actionPerformed(ActionEvent e) {
     		// Mostrar la ventana de Eliminar Huésped
@@ -287,6 +289,7 @@ public Interfaz_Detalle() {
             registrarHuespedFrame.setLocationRelativeTo(null); // Centrar la ventana secundaria
     	}
     });
+    */
     btnEliminarHuesped.setForeground(Color.WHITE);
     btnEliminarHuesped.setFont(new Font("Calibri", Font.PLAIN, 14));
     btnEliminarHuesped.setBackground(new Color(63, 63, 63));

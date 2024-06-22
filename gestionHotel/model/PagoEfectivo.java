@@ -32,4 +32,8 @@ public class PagoEfectivo implements PagoStrategy {
     public double getTipoCambio() {
         return tipoCambio;
     }
+    
+    public String getTipo() {
+    	return "Efectivo";
+    }
 }

@@ -37,4 +37,8 @@ public class PagoTransferencia implements PagoStrategy {
     public String getAlias() {
         return alias;
     }
+    
+    public String getTipo() {
+    	return "Transferencia";
+    }
 }

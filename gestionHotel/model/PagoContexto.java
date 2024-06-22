@@ -24,4 +24,8 @@ public class PagoContexto {
     public Date getFechaMaxima() {
         return estrategia != null ? estrategia.getFechaMaxima() : null; //si estrategia es null, devuelve null, sino devuelve fechaMaxima
     }
+    
+    public String getTipo() {
+    	return estrategia.getTipo();
+    }
 }

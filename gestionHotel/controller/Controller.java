@@ -5,13 +5,17 @@ import view.*;
 
 import java.util.*;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+
+import com.toedter.calendar.JDateChooser;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,20 +30,18 @@ public class Controller {
     private Gerente gerente;
     private List<AbstractHabitacion> habitaciones;
     private List<Reserva> reservas;
-    private List<Huesped> huespedes;
     private GestorDeNotificaciones gestorNotif;
     private Auditoria auditoria;
     private PoliticasReserva politicas;
     private Cliente clienteActual;
     
     public Controller(List<Cliente> clientes, Gerente gerente, List<AbstractHabitacion> habitaciones,
-            List<Reserva> reservas, List<Huesped> huespedes, GestorDeNotificaciones gestorNotif, Auditoria auditoria, PoliticasReserva politicas, Interfaz_Login vista) {
+            List<Reserva> reservas, GestorDeNotificaciones gestorNotif, Auditoria auditoria, PoliticasReserva politicas, Interfaz_Login vista) {
         super();
         this.clientes = clientes;
         this.gerente = gerente;
         this.habitaciones = habitaciones;
         this.reservas = reservas;
-        this.huespedes = huespedes;
         this.gestorNotif = gestorNotif;
         this.politicas = politicas;
         this.auditoria = auditoria;
@@ -139,7 +141,7 @@ public class Controller {
         return null;
     }
     
-    private void iniciarVistaGerente() { //falta terminar, por ahora paso al cliente
+    private void iniciarVistaGerente() { //falta terminar
     	Interfaz_PaginaGerente registro = new Interfaz_PaginaGerente();
     	registro.setVisible(true);
         registro.setLocationRelativeTo(null);
@@ -148,12 +150,13 @@ public class Controller {
         JButton btnCerrarSession = registro.getBtnCerrarSession();
         JButton btnABMClientes = registro.getBtnABMClientes();
         JButton btnModificarPoliticas = registro.getBtnModificarPoliticas();
+        JButton btnVerReservas = registro.getBtnVerReservas();
         
         if (btnABMHabitaciones != null) {
         	btnABMHabitaciones.addActionListener(new ActionListener() {
     			public void actionPerformed(ActionEvent e) {
     				registro.dispose();
-                    iniciarVistaHabitacionABM(); //faltan agregar y modificar
+                    iniciarVistaHabitacionABM();
     			}
     		});
         }
@@ -193,6 +196,391 @@ public class Controller {
     			}
     		});
         }
+        if (btnVerReservas != null) {
+        	btnVerReservas.addActionListener(new ActionListener() {
+        		public void actionPerformed(ActionEvent e) {
+        			registro.dispose();
+                    iniciarVistaVerReservas();
+        		}
+        	});
+        }
+    }
+    
+    private void iniciarVistaVerReservas() {
+    	Interfaz_MiReserva miRes = new Interfaz_MiReserva();
+    	miRes.setVisible(true);
+		miRes.setLocationRelativeTo(null);
+		DefaultTableModel tabla = miRes.getTablaFuncional();
+		JButton btnEliminarReserva = miRes.getBtnEliminarReserva();
+		JButton btnAtras = miRes.getBtnAtras();
+		
+		tabla.setRowCount(0);
+        for (Reserva res : reservas) {
+        	if (clienteActual == null) {
+        		String huespedes = "";
+            	for (Huesped h : res.getHuespedes()) {
+            		if (huespedes == "") {
+            			huespedes += h.getNombre();
+            		} else {
+            			huespedes += ", " + h.getNombre();
+            		}
+            	}
+            	
+            	Object[] linea = {res.getIdReserva(), res.getDNIClienteReserva(), res.getFechaInicio(), res.getFechaFin(), huespedes, res.getPagoContexto().getTipo(), res.getEstado()};
+    			tabla.addRow(linea);
+    			tabla.fireTableDataChanged();
+        	} else {
+        		if (res.getDNIClienteReserva().equals(clienteActual.getDNI())) {
+        			String huespedes = "";
+                	for (Huesped h : res.getHuespedes()) {
+                		if (huespedes == "") {
+                			huespedes += h.getNombre();
+                		} else {
+                			huespedes += ", " + h.getNombre();
+                		}
+                	}
+                	
+                	Object[] linea = {res.getIdReserva(), res.getDNIClienteReserva(), res.getFechaInicio(), res.getFechaFin(), huespedes, res.getPagoContexto().getTipo(), res.getEstado()};
+        			tabla.addRow(linea);
+        			tabla.fireTableDataChanged();
+        		}
+        	}
+		}
+        
+        if (btnAtras != null) {
+    		btnAtras.addActionListener(new ActionListener() {
+    			public void actionPerformed(ActionEvent e) {
+    				miRes.dispose();
+    				if (clienteActual == null) {
+    					iniciarVistaGerente();
+    				} else {
+    					iniciarVistaCliente();
+    				}
+    			}
+    		});
+    	}
+        
+        btnEliminarReserva.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				miRes.dispose();
+				iniciarVistaEliminarReserva();
+			}
+		});
+    }
+    
+    public void iniciarVistaReserva() {
+    	Interfaz_ReservarHabitacion interReserva = new Interfaz_ReservarHabitacion();
+    	interReserva.setVisible(true);
+    	interReserva.setLocationRelativeTo(null);
+    	
+    	DefaultTableModel tablaAñadir = interReserva.getTablaFuncional();
+    	DefaultTableModel tablaRemover = interReserva.getTablaFuncional2();
+    	tablaRemover.setRowCount(0);
+    	JTable tAñadir = interReserva.getTablaHabitacionesDispo();
+    	JTable tRemover = interReserva.getTablaHabitacionSeleccionada();
+    	JButton btnAtras = interReserva.getBtnAtras();
+    	JButton btnSiguiente = interReserva.getBtnSiguiente();
+    	JCheckBox chServicioDespertador = interReserva.getChckbxServicioDespertador();
+    	JCheckBox chTV = interReserva.getChckbxTv();
+    	JCheckBox chMinibar = interReserva.getChckbxMinibar();
+    	JCheckBox chInternet = interReserva.getChckbxInternet();
+    	JComboBox comboBoxTipo = interReserva.getComboBoxTipo();
+    	JButton btnFiltrar = interReserva.getBtnFiltrar();
+    	JComboBox comboboxCantPersonas = interReserva.getComboBoxCantPers();
+    	JTextField txtDNI = interReserva.getTextDNICliente();
+    	
+    	String DNI;
+    	
+    	//aca agrego las habitaciones a la tablaAñadir
+    	if (tablaAñadir != null) {
+    		tablaAñadir.setRowCount(0);
+            for (AbstractHabitacion hab : habitaciones) {
+            	String extras = "";
+            	String disponible = "";
+            	if (hab.isDisponible()) {
+            		disponible = "Si";
+            	} else {
+            		disponible = "No";
+            	}
+            	
+            	for (String e : hab.getExtras()) {
+            		if (extras == "") {
+            			extras += e;
+            		} else {
+            			extras += ", " + e;
+            		}
+            	}
+            	
+    			Object[] linea = {hab.getIdHabitacion(), hab.getPrecioPorNoche(), Integer.toString(hab.getCantPersonas()), hab.getTipo(), extras, disponible};
+    			if (hab.isDisponible()) {
+    				tablaAñadir.addRow(linea);
+    			}
+    			tablaAñadir.fireTableDataChanged();
+    		}
+    	}
+    	
+    	btnFiltrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ev) {
+				tablaAñadir.setRowCount(0);
+	            for (AbstractHabitacion hab : habitaciones) {
+	            	String extras = "";
+	            	
+	            	
+	            	for (String e : hab.getExtras()) {
+	            		if (extras == "") {
+	            			extras += e;
+	            		} else {
+	            			extras += ", " + e;
+	            		}
+	            		
+	            	}
+	            	
+	            	Object[] linea = {hab.getIdHabitacion(), hab.getPrecioPorNoche(), Integer.toString(hab.getCantPersonas()), hab.getTipo(), extras, "Si"};
+	            	
+	            	System.out.println((comboboxCantPersonas.getSelectedItem().toString()));
+	            	
+	    			if (hab.getCantPersonas() == Integer.parseInt(comboboxCantPersonas.getSelectedItem().toString()) &&
+	    				hab.isDisponible() &&
+	    				hab.getTipo().equals(comboBoxTipo.getSelectedItem())) {
+	    				
+	    				boolean cumple = true;
+	    				
+	    				if (chServicioDespertador.isSelected() && !hab.getExtras().contains("Servicio despertador")) {
+	    						cumple = false;
+	    				}
+	    				if (chTV.isSelected() && !hab.getExtras().contains("TV")) {
+		    				cumple = false;
+	    				}
+	    				if (chInternet.isSelected() && !hab.getExtras().contains("Internet")) {
+		    				cumple = false;
+	    				}
+	    				if (chMinibar.isSelected() && !hab.getExtras().contains("Minibar")) {
+		    				cumple = false;
+	    				}
+	    				
+	    				if (cumple) {
+	    					tablaAñadir.addRow(linea);
+	    				}
+	    			}
+	    			tablaAñadir.fireTableDataChanged();
+	    		}
+			}
+		});
+    	
+    	List<AbstractHabitacion> listaHabitaciones = new ArrayList<AbstractHabitacion>(); //aca guardo las habitaciones que añado, despues lo agrego todo a la tabla
+    	
+    	tAñadir.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent ev) {
+            	int filaSeleccionada = tAñadir.rowAtPoint(ev.getPoint());
+                if (filaSeleccionada != -1) {
+                	tAñadir.setRowSelectionInterval(filaSeleccionada, filaSeleccionada);
+                    String codigo = tAñadir.getValueAt(filaSeleccionada, 0).toString();
+                    if (!listaHabitaciones.contains(getHabitacionByCodigo(codigo))) {
+                    	listaHabitaciones.add(getHabitacionByCodigo(codigo));
+                    }
+                    
+                    tablaRemover.setRowCount(0);
+                    for (AbstractHabitacion hab : listaHabitaciones) {
+                    	String extras = "";
+                    	String disponible = "";
+                    	if (hab.isDisponible()) {
+                    		disponible = "Si";
+                    	} else {
+                    		disponible = "No";
+                    	}
+                    	
+                    	for (String e : hab.getExtras()) {
+                    		if (extras == "") {
+                    			extras += e;
+                    		} else {
+                    			extras += ", " + e;
+                    		}
+                    	}
+            			Object[] linea = {hab.getIdHabitacion(), hab.getPrecioPorNoche(), Integer.toString(hab.getCantPersonas()), hab.getTipo(), extras, disponible};
+            			tablaRemover.addRow(linea);
+            			tablaRemover.fireTableDataChanged();
+            		}
+                }
+            }
+        });
+    	
+    	tRemover.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent ev) {
+            	int filaSeleccionada = tRemover.rowAtPoint(ev.getPoint());
+                if (filaSeleccionada != -1) {
+                	tRemover.setRowSelectionInterval(filaSeleccionada, filaSeleccionada);
+                    String codigo = tRemover.getValueAt(filaSeleccionada, 0).toString();
+                    if (!listaHabitaciones.contains(getHabitacionByCodigo(codigo))) {
+                    	listaHabitaciones.add(getHabitacionByCodigo(codigo));
+                    }
+                    
+                    listaHabitaciones.remove(getHabitacionByCodigo(codigo));
+                    
+                    tablaRemover.setRowCount(0);
+                    for (AbstractHabitacion hab : listaHabitaciones) {
+                    	String extras = "";
+                    	String disponible = "";
+                    	if (hab.isDisponible()) {
+                    		disponible = "Si";
+                    	} else {
+                    		disponible = "No";
+                    	}
+                    	
+                    	for (String e : hab.getExtras()) {
+                    		if (extras == "") {
+                    			extras += e;
+                    		} else {
+                    			extras += ", " + e;
+                    		}
+                    	}
+            			Object[] linea = {hab.getIdHabitacion(), hab.getPrecioPorNoche(), Integer.toString(hab.getCantPersonas()), hab.getTipo(), extras, disponible};
+            			tablaRemover.addRow(linea);
+            			tablaRemover.fireTableDataChanged();
+            		}
+                }
+            }
+        });
+    	
+    	
+    	btnAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (listaHabitaciones.size() > 0) {
+					if (clienteActual == null) {
+						interReserva.dispose();
+		                iniciarVistaGerente();
+					} else {
+						interReserva.dispose();
+		                iniciarVistaCliente();
+					}
+				}
+				
+			}
+		});
+    	
+    	btnSiguiente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				interReserva.dispose();
+				if (clienteActual == null) {
+					iniciarVistaReservaDetalle(listaHabitaciones, txtDNI.getText());
+				} else {
+					iniciarVistaReservaDetalle(listaHabitaciones, clienteActual.getDNI());
+				}
+			}
+		});	
+    }
+    
+    private AbstractHabitacion getHabitacionByCodigo(String codigo) {
+    	for (AbstractHabitacion h : habitaciones) {
+    		if(h.getIdHabitacion() == codigo) {
+    			return h;
+    		}
+    	}
+    	return null;
+    }
+    
+    private void iniciarVistaReservaDetalle(List<AbstractHabitacion> listaHabitaciones, String DNI) {
+    	Interfaz_Detalle detalle = new Interfaz_Detalle();
+    	detalle.setVisible(true);
+    	detalle.setLocationRelativeTo(null);
+    	JButton btnAtras = detalle.getBtnAtras();
+    	DefaultTableModel tablaHabitaciones = detalle.getTablaFuncional();
+    	DefaultTableModel tablaHuespedes = detalle.getTablaFuncional1();
+    	JButton btnReservar = detalle.getBtnReservar();
+    	JButton  btnResgistrarHuesped = detalle.getBtnResgistrarHuesped();
+    	JButton btnEliminarHuesped = detalle.getBtnEliminarHuesped();
+    	JRadioButton rdbtnCredito = detalle.getRdbtnCredito();
+    	JRadioButton rdbtnDebito = detalle.getRdbtnDebito();
+    	JRadioButton rdbtnTransferencia = detalle.getRdbtnTransferencia();
+    	JRadioButton rdbtnEfectivo = detalle.getRdbtnEfectivo();
+    	ButtonGroup grupoMetodoPago = detalle.getGrupoMetodoPago();
+    	JDateChooser dateCheckIn = detalle.getDateCheckIn();
+    	JDateChooser dateCheckOut = detalle.getDateCheckOut();
+    	
+    	List<Huesped> huespedes = new ArrayList<Huesped>();
+    	
+    	tablaHabitaciones.setRowCount(0);
+        for (AbstractHabitacion hab : listaHabitaciones) {
+			Object[] linea = {hab.getIdHabitacion(), hab.getTipo(), hab.getPrecioPorNoche()};
+			tablaHabitaciones.addRow(linea);
+			tablaHabitaciones.fireTableDataChanged();
+		}
+        
+        btnResgistrarHuesped.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Interfaz_RegistrarHuesped regHue = new Interfaz_RegistrarHuesped();
+				regHue.setVisible(true);
+				regHue.setLocationRelativeTo(null);
+				JTextField txtNombre = regHue.getTextNombre();
+				JTextField txtApellido = regHue.getTextApellido();
+				JTextField txtDNI = regHue.getTextDNI();
+				JButton btnRegistrar = regHue.getBtnRegistrar();
+				btnRegistrar.addActionListener(new ActionListener() {
+		            public void actionPerformed(ActionEvent ev) {
+		                huespedes.add(new Huesped(txtNombre.getText(), txtApellido.getText(), txtDNI.getText()));
+		                tablaHuespedes.setRowCount(0);
+		                for (Huesped hue : huespedes) {
+		                    Object[] linea = {hue.getDNI(), hue.getNombre(), hue.getApellido()};
+		                    tablaHuespedes.addRow(linea);
+		                }
+		                tablaHuespedes.fireTableDataChanged();
+		                regHue.dispose();
+		            }
+		        });
+			}
+		});
+        
+    	
+    	btnAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				detalle.dispose();
+                iniciarVistaReserva();
+			}
+		});
+    }
+    
+    private void iniciarVistaEliminarReserva() { //checkear si anda
+    	Interfaz_EliminarReserva eliRes = new Interfaz_EliminarReserva();
+    	eliRes.setVisible(true);
+    	eliRes.setLocationRelativeTo(null);
+    	JTextField txtCod = eliRes.getTextCodigo();
+    	JButton btnEliminar = eliRes.getBtnEliminar();
+    	
+    	btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (clienteActual == null) {
+					for (Reserva r : reservas) {
+						if (r.getIdReserva().equals(txtCod.getText())){
+							r.setEstado("Cancelada");
+							for (AbstractHabitacion h : r.getHabitaciones()) {
+								h.setDisponible(true);
+							}
+						}
+					}
+				} else {
+					for (Reserva r : reservas) {
+						if (r.getIdReserva().equals(txtCod.getText()) && r.getDNIClienteReserva().equals(clienteActual.getDNI())){
+							r.setEstado("Cancelada");
+							for (AbstractHabitacion h : r.getHabitaciones()) {
+								h.setDisponible(true);
+							}
+						}
+					}
+				}
+				
+				eliRes.dispose();
+				iniciarVistaVerReservas();
+			}
+		});
+    	
+    	eliRes.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+            	eliRes.dispose();
+                iniciarVistaVerReservas();
+            }
+        });
     }
     
     private void iniciarVistaPoliticas() {
@@ -206,6 +594,11 @@ public class Controller {
 		JTextField txtCantDiasTarde = modPoliticas.getTxtCantDiasTarde();
 		JTextField txtDescuento = modPoliticas.getTxtDescuento();
 		JTextField txtRecargo = modPoliticas.getTxtRecargo();
+		
+		txtCantDiasTemprano.setText(Integer.toString(politicas.getCantDiasTemprano()));
+		txtCantDiasTarde.setText(Integer.toString(politicas.getCantDiasTarde()));
+		txtDescuento.setText(Float.toString(politicas.getDtoTemprano()));
+		txtRecargo.setText(Float.toString(politicas.getRecragoTarde()));
 		
 		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -230,7 +623,7 @@ public class Controller {
 		});
     }
     
-    private void iniciarVistaHabitacionABM() { //falta agregar y modificar
+    private void iniciarVistaHabitacionABM() {
     	Interfaz_HabitacionABM habABM = new Interfaz_HabitacionABM();
     	habABM.setVisible(true);
         habABM.setLocationRelativeTo(null);
@@ -391,11 +784,16 @@ public class Controller {
     	        if (rdbtnTv.isSelected()) {
     	        	extras.add("TV");
     	        }
-    			if (comboBoxTipo.getSelectedItem() == "Suite") {
-    				modificarHabitacionPorId(txtCodigo.getText(), new Suite(txtCodigo.getText(), ((Number) spPrecio.getValue()).doubleValue(), (int) spCantPersonas.getValue(), "Suite", extras, disponible));
-    	        } else {
-    				modificarHabitacionPorId(txtCodigo.getText(), new Suite(txtCodigo.getText(), ((Number) spPrecio.getValue()).doubleValue(), (int) spCantPersonas.getValue(), "Habitacion", extras, disponible));
-    	        }
+    	        
+    	        for (AbstractHabitacion hab : habitaciones) {    	        	
+    	    		if (hab.getIdHabitacion().equals(txtCodigo.getText())) {
+    	    			System.out.println("Entro al if");
+    	    			hab.setCantPersonas((int) spCantPersonas.getValue());
+    	    			hab.setDisponible(disponible);
+    	    			hab.setExtras(extras);
+    	    			hab.setPrecioPorNoche(((Number) spPrecio.getValue()).doubleValue());
+    	    		}
+    	    	}
     			modHab.dispose();
     			iniciarVistaHabitacionABM();
     		}
@@ -411,14 +809,6 @@ public class Controller {
         });
     }
     
-    private void modificarHabitacionPorId(String id, AbstractHabitacion datosHabitacion) {
-    	for (AbstractHabitacion hab : habitaciones) {
-    		if (hab.getIdHabitacion() == id) {
-    			hab = datosHabitacion;
-    		}
-    	}
-    }
-    
     private void iniciarVistaEliminarHabitacion() {
     	Interfaz_EliminarHabitacion eliHab = new Interfaz_EliminarHabitacion();
     	eliHab.setVisible(true);
@@ -432,58 +822,23 @@ public class Controller {
     			iniciarVistaHabitacionABM();
     		}
     	});
+    	
+    	eliHab.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+            	eliHab.dispose();
+                iniciarVistaHabitacionABM();
+            }
+        });
     }
     
     private void eliminarHabitacionById(String id) {
     	for (AbstractHabitacion hab : habitaciones) {
     		if (hab.getIdHabitacion().equals(id)) {
     			habitaciones.remove(hab);
+    			break;
     		}
     	}
-    }
-    
-    
-    public void iniciarVistaReserva() { //hablar con martis ---- voy a tener que pasarle al detalle de la reserva los datos de la habitación para que desde ahí pueda crear la reserva entera
-    	Interfaz_ReservarHabitacion interReserva = new Interfaz_ReservarHabitacion();
-    	interReserva.setVisible(true);
-    	interReserva.setLocationRelativeTo(null);
-    	
-    	DefaultTableModel tablaAñadir = interReserva.getTablaFuncional();
-    	//DefaultTableModel tablaRemover = interReserva.getTablaRemover(); //esto es para la tabla que muestra las habitaciones que ya tengo seleccionadas
-    	JButton btnAtras = interReserva.getBtnAtras();
-    	JButton btnSiguiente = interReserva.getBtnSiguiente();
-    	
-    	//aca agrego las habitaciones a la tablaAñadir
-    	if (tablaAñadir != null) {
-    		for (AbstractHabitacion hab : habitaciones) {
-    			Object[] linea = {}; //estas lineas coinciden con las columnas de la tabla, que deberian coincidir mejor con las caracteristicas de una habitacion
-    			tablaAñadir.addRow(linea);
-    		}
-    	}
-    	
-    	List<AbstractHabitacion> listaHabitaciones = new ArrayList<AbstractHabitacion>(); //aca guardo las habitaciones que añado, despues lo agrego todo a la tabla
-    	
-    	btnAtras.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (clienteActual == null) {
-					interReserva.dispose();
-	                iniciarVistaGerente();
-				} else {
-					interReserva.dispose();
-	                iniciarVistaCliente();
-				}
-				
-			}
-		});
-    	
-    	btnSiguiente.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				interReserva.dispose();
-                //iniciarVistaReservaDetalle(listaHabitaciones); //again, aca paso la lista de habitaciones para que pueda hacer bien la reserva
-			}
-		});
-    	
-    	
     }
     
     public void iniciarVistaClientesABM() {
@@ -526,9 +881,4 @@ public class Controller {
     		});
 		}
     }
-    
-    
-    
-    
-    
 }

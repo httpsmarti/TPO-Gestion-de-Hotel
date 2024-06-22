@@ -1,17 +1,10 @@
 package model;
 
 public class Huesped {
-	private String idHuesped;
 	private String nombre;
 	private String apellido;
 	private String DNI;
 	
-	public String getIdHuesped() {
-		return idHuesped;
-	}
-	public void setIdHuesped(String idHuesped) {
-		this.idHuesped = idHuesped;
-	}
 	public String getNombre() {
 		return nombre;
 	}
@@ -31,9 +24,8 @@ public class Huesped {
 		DNI = dNI;
 	}
 	
-	public Huesped(String idHuesped, String nombre, String apellido, String dNI) {
+	public Huesped(String nombre, String apellido, String dNI) {
 		super();
-		this.idHuesped = idHuesped;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		DNI = dNI;
