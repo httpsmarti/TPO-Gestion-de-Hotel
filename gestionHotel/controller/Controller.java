@@ -52,7 +52,7 @@ public class Controller {
         this.politicas = politicas;
         this.auditoria = auditoria;
         
-        //cancelar reservas Pendientes de pago con mas de 24 horas si
+        //cancelar reservas Pendientes de pago con mas de 24 horas no!
         
         iniciarVistaLogin();
     }
