@@ -57,7 +57,8 @@ private JDateChooser dateCheckOut;
 static DefaultTableModel tablaFuncional = new DefaultTableModel();
 static DefaultTableModel tablaFuncional1 = new DefaultTableModel();
 private JTextField idTrasferencia;
-private JTextField textTipoCambio;
+private JTextField idTipoCambio;
+private JComboBox comboBoxBanco;
 
 public static void main(String[] args) {
     EventQueue.invokeLater(new Runnable() {
@@ -309,94 +310,94 @@ public Interfaz_Detalle() {
     rdbtnCredito.setFont(new Font("Arial", Font.PLAIN, 15));
     rdbtnCredito.setActionCommand("rdbtnCredito");
     
-        // Agrega los botones al grupo
-        grupoMetodoPago.add(rdbtnCredito);
-        
-            // Botón de débito
-            rdbtnDebito = new JRadioButton("Débito");
-            rdbtnDebito.setBounds(20, 262, 125, 23);
-            panel_2_1.add(rdbtnDebito);
-            rdbtnDebito.setBackground(new Color(255, 255, 255));
-            rdbtnDebito.setFont(new Font("Arial", Font.PLAIN, 15));
-            rdbtnDebito.setActionCommand("rdbtnDebito");
-            grupoMetodoPago.add(rdbtnDebito);
-            
-                // Botón de transferencia
-                rdbtnTransferencia = new JRadioButton("Transferencia");
-                rdbtnTransferencia.setBounds(20, 288, 125, 23);
-                panel_2_1.add(rdbtnTransferencia);
-                rdbtnTransferencia.setBackground(new Color(255, 255, 255));
-                rdbtnTransferencia.setFont(new Font("Arial", Font.PLAIN, 15));
-                rdbtnTransferencia.setActionCommand("rdbtnTransferencia");
-                grupoMetodoPago.add(rdbtnTransferencia);
-                
-                rdbtnEfectivo = new JRadioButton("Efectivo");
-                rdbtnEfectivo.setBounds(20, 314, 86, 23);
-                panel_2_1.add(rdbtnEfectivo);
-                rdbtnEfectivo.setFont(new Font("Arial", Font.PLAIN, 15));
-                rdbtnEfectivo.setBackground(Color.WHITE);
-                rdbtnEfectivo.setActionCommand("rdbtnTransferencia");
-                grupoMetodoPago.add(rdbtnEfectivo);
-                
-                idTrasferencia = new JTextField();
-                idTrasferencia.setFont(new Font("Arial", Font.PLAIN, 12));
-                idTrasferencia.setText("Alias");
-                idTrasferencia.setColumns(10);
-                idTrasferencia.setBounds(230, 293, 96, 20);
-                panel_2_1.add(idTrasferencia);
-                
-                textTipoCambio = new JTextField();
-                textTipoCambio.setText("Tipo de cambio");
-                textTipoCambio.setFont(new Font("Arial", Font.PLAIN, 12));
-                textTipoCambio.setColumns(10);
-                textTipoCambio.setBounds(230, 315, 96, 20);
-                panel_2_1.add(textTipoCambio);
-                
-                JComboBox comboBoxBanco = new JComboBox();
-                comboBoxBanco.setBackground(new Color(255, 255, 255));
-                comboBoxBanco.setFont(new Font("Arial", Font.PLAIN, 12));
-                comboBoxBanco.setModel(new DefaultComboBoxModel(new String[] {"Visa", "Macro", "BBVA", "Galicia"}));
+    // Agrega los botones al grupo
+    grupoMetodoPago.add(rdbtnCredito);
+    
+    // Botón de débito
+    rdbtnDebito = new JRadioButton("Débito");
+    rdbtnDebito.setBounds(20, 262, 125, 23);
+    panel_2_1.add(rdbtnDebito);
+    rdbtnDebito.setBackground(new Color(255, 255, 255));
+    rdbtnDebito.setFont(new Font("Arial", Font.PLAIN, 15));
+    rdbtnDebito.setActionCommand("rdbtnDebito");
+    grupoMetodoPago.add(rdbtnDebito);
+    
+    // Botón de transferencia
+    rdbtnTransferencia = new JRadioButton("Transferencia");
+    rdbtnTransferencia.setBounds(20, 288, 125, 23);
+    panel_2_1.add(rdbtnTransferencia);
+    rdbtnTransferencia.setBackground(new Color(255, 255, 255));
+    rdbtnTransferencia.setFont(new Font("Arial", Font.PLAIN, 15));
+    rdbtnTransferencia.setActionCommand("rdbtnTransferencia");
+    grupoMetodoPago.add(rdbtnTransferencia);
+    
+    rdbtnEfectivo = new JRadioButton("Efectivo");
+    rdbtnEfectivo.setBounds(20, 314, 86, 23);
+    panel_2_1.add(rdbtnEfectivo);
+    rdbtnEfectivo.setFont(new Font("Arial", Font.PLAIN, 15));
+    rdbtnEfectivo.setBackground(Color.WHITE);
+    rdbtnEfectivo.setActionCommand("rdbtnTransferencia");
+    grupoMetodoPago.add(rdbtnEfectivo);
+    
+    idTrasferencia = new JTextField();
+    idTrasferencia.setFont(new Font("Arial", Font.PLAIN, 12));
+    idTrasferencia.setText("Alias");
+    idTrasferencia.setColumns(10);
+    idTrasferencia.setBounds(230, 293, 96, 20);
+    panel_2_1.add(idTrasferencia);
+    
+    idTipoCambio = new JTextField();
+    idTipoCambio.setText("Tipo de cambio");
+    idTipoCambio.setFont(new Font("Arial", Font.PLAIN, 12));
+    idTipoCambio.setColumns(10);
+    idTipoCambio.setBounds(230, 315, 96, 20);
+    panel_2_1.add(idTipoCambio);
+    
+    comboBoxBanco = new JComboBox();
+    comboBoxBanco.setBackground(new Color(255, 255, 255));
+    comboBoxBanco.setFont(new Font("Arial", Font.PLAIN, 12));
+    comboBoxBanco.setModel(new DefaultComboBoxModel(new String[] {"Visa", "Macro", "BBVA", "Galicia"}));
                 comboBoxBanco.setBounds(230, 236, 96, 22);
                 panel_2_1.add(comboBoxBanco);
  
              // Inicialmente ocultar los campos comboBoxBanco, idTrasferencia, y textTipoCambio
-                comboBoxBanco.setVisible(false);
-                idTrasferencia.setVisible(false);
-                textTipoCambio.setVisible(false);
+    comboBoxBanco.setVisible(false);
+    idTrasferencia.setVisible(false);
+    idTipoCambio.setVisible(false);
 
-                // Añadir ActionListener para los radio buttons
-                rdbtnCredito.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        comboBoxBanco.setVisible(true);
-                        idTrasferencia.setVisible(false);
-                        textTipoCambio.setVisible(false);
-                    }
-                });
+    // Añadir ActionListener para los radio buttons
+    rdbtnCredito.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            comboBoxBanco.setVisible(true);
+            idTrasferencia.setVisible(false);
+            idTipoCambio.setVisible(false);
+        }
+    });
 
-                rdbtnDebito.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        comboBoxBanco.setVisible(true);
-                        idTrasferencia.setVisible(false);
-                        textTipoCambio.setVisible(false);
-                    }
-                });
+    rdbtnDebito.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            comboBoxBanco.setVisible(true);
+            idTrasferencia.setVisible(false);
+            idTipoCambio.setVisible(false);
+        }
+    });
 
-                rdbtnTransferencia.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        comboBoxBanco.setVisible(false);
-                        idTrasferencia.setVisible(true);
-                        textTipoCambio.setVisible(false);
-                    }
-                });
+    rdbtnTransferencia.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            comboBoxBanco.setVisible(false);
+            idTrasferencia.setVisible(true);
+            idTipoCambio.setVisible(false);
+        }
+    });
 
-                rdbtnEfectivo.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        comboBoxBanco.setVisible(false);
-                        idTrasferencia.setVisible(false);
-                        textTipoCambio.setVisible(true);
-                    }
-                });
-            }
+    rdbtnEfectivo.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            comboBoxBanco.setVisible(false);
+            idTrasferencia.setVisible(false);
+            idTipoCambio.setVisible(true);
+        }
+    });
+}
 
 
 // Renderer personalizado para las celdas
@@ -418,7 +419,17 @@ class CustomTableCellRenderer extends JPanel implements TableCellRenderer {
         return this;
         }
 }
-
+	public JTextField getIdTrasferencia() {
+		return idTrasferencia;
+	}
+	
+	public JTextField getIdTipoCambio() {
+		return idTipoCambio;
+	}
+	
+	public JComboBox getComboBoxBanco() {
+		return comboBoxBanco;
+	}
     public JTable getTable() {
 		return table;
 	}
