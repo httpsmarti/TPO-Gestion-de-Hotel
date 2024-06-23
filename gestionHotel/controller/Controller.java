@@ -9,6 +9,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
@@ -23,8 +24,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 
 public class Controller {
 
@@ -38,7 +42,7 @@ public class Controller {
     private Cliente clienteActual;
     
     public Controller(List<Cliente> clientes, Gerente gerente, List<AbstractHabitacion> habitaciones,
-            List<Reserva> reservas, GestorDeNotificaciones gestorNotif, Auditoria auditoria, PoliticasReserva politicas, Interfaz_Login vista) {
+        List<Reserva> reservas, GestorDeNotificaciones gestorNotif, Auditoria auditoria, PoliticasReserva politicas, Interfaz_Login vista) {
         super();
         this.clientes = clientes;
         this.gerente = gerente;
@@ -47,6 +51,8 @@ public class Controller {
         this.gestorNotif = gestorNotif;
         this.politicas = politicas;
         this.auditoria = auditoria;
+        
+        //cancelar reservas Pendientes de pago con mas de 24 horas si
         
         iniciarVistaLogin();
     }
@@ -359,7 +365,6 @@ public class Controller {
 	    				if (chMinibar.isSelected() && !hab.getExtras().contains("Minibar")) {
 		    				cumple = false;
 	    				}
-	    				
 	    				if (cumple) {
 	    					tablaAñadir.addRow(linea);
 	    				}
@@ -500,7 +505,10 @@ public class Controller {
     	ButtonGroup grupoMetodoPago = detalle.getGrupoMetodoPago();
     	JDateChooser dateCheckIn = detalle.getDateCheckIn();
     	JDateChooser dateCheckOut = detalle.getDateCheckOut();
-    	
+    	JTextField alias = detalle.getIdTrasferencia();
+    	JTextField txtTipoCambio = detalle.getTextTipoCambio();
+    	JComboBox comboBoxBanco = detalle.getComboBoxBanco();
+    	JLabel precio = detalle.getLprecio();
     	List<Huesped> huespedes = new ArrayList<Huesped>();
     	
     	tablaHabitaciones.setRowCount(0);
@@ -509,32 +517,173 @@ public class Controller {
 			tablaHabitaciones.addRow(linea);
 			tablaHabitaciones.fireTableDataChanged();
 		}
+        LocalDate fechaActual = LocalDate.now();
+        LocalDate fechaMasUnDia = fechaActual.plusDays(1);
+        Date fechaMaxima = Date.from(fechaMasUnDia.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		
+		//
+		//necesito los listeners de los selectores de fechas para ver si ambos tienen fechas
+		// Listener para dateCheckIn
+        dateCheckIn.getDateEditor().addPropertyChangeListener(new PropertyChangeListener() {
+            public void propertyChange(PropertyChangeEvent evt) {
+            	if (checkFechas(dateCheckIn, dateCheckOut)) {
+            		double costoNoches = 0;
+    				for (AbstractHabitacion h : listaHabitaciones) {
+    					costoNoches += h.getPrecioPorNoche();
+    				}
+    				
+    				//obtengo la cantidad de noches
+    				LocalDate localDateCheckIn = dateCheckIn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    		        LocalDate localDateCheckOut = dateCheckOut.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    		        long cantidadNochesLong = ChronoUnit.DAYS.between(localDateCheckIn, localDateCheckOut);
+    		        int cantNoches = (int) cantidadNochesLong;
+    				
+    		        
+    		        double precioTotal = cantNoches*costoNoches;
+    		        
+    				//aplico las politicas
+    				long diasHastaCheckIn = ChronoUnit.DAYS.between(fechaActual, localDateCheckIn);
+    								
+    				if (diasHastaCheckIn >= politicas.getCantDiasTemprano()) {
+    		            // aplico descuento temprano
+    					precioTotal *= politicas.getDtoTemprano()/100;
+    		        } else if (diasHastaCheckIn <= politicas.getCantDiasTarde()) {
+    		            // aplico recargo tarde
+    		        	precioTotal *= (politicas.getRecragoTarde())/100 + 1;
+    		        }
+    				
+    				if (diasHastaCheckIn >= politicas.getCantDiasTemprano()) {
+    		            // aplico descuento temprano
+    					precioTotal *= politicas.getDtoTemprano()/100;
+    		        } else if (diasHastaCheckIn <= politicas.getCantDiasTarde()) {
+    		            // aplico recargo tarde
+    		        	precioTotal *= (politicas.getRecragoTarde())/100 + 1;
+    		        }
+            		
+            		
+            		precio.setText(String.valueOf(precioTotal));
+            	}
+            }
+        });
+
+        // Listener para dateCheckOut
+        dateCheckOut.getDateEditor().addPropertyChangeListener(new PropertyChangeListener() {
+            public void propertyChange(PropertyChangeEvent evt) {
+                if ("date".equals(evt.getPropertyName())) {
+                	if (checkFechas(dateCheckIn, dateCheckOut)) {
+                		double costoNoches = 0;
+        				for (AbstractHabitacion h : listaHabitaciones) {
+        					costoNoches += h.getPrecioPorNoche();
+        				}
+        				
+        				//obtengo la cantidad de noches
+        				LocalDate localDateCheckIn = dateCheckIn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        		        LocalDate localDateCheckOut = dateCheckOut.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        		        long cantidadNochesLong = ChronoUnit.DAYS.between(localDateCheckIn, localDateCheckOut);
+        		        int cantNoches = (int) cantidadNochesLong;
+        				
+        		        
+        		        double precioTotal = cantNoches*costoNoches;
+        		        
+        				//aplico las politicas
+        				long diasHastaCheckIn = ChronoUnit.DAYS.between(fechaActual, localDateCheckIn);
+        								
+        				if (diasHastaCheckIn >= politicas.getCantDiasTemprano()) {
+        		            // aplico descuento temprano
+        					precioTotal *= politicas.getDtoTemprano()/100;
+        		        } else if (diasHastaCheckIn <= politicas.getCantDiasTarde()) {
+        		            // aplico recargo tarde
+        		        	precioTotal *= (politicas.getRecragoTarde())/100 + 1;
+        		        }
+        				
+        				if (diasHastaCheckIn >= politicas.getCantDiasTemprano()) {
+        		            // aplico descuento temprano
+        					precioTotal *= politicas.getDtoTemprano()/100;
+        		        } else if (diasHastaCheckIn <= politicas.getCantDiasTarde()) {
+        		            // aplico recargo tarde
+        		        	precioTotal *= (politicas.getRecragoTarde())/100 + 1;
+        		        }
+                		
+                		
+                		precio.setText(String.valueOf(precioTotal));
+                	}
+                }
+            }
+        });
         
         btnReservar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-		        LocalDate fechaActual = LocalDate.now();
-		        LocalDate fechaMasUnDia = fechaActual.plusDays(1);
-		        Date fechaMaxima = Date.from(fechaMasUnDia.atStartOfDay(ZoneId.systemDefault()).toInstant());
-				Double precioTotal;
 				PagoContexto pc = new PagoContexto();
 				if (rdbtnCredito.isSelected()) {
-					pc.setEstrategia(new PagoCredito(fechaMaxima, idCredito, banco));
+					pc.setEstrategia(new PagoCredito(fechaMaxima, generarIdReserva(), comboBoxBanco.getSelectedItem().toString()));
 				}
 				if (rdbtnDebito.isSelected()) {
-					pc.setEstrategia(new PagoCredito(fechaMaxima, idDebito, banco));
+					pc.setEstrategia(new PagoDebito(fechaMaxima, generarIdReserva(), comboBoxBanco.getSelectedItem().toString()));
 				}
 				if (rdbtnTransferencia.isSelected()) {
-					pc.setEstrategia(new PagoCredito(fechaMaxima, idTransferencia, alias));
+					pc.setEstrategia(new PagoTransferencia(fechaMaxima, generarIdReserva(), alias.getText()));
 				}
 				if (rdbtnEfectivo.isSelected()) {
-					pc.setEstrategia(new PagoCredito(fechaMaxima, tipoDeCambio));
+					pc.setEstrategia(new PagoEfectivo(fechaMaxima, Double.parseDouble(comboBoxBanco.getSelectedItem().toString())));
 				}
 				
-				//calcular monto para mostrar el precio final en la vista
+				double costoNoches = 0;
+				for (AbstractHabitacion h : listaHabitaciones) {
+					costoNoches += h.getPrecioPorNoche();
+				}
 				
-				reservas.add(new Reserva(generarIdReserva(), precioTotal, dateCheckIn.getDate(), dateCheckOut.getDate(), Calendar.getInstance().getTime(), listaHabitaciones, DNI, huespedes, pc, "Pendiente de pago"));
+				//obtengo la cantidad de noches
+				LocalDate localDateCheckIn = dateCheckIn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		        LocalDate localDateCheckOut = dateCheckOut.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		        long cantidadNochesLong = ChronoUnit.DAYS.between(localDateCheckIn, localDateCheckOut);
+		        int cantNoches = (int) cantidadNochesLong;
+				
+		        
+		        double precioTotal = cantNoches*costoNoches;
+		        
+				//aplico las politicas
+				long diasHastaCheckIn = ChronoUnit.DAYS.between(fechaActual, localDateCheckIn);
+								
+				if (diasHastaCheckIn >= politicas.getCantDiasTemprano()) {
+		            // aplico descuento temprano
+					precioTotal *= politicas.getDtoTemprano()/100;
+		        } else if (diasHastaCheckIn <= politicas.getCantDiasTarde()) {
+		            // aplico recargo tarde
+		        	precioTotal *= (politicas.getRecragoTarde())/100 + 1;
+		        }
+				
+				if (diasHastaCheckIn >= politicas.getCantDiasTemprano()) {
+		            // aplico descuento temprano
+					precioTotal *= politicas.getDtoTemprano()/100;
+		        } else if (diasHastaCheckIn <= politicas.getCantDiasTarde()) {
+		            // aplico recargo tarde
+		        	precioTotal *= (politicas.getRecragoTarde())/100 + 1;
+		        }
+				
+				
+				
+		        reservas.add(new Reserva(generarIdReserva(), precioTotal, dateCheckIn.getDate(), dateCheckOut.getDate(), Calendar.getInstance().getTime(), listaHabitaciones, DNI, huespedes, pc, "Pendiente de pago"));
 			}
 		});
+        
+        
+        //listener para dateCheckIn
+        dateCheckIn.getDateEditor().addPropertyChangeListener(new PropertyChangeListener() {
+            public void propertyChange(PropertyChangeEvent evt) {
+                if ("date".equals(evt.getPropertyName())) {
+                	checkFechas(dateCheckIn, dateCheckOut);
+                }
+            }
+        });
+
+        //listener para dateCheckOut
+        dateCheckOut.getDateEditor().addPropertyChangeListener(new PropertyChangeListener() {
+            public void propertyChange(PropertyChangeEvent evt) {
+                if ("date".equals(evt.getPropertyName())) {
+                	checkFechas(dateCheckIn, dateCheckOut);
+                }
+            }
+        });
         
         btnResgistrarHuesped.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -592,6 +741,24 @@ public class Controller {
                 iniciarVistaReserva();
 			}
 		});
+    }
+    
+    private boolean checkFechas(JDateChooser dateCheckIn, JDateChooser dateCheckOut) {
+        Date checkInDate = dateCheckIn.getDate();
+        Date checkOutDate = dateCheckOut.getDate();
+
+        if (checkInDate != null && checkOutDate != null) {
+            LocalDate localDateCheckIn = checkInDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate localDateCheckOut = checkOutDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+            if (localDateCheckOut.isAfter(localDateCheckIn)) {
+                System.out.println("Fechas válidas: Check-Out es después de Check-In.");
+                return true;
+            } else {
+                System.out.println("Fecha de Check-Out debe ser posterior a la fecha de Check-In.");
+            }
+        }
+        return false;
     }
     
     private String generarIdReserva() {
@@ -922,6 +1089,7 @@ public class Controller {
     	JButton btnModificar = cABM.getBtnModificarCliente();
     	JButton btnEliminar = cABM.getBtnEliminarCliente();
     	
+    	tabla.setRowCount(0);
     	for (Cliente c : clientes) {
 			Object[] linea = {c.getNombre(), c.getApellido(), c.getDNI(), c.getEdad(), c.getMail(), c.getTelefono()};
 			tabla.addRow(linea);
@@ -971,11 +1139,24 @@ public class Controller {
     	
     	btnRegistrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				String contactoPref = null;
+				if (comboBoxContactoPref.getSelectedItem().equals("Teléfono")) {
+					contactoPref = "wpp";
+				}
+				if (comboBoxContactoPref.getSelectedItem().equals("Whatsapp")) {
+					contactoPref = "telefono";
+				}
+				if (comboBoxContactoPref.getSelectedItem().equals("Email")) {
+					contactoPref = "mail";
+				}
+				
+				
 				if (txtNombre.getText() != "" && txtApellido.getText() != "" && txtDNI.getText() != "" && txtEdad.getText() != "" && txtTelefono.getText() != "" && txtMail.getText() != "") {
-					clientes.add(new Cliente(txtNombre.getText(), txtApellido.getText(), txtDNI.getText(), Integer.parseInt(txtEdad.getText()), txtMail.getText(), txtContactoPref.getText()));					
+					clientes.add(new Cliente(txtNombre.getText(), txtApellido.getText(), txtDNI.getText(), Integer.parseInt(txtEdad.getText()), txtTelefono.getText(), txtMail.getText(), contactoPref));					
 					agrCli.dispose();
 					iniciarVistaClientesABM();
-				}				
+				}
 			}
 		});
     	
@@ -1001,7 +1182,7 @@ public class Controller {
     		btnVerMisReservas.addActionListener(new ActionListener() {
     			public void actionPerformed(ActionEvent e) {
     				pagCliente.dispose();
-    				//martis haceme la view porfa D: Interfaz_MiReserva
+    				//Interfaz_MiReserva
     			}
     		});
     	}
