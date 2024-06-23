@@ -19,7 +19,7 @@ public class PagoDebito implements PagoStrategy {
 
     @Override
     public void pagar(double monto) {
-        // Lógica para pagar con débito
+        System.out.println("Pagado con debito: " + monto + ". Banco: " + banco);
         this.pagado = true;
     }
 

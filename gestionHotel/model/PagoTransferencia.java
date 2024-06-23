@@ -18,7 +18,7 @@ public class PagoTransferencia implements PagoStrategy {
     }
 
     public void pagar(double monto) {
-        // Lógica para pagar por transferencia
+        System.out.println("Pagado mediante transferencia: " + monto + ". Alias: " + alias);
         this.pagado = true;
     }
 

@@ -15,7 +15,7 @@ public class PagoEfectivo implements PagoStrategy {
 
     @Override
     public void pagar(double monto) {
-        // Lógica para pagar en efectivo
+        System.out.println("Pagado en efectivo: " + monto + ". Tipo de cambio: " + tipoCambio);
         this.pagado = true;
     }
 

@@ -16,8 +16,8 @@ import javax.swing.DefaultComboBoxModel;
 public class Interfaz_ModificarCliente extends JFrame {
 
     private JPanel contentPane;
-    
-    private JTextField textNombre;
+
+	private JTextField textNombre;
     private JTextField textApellido;
     private JTextField textDNI;
     private JTextField textEdad;
@@ -77,10 +77,10 @@ public class Interfaz_ModificarCliente extends JFrame {
         textApellido.setBounds(559, 114, 199, 26);
         contentPane.add(textApellido);
         
-        JLabel lblNombre_1_1 = new JLabel("DNI:");
-        lblNombre_1_1.setFont(new Font("Calibri", Font.PLAIN, 16));
-        lblNombre_1_1.setBounds(244, 170, 61, 17);
-        contentPane.add(lblNombre_1_1);
+        JLabel lblDNI = new JLabel("DNI:");
+        lblDNI.setFont(new Font("Calibri", Font.PLAIN, 16));
+        lblDNI.setBounds(244, 170, 61, 17);
+        contentPane.add(lblDNI);
         
         textDNI = new JTextField();
         textDNI.setColumns(10);
@@ -92,30 +92,30 @@ public class Interfaz_ModificarCliente extends JFrame {
         textEdad.setBounds(559, 166, 199, 26);
         contentPane.add(textEdad);
         
-        JLabel lblNombre_1_1_1 = new JLabel("Edad:");
-        lblNombre_1_1_1.setFont(new Font("Calibri", Font.PLAIN, 16));
-        lblNombre_1_1_1.setBounds(488, 170, 61, 17);
-        contentPane.add(lblNombre_1_1_1);
+        JLabel lblEdad = new JLabel("Edad:");
+        lblEdad.setFont(new Font("Calibri", Font.PLAIN, 16));
+        lblEdad.setBounds(488, 170, 61, 17);
+        contentPane.add(lblEdad);
         
         textTelefono = new JTextField();
         textTelefono.setColumns(10);
         textTelefono.setBounds(315, 214, 149, 26);
         contentPane.add(textTelefono);
         
-        JLabel lblNombre_1_1_1_1 = new JLabel("Teléfono:");
-        lblNombre_1_1_1_1.setFont(new Font("Calibri", Font.PLAIN, 16));
-        lblNombre_1_1_1_1.setBounds(244, 221, 61, 17);
-        contentPane.add(lblNombre_1_1_1_1);
+        JLabel lbltelefono = new JLabel("Teléfono:");
+        lbltelefono.setFont(new Font("Calibri", Font.PLAIN, 16));
+        lbltelefono.setBounds(244, 221, 61, 17);
+        contentPane.add(lbltelefono);
         
         textMail = new JTextField();
         textMail.setColumns(10);
         textMail.setBounds(559, 214, 199, 26);
         contentPane.add(textMail);
         
-        JLabel lblNombre_1_1_1_1_1 = new JLabel("Mail:");
-        lblNombre_1_1_1_1_1.setFont(new Font("Calibri", Font.PLAIN, 16));
-        lblNombre_1_1_1_1_1.setBounds(488, 221, 61, 17);
-        contentPane.add(lblNombre_1_1_1_1_1);
+        JLabel lblmail = new JLabel("Mail:");
+        lblmail.setFont(new Font("Calibri", Font.PLAIN, 16));
+        lblmail.setBounds(488, 221, 61, 17);
+        contentPane.add(lblmail);
         
         JLabel lblNombre_1_1_1_1_1_1 = new JLabel("Contacto de preferencia:");
         lblNombre_1_1_1_1_1_1.setFont(new Font("Calibri", Font.PLAIN, 16));
@@ -128,7 +128,6 @@ public class Interfaz_ModificarCliente extends JFrame {
         ContactPreferece.setBounds(424, 275, 334, 26);
         contentPane.add(ContactPreferece);
     }
-    
     public JTextField getTextNombre() {
 		return textNombre;
 	}

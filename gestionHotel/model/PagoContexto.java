@@ -28,4 +28,8 @@ public class PagoContexto {
     public String getTipo() {
     	return estrategia.getTipo();
     }
+    
+    public PagoStrategy getEstrategia() {
+    	return estrategia;
+    }
 }

@@ -18,8 +18,8 @@ public class Auditoria {
 		eventos.add(evento);
 	}
 	
-	public void agregarEvento(EventoAuditoria evento) {
-		eventos.add(evento);
+	public void agregarEvento(Date fecha, String titulo, String descripcion) {
+		eventos.add(new EventoAuditoria(generarIdEvento(), fecha, titulo, descripcion));
 	}
 	
 	public EventoAuditoria obtenerEventoPorId(String idEvento) {
@@ -43,6 +43,17 @@ public class Auditoria {
 		      eventos.remove(i);
 		      break;
 		    }
+		}
+	}
+	
+	public String generarIdEvento() {
+		return String.valueOf(Integer.parseInt(eventos.get(eventos.size()-1).getIdEvento()) + 1);
+		
+	}
+	
+	public void mostrarLogs() {
+		for (EventoAuditoria e : eventos) {
+			System.out.println("Titutlo: " + e.getTitulo() + ". Descripcion: " + e.getDescripcion() + ". Fecha: " + e.getFecha());
 		}
 	}
 }

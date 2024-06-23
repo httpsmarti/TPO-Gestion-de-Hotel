@@ -1,7 +1,6 @@
 package model;
 
 public class Notificacion {
-	private String idNotificacion;
 	private String mensaje;
 	private AbstractCuenta destinatario;
 	private String medio;
@@ -25,17 +24,10 @@ public class Notificacion {
 		this.medio = medio;
 	}
 	
-	public String getIdNotificacion() {
-		return idNotificacion;
-	}
 	
-	public void setIdNotificacion(String idNotificacion) {
-		this.idNotificacion = idNotificacion;
-	}
 	
-	public Notificacion(String idNotificacion, String mensaje, AbstractCuenta destinatario, String medio) {
+	public Notificacion(String mensaje, AbstractCuenta destinatario, String medio) {
 		super();
-		this.idNotificacion = idNotificacion;
 		this.mensaje = mensaje;
 		this.destinatario = destinatario;
 		this.medio = medio;

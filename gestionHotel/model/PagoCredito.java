@@ -19,7 +19,7 @@ public class PagoCredito implements PagoStrategy {
 
     @Override
     public void pagar(double monto) {
-        // Lógica para pagar con crédito
+    	System.out.println("Pagado con credito: " + monto + ". Banco: " + banco);
         this.pagado = true;
     }
 
