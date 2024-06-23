@@ -40,7 +40,8 @@ public class Interfaz_MiReserva extends JFrame {
 	private JButton btnSiguiente; 
 	private JButton btnAtras;
 	private JButton btnEliminarReserva;
-
+	private JButton btnPagar;
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -132,9 +133,19 @@ public class Interfaz_MiReserva extends JFrame {
         btnEliminarReserva.setForeground(Color.WHITE);
         btnEliminarReserva.setFont(new Font("Calibri", Font.PLAIN, 14));
         btnEliminarReserva.setBackground(new Color(63, 63, 63));
-        btnEliminarReserva.setBounds(523, 471, 142, 39);
+        btnEliminarReserva.setBounds(618, 471, 142, 39);
         contentPane.add(btnEliminarReserva);
+        
+        btnPagar = new JButton("Pagar Reserva");
+        btnPagar.setForeground(Color.WHITE);
+        btnPagar.setFont(new Font("Calibri", Font.PLAIN, 14));
+        btnPagar.setBackground(new Color(63, 63, 63));
+        btnPagar.setBounds(447, 471, 142, 39);
+        contentPane.add(btnPagar);
 	}	
+	public JButton getBtnPagar() {
+		return btnPagar;
+	}
 	
 	public DefaultTableModel getTablaFuncional() {
 		return tablaFuncional;

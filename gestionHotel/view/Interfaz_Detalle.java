@@ -216,7 +216,7 @@ public Interfaz_Detalle() {
     
     precio = new JLabel("precio");
     precio.setFont(new Font("Calibri", Font.PLAIN, 16));
-    precio.setBounds(585, 338, 62, 22);
+    precio.setBounds(525, 338, 122, 22);
     panel_2_1.add(precio);
     
     JLabel lblClienteResgistrado = new JLabel("Cliente Resgistrado:");
@@ -292,12 +292,12 @@ public Interfaz_Detalle() {
     
     JLabel lblNewLabel_2_1_1_1 = new JLabel("Monto:");
     lblNewLabel_2_1_1_1.setFont(new Font("Calibri", Font.BOLD, 16));
-    lblNewLabel_2_1_1_1.setBounds(504, 338, 62, 22);
+    lblNewLabel_2_1_1_1.setBounds(444, 338, 203, 22);
     panel_2_1.add(lblNewLabel_2_1_1_1);
     
     JLabel signo = new JLabel("$");
     signo.setFont(new Font("Calibri", Font.PLAIN, 16));
-    signo.setBounds(565, 338, 18, 22);
+    signo.setBounds(505, 338, 142, 22);
     panel_2_1.add(signo);
     
     JLabel lblNewLabel_2_1_1 = new JLabel("Seleccione método de pago");
