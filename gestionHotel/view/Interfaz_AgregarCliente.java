@@ -123,7 +123,7 @@ public class Interfaz_AgregarCliente extends JFrame {
         contentPane.add(lblNombre_1_1_1_1_1_1);
         
         ContactPreferece = new JComboBox();
-        ContactPreferece.setModel(new DefaultComboBoxModel(new String[] {"SMS", "Whatsapp", "Email"}));
+        ContactPreferece.setModel(new DefaultComboBoxModel(new String[] {"Teléfono", "Whatsapp", "Email"}));
         ContactPreferece.setToolTipText("");
         ContactPreferece.setBounds(424, 275, 334, 26);
         contentPane.add(ContactPreferece);

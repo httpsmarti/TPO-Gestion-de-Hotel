@@ -34,6 +34,7 @@ import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JTextField;
 
 public class Interfaz_Detalle extends JFrame {
 
@@ -52,13 +53,11 @@ private ButtonGroup grupoMetodoPago = new ButtonGroup();
 private JButton btnAtras;
 private JDateChooser dateCheckIn;
 private JDateChooser dateCheckOut;
-private JRadioButton rdbtnInternet;
-private JRadioButton rdbtnMinibar;
-private JRadioButton rdbtnServicioDespertador;
-private JRadioButton rdbtnTv;
 
 static DefaultTableModel tablaFuncional = new DefaultTableModel();
 static DefaultTableModel tablaFuncional1 = new DefaultTableModel();
+private JTextField idTrasferencia;
+private JTextField textTipoCambio;
 
 public static void main(String[] args) {
     EventQueue.invokeLater(new Runnable() {
@@ -182,7 +181,7 @@ public Interfaz_Detalle() {
     //elije las fechas check in check out
     JLabel lblCheckOut = new JLabel("Check Out\r\n");
     lblCheckOut.setFont(new Font("Calibri", Font.BOLD, 16));
-    lblCheckOut.setBounds(247, 35, 82, 20);
+    lblCheckOut.setBounds(23, 126, 82, 20);
     panel_2.add(lblCheckOut);
     
     dateCheckIn = new JDateChooser();
@@ -192,7 +191,7 @@ public Interfaz_Detalle() {
     
     dateCheckOut = new JDateChooser();
     dateCheckOut.getCalendarButton().setForeground(new Color(206, 157, 255));
-    dateCheckOut.setBounds(247, 66, 170, 32);
+    dateCheckOut.setBounds(23, 157, 170, 32);
     panel_2.add(dateCheckOut);
     
     JPanel panel_4 = new JPanel();
@@ -202,43 +201,8 @@ public Interfaz_Detalle() {
     
     JPanel panel_4_1 = new JPanel();
     panel_4_1.setBackground(new Color(226, 198, 255));
-    panel_4_1.setBounds(247, 52, 170, 3);
+    panel_4_1.setBounds(23, 143, 170, 3);
     panel_2.add(panel_4_1);
-    
-    JLabel lblExtra_1 = new JLabel("Extra");
-    lblExtra_1.setFont(new Font("Calibri", Font.BOLD, 16));
-    lblExtra_1.setBounds(23, 134, 68, 20);
-    panel_2.add(lblExtra_1);
-    
-    //Botones EXTRAS 
-    
-    rdbtnMinibar = new JRadioButton("Minibar");
-    rdbtnMinibar.setFont(new Font("Calibri", Font.PLAIN, 15));
-    rdbtnMinibar.setBackground(Color.WHITE);
-    rdbtnMinibar.setActionCommand("rdbtnCredito");
-    rdbtnMinibar.setBounds(23, 162, 82, 23);
-    panel_2.add(rdbtnMinibar);
-    
-    rdbtnServicioDespertador = new JRadioButton("Servicio Despertador");
-    rdbtnServicioDespertador.setFont(new Font("Calibri", Font.PLAIN, 15));
-    rdbtnServicioDespertador.setBackground(Color.WHITE);
-    rdbtnServicioDespertador.setActionCommand("rdbtnDebito");
-    rdbtnServicioDespertador.setBounds(107, 162, 160, 23);
-    panel_2.add(rdbtnServicioDespertador);
-    
-    rdbtnTv = new JRadioButton("TV");
-    rdbtnTv.setFont(new Font("Calibri", Font.PLAIN, 15));
-    rdbtnTv.setBackground(Color.WHITE);
-    rdbtnTv.setActionCommand("rdbtnTransferencia");
-    rdbtnTv.setBounds(354, 162, 47, 23);
-    panel_2.add(rdbtnTv);
-    
-    rdbtnInternet = new JRadioButton("Internet");
-    rdbtnInternet.setFont(new Font("Calibri", Font.PLAIN, 15));
-    rdbtnInternet.setBackground(Color.WHITE);
-    rdbtnInternet.setActionCommand("rdbtnDebito");
-    rdbtnInternet.setBounds(269, 162, 93, 23);
-    panel_2.add(rdbtnInternet);
     
     JPanel panel_2_1 = new JPanel();
     panel_2_1.setBackground(new Color(255, 255, 255));
@@ -248,7 +212,7 @@ public Interfaz_Detalle() {
     
     JLabel precio = new JLabel("precio");
     precio.setFont(new Font("Calibri", Font.PLAIN, 16));
-    precio.setBounds(576, 320, 62, 22);
+    precio.setBounds(585, 338, 62, 22);
     panel_2_1.add(precio);
     
     JLabel lblClienteResgistrado = new JLabel("Cliente Resgistrado:");
@@ -322,59 +286,118 @@ public Interfaz_Detalle() {
 
     scrollPane_1.setViewportView(table_1);
     
-    JLabel lblNewLabel_2_1_1 = new JLabel("Seleccione método de pago");
-    lblNewLabel_2_1_1.setFont(new Font("Calibri", Font.BOLD, 16));
-    lblNewLabel_2_1_1.setBounds(20, 205, 203, 22);
-    panel_2_1.add(lblNewLabel_2_1_1);
-    
-    
-    rdbtnCredito = new JRadioButton("Crédito");
-    rdbtnCredito.setBackground(new Color(255, 255, 255));
-    rdbtnCredito.setFont(new Font("Calibri", Font.PLAIN, 15));
-    rdbtnCredito.setActionCommand("rdbtnCredito");
-    rdbtnCredito.setBounds(20, 234, 109, 23);
-    panel_2_1.add(rdbtnCredito);
-
-    // Botón de débito
-    rdbtnDebito = new JRadioButton("Débito");
-    rdbtnDebito.setBackground(new Color(255, 255, 255));
-    rdbtnDebito.setFont(new Font("Calibri", Font.PLAIN, 15));
-    rdbtnDebito.setActionCommand("rdbtnDebito");
-    rdbtnDebito.setBounds(20, 260, 109, 23);
-    panel_2_1.add(rdbtnDebito);
-
-    // Botón de transferencia
-    rdbtnTransferencia = new JRadioButton("Transferencia");
-    rdbtnTransferencia.setBackground(new Color(255, 255, 255));
-    rdbtnTransferencia.setFont(new Font("Calibri", Font.PLAIN, 15));
-    rdbtnTransferencia.setActionCommand("rdbtnTransferencia");
-    rdbtnTransferencia.setBounds(20, 286, 109, 23);
-    panel_2_1.add(rdbtnTransferencia);
-    
-    rdbtnEfectivo = new JRadioButton("Efectivo");
-    rdbtnEfectivo.setFont(new Font("Calibri", Font.PLAIN, 15));
-    rdbtnEfectivo.setBackground(Color.WHITE);
-    rdbtnEfectivo.setActionCommand("rdbtnTransferencia");
-    rdbtnEfectivo.setBounds(20, 312, 109, 23);
-    panel_2_1.add(rdbtnEfectivo);
-
-    // Agrega los botones al grupo
-    grupoMetodoPago.add(rdbtnCredito);
-    grupoMetodoPago.add(rdbtnDebito);
-    grupoMetodoPago.add(rdbtnTransferencia);
-    grupoMetodoPago.add(rdbtnEfectivo);
-    
     JLabel lblNewLabel_2_1_1_1 = new JLabel("Monto:");
     lblNewLabel_2_1_1_1.setFont(new Font("Calibri", Font.BOLD, 16));
-    lblNewLabel_2_1_1_1.setBounds(495, 320, 62, 22);
+    lblNewLabel_2_1_1_1.setBounds(504, 338, 62, 22);
     panel_2_1.add(lblNewLabel_2_1_1_1);
     
     JLabel signo = new JLabel("$");
     signo.setFont(new Font("Calibri", Font.PLAIN, 16));
-    signo.setBounds(556, 320, 18, 22);
+    signo.setBounds(565, 338, 18, 22);
     panel_2_1.add(signo);
     
-}
+    JLabel lblNewLabel_2_1_1 = new JLabel("Seleccione método de pago");
+    lblNewLabel_2_1_1.setBounds(20, 207, 203, 22);
+    panel_2_1.add(lblNewLabel_2_1_1);
+    lblNewLabel_2_1_1.setFont(new Font("Calibri", Font.BOLD, 16));
+    
+    
+    rdbtnCredito = new JRadioButton("Crédito");
+    rdbtnCredito.setBounds(20, 236, 125, 23);
+    panel_2_1.add(rdbtnCredito);
+    rdbtnCredito.setBackground(new Color(255, 255, 255));
+    rdbtnCredito.setFont(new Font("Arial", Font.PLAIN, 15));
+    rdbtnCredito.setActionCommand("rdbtnCredito");
+    
+        // Agrega los botones al grupo
+        grupoMetodoPago.add(rdbtnCredito);
+        
+            // Botón de débito
+            rdbtnDebito = new JRadioButton("Débito");
+            rdbtnDebito.setBounds(20, 262, 125, 23);
+            panel_2_1.add(rdbtnDebito);
+            rdbtnDebito.setBackground(new Color(255, 255, 255));
+            rdbtnDebito.setFont(new Font("Arial", Font.PLAIN, 15));
+            rdbtnDebito.setActionCommand("rdbtnDebito");
+            grupoMetodoPago.add(rdbtnDebito);
+            
+                // Botón de transferencia
+                rdbtnTransferencia = new JRadioButton("Transferencia");
+                rdbtnTransferencia.setBounds(20, 288, 125, 23);
+                panel_2_1.add(rdbtnTransferencia);
+                rdbtnTransferencia.setBackground(new Color(255, 255, 255));
+                rdbtnTransferencia.setFont(new Font("Arial", Font.PLAIN, 15));
+                rdbtnTransferencia.setActionCommand("rdbtnTransferencia");
+                grupoMetodoPago.add(rdbtnTransferencia);
+                
+                rdbtnEfectivo = new JRadioButton("Efectivo");
+                rdbtnEfectivo.setBounds(20, 314, 86, 23);
+                panel_2_1.add(rdbtnEfectivo);
+                rdbtnEfectivo.setFont(new Font("Arial", Font.PLAIN, 15));
+                rdbtnEfectivo.setBackground(Color.WHITE);
+                rdbtnEfectivo.setActionCommand("rdbtnTransferencia");
+                grupoMetodoPago.add(rdbtnEfectivo);
+                
+                idTrasferencia = new JTextField();
+                idTrasferencia.setFont(new Font("Arial", Font.PLAIN, 12));
+                idTrasferencia.setText("Alias");
+                idTrasferencia.setColumns(10);
+                idTrasferencia.setBounds(230, 293, 96, 20);
+                panel_2_1.add(idTrasferencia);
+                
+                textTipoCambio = new JTextField();
+                textTipoCambio.setText("Tipo de cambio");
+                textTipoCambio.setFont(new Font("Arial", Font.PLAIN, 12));
+                textTipoCambio.setColumns(10);
+                textTipoCambio.setBounds(230, 315, 96, 20);
+                panel_2_1.add(textTipoCambio);
+                
+                JComboBox comboBoxBanco = new JComboBox();
+                comboBoxBanco.setBackground(new Color(255, 255, 255));
+                comboBoxBanco.setFont(new Font("Arial", Font.PLAIN, 12));
+                comboBoxBanco.setModel(new DefaultComboBoxModel(new String[] {"Visa", "Macro", "BBVA", "Galicia"}));
+                comboBoxBanco.setBounds(230, 236, 96, 22);
+                panel_2_1.add(comboBoxBanco);
+ 
+             // Inicialmente ocultar los campos comboBoxBanco, idTrasferencia, y textTipoCambio
+                comboBoxBanco.setVisible(false);
+                idTrasferencia.setVisible(false);
+                textTipoCambio.setVisible(false);
+
+                // Añadir ActionListener para los radio buttons
+                rdbtnCredito.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        comboBoxBanco.setVisible(true);
+                        idTrasferencia.setVisible(false);
+                        textTipoCambio.setVisible(false);
+                    }
+                });
+
+                rdbtnDebito.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        comboBoxBanco.setVisible(true);
+                        idTrasferencia.setVisible(false);
+                        textTipoCambio.setVisible(false);
+                    }
+                });
+
+                rdbtnTransferencia.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        comboBoxBanco.setVisible(false);
+                        idTrasferencia.setVisible(true);
+                        textTipoCambio.setVisible(false);
+                    }
+                });
+
+                rdbtnEfectivo.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        comboBoxBanco.setVisible(false);
+                        idTrasferencia.setVisible(false);
+                        textTipoCambio.setVisible(true);
+                    }
+                });
+            }
+
 
 // Renderer personalizado para las celdas
 class CustomTableCellRenderer extends JPanel implements TableCellRenderer {
@@ -394,7 +417,8 @@ class CustomTableCellRenderer extends JPanel implements TableCellRenderer {
         label.setForeground(Color.BLACK);
         return this;
         }
-    }
+}
+
     public JTable getTable() {
 		return table;
 	}
@@ -405,20 +429,6 @@ class CustomTableCellRenderer extends JPanel implements TableCellRenderer {
 
 	public JButton getBtnReservar() {
 		return btnReservar;
-	}
-	public JRadioButton getRdbtnInternet() {
-		return rdbtnInternet;
-	}
-	public JRadioButton getRdbtnMinibar() {
-		return rdbtnMinibar;
-	}
-
-	public JRadioButton getRdbtnServicioDespertador() {
-		return rdbtnServicioDespertador;
-	}
-
-	public JRadioButton getRdbtnTv() {
-		return rdbtnTv;
 	}
 
 	public JButton getBtnResgistrarHuesped() {

@@ -48,6 +48,7 @@ public class Interfaz_ReservarHabitacion extends JFrame {
 	private JCheckBox chckbxMinibar;
 	private JButton btnFiltrar;
 	private JComboBox comboBoxCantPers;
+	private JButton btnReiniciarFiltro;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -130,7 +131,7 @@ public class Interfaz_ReservarHabitacion extends JFrame {
         btnFiltrar.setForeground(Color.WHITE);
         btnFiltrar.setFont(new Font("Calibri", Font.PLAIN, 14));
         btnFiltrar.setBackground(new Color(63, 63, 63));
-        btnFiltrar.setBounds(995, 20, 76, 34);
+        btnFiltrar.setBounds(990, 20, 76, 34);
         panel_1.add(btnFiltrar);
         
         JLabel lblCantidadPersonas = new JLabel("Tipo");
@@ -149,10 +150,17 @@ public class Interfaz_ReservarHabitacion extends JFrame {
         comboBoxCantPers.setBounds(233, 33, 151, 27);
         panel_1.add(comboBoxCantPers);
         
-        JLabel lblExtras = new JLabel("Tipo");
+        JLabel lblExtras = new JLabel("Extras");
         lblExtras.setFont(new Font("Calibri", Font.BOLD, 14));
         lblExtras.setBounds(602, 4, 122, 32);
         panel_1.add(lblExtras);
+        
+        btnReiniciarFiltro = new JButton("Reiniciar");
+        btnReiniciarFiltro.setForeground(Color.WHITE);
+        btnReiniciarFiltro.setFont(new Font("Calibri", Font.PLAIN, 14));
+        btnReiniciarFiltro.setBackground(new Color(63, 63, 63));
+        btnReiniciarFiltro.setBounds(1075, 20, 85, 34);
+        panel_1.add(btnReiniciarFiltro);
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -264,10 +272,13 @@ public class Interfaz_ReservarHabitacion extends JFrame {
         lblHabitacionesDisponibles.setBounds(231, 208, 224, 32);
         contentPane.add(lblHabitacionesDisponibles);
 		
-		JLabel lblHabitacinSeleccionada = new JLabel("Habitación Seleccionada");
-		lblHabitacinSeleccionada.setFont(new Font("Calibri", Font.BOLD, 16));
-		lblHabitacinSeleccionada.setBounds(231, 387, 224, 32);
-		contentPane.add(lblHabitacinSeleccionada);
+		JLabel lblHabitacionesSeleccionadas = new JLabel("Habitaciones Seleccionadas");
+		lblHabitacionesSeleccionadas.setFont(new Font("Calibri", Font.BOLD, 16));
+		lblHabitacionesSeleccionadas.setBounds(231, 387, 224, 32);
+		contentPane.add(lblHabitacionesSeleccionadas);
+	}
+	public JButton getBtnReiniciarFiltro() {
+		return btnReiniciarFiltro;
 	}
 	public JCheckBox getChckbxServicioDespertador() {
 		return chckbxServicioDespertador;
