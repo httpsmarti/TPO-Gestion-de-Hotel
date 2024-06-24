@@ -63,6 +63,7 @@ public class Controller {
             }
         }
         generarReporteHabitaciones();
+        mostrarAuditoria();
         iniciarVistaLogin();
     }
     
@@ -370,6 +371,8 @@ public class Controller {
     	JButton btnReiniciar = interReserva.getBtnReiniciarFiltro();
     	String DNI;
     	
+    	
+    	
     	if(clienteActual != null) {
     		txtDNI.setText(clienteActual.getDNI());
     		txtDNI.setEnabled(false);
@@ -527,16 +530,13 @@ public class Controller {
     	
     	btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (listaHabitaciones.size() > 0) {
-					if (clienteActual == null) {
-						interReserva.dispose();
-		                iniciarVistaGerente();
-					} else {
-						interReserva.dispose();
-		                iniciarVistaCliente();
-					}
+				if (clienteActual == null) {
+					interReserva.dispose();
+	                iniciarVistaGerente();
+				} else {
+					interReserva.dispose();
+	                iniciarVistaCliente();
 				}
-				
 			}
 		});
     	
@@ -613,7 +613,9 @@ public class Controller {
     	JLabel precio = detalle.getLprecio();
     	List<Huesped> huespedes = new ArrayList<Huesped>();
     	
+    	tablaHuespedes.setRowCount(0);
     	tablaHabitaciones.setRowCount(0);
+    	
         for (AbstractHabitacion hab : listaHabitaciones) {
 			Object[] linea = {hab.getIdHabitacion(), hab.getTipo(), hab.getPrecioPorNoche()};
 			tablaHabitaciones.addRow(linea);
@@ -622,8 +624,7 @@ public class Controller {
         LocalDate fechaActual = LocalDate.now();
         LocalDate fechaMasUnDia = fechaActual.plusDays(1);
         Date fechaMaxima = Date.from(fechaMasUnDia.atStartOfDay(ZoneId.systemDefault()).toInstant());
-		
-		//
+        
 		//necesito los listeners de los selectores de fechas para ver si ambos tienen fechas
 		// Listener para dateCheckIn
         dateCheckIn.getDateEditor().addPropertyChangeListener(new PropertyChangeListener() {
@@ -1235,22 +1236,21 @@ public class Controller {
         });
     }
     
-    private void iniciarVistaModificarCliente() { //SIN TERMINAR
+    private void iniciarVistaModificarCliente() {
     	Interfaz_ModificarCliente modCli = new Interfaz_ModificarCliente();
     	modCli.setVisible(true);
     	modCli.setLocationRelativeTo(null);
     	JTextField txtNombre = modCli.getTextNombre();
-    	JTextField txtApellido = modCli.getTextNombre();
-    	JTextField txtDNI = modCli.getTextNombre();
-    	JTextField txtEdad = modCli.getTextNombre();
-    	JTextField txtTelefono = modCli.getTextNombre();
-    	JTextField txtMail = modCli.getTextNombre();
+    	JTextField txtApellido = modCli.getTextApellido();
+    	JTextField txtDNI = modCli.getTextDNI();
+    	JTextField txtEdad = modCli.getTextEdad();
+    	JTextField txtTelefono = modCli.getTextTelefono();
+    	JTextField txtMail = modCli.getTextMail();
     	JComboBox comboBoxContactoPref = modCli.getContactPreferece();
     	JButton btnGuardar = modCli.getBtnGuardar();
     	
     	btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 				String contactoPref = null;
 				if (comboBoxContactoPref.getSelectedItem().equals("Teléfono")) {
 					contactoPref = "wpp";
@@ -1263,25 +1263,26 @@ public class Controller {
 				}
 				
 				if (txtDNI.getText() != "") {
-					for (Cliente c : clientes) { //martina te voy a encontrar
+					for (Cliente c : clientes) {
 						if (c.getDNI().equals(txtDNI.getText())) {
-							if (txtApellido.getText() != "") {
+							if (!txtApellido.getText().equals("") && txtApellido.getText() != null) {
 								c.setApellido(txtApellido.getText());
 							}
-							if (txtNombre.getText() != "") {
+							if (!txtNombre.getText().equals("") && txtNombre.getText() != null) {
 								c.setNombre(txtNombre.getText());
-								System.out.println(c.getNombre());
 							}
-							if (txtEdad.getText() != "") {
+							if (!txtEdad.getText().equals("") && txtEdad.getText() != null) {
 								c.setEdad(Integer.parseInt(txtEdad.getText()));
 							}
-							if (txtTelefono.getText() != "") {
+							if (!txtTelefono.getText().equals("") && txtTelefono.getText() != null) {
 								c.setTelefono(txtTelefono.getText());
 							}
-							if (txtMail.getText() != "") {
+							if (!txtMail.getText().equals("") && txtMail.getText() != null) {
 								c.setMail(txtMail.getText());
 							}
+							c.setContactoPref(contactoPref);
 						}
+						
 					}	
 					modCli.dispose();
 					iniciarVistaClientesABM();
@@ -1387,5 +1388,9 @@ public class Controller {
     		}
     		System.out.println("La habitacion " + h.getIdHabitacion() + " se encuentra " + disponible);
     	}
+    }
+    
+    private void mostrarAuditoria() {
+    	auditoria.mostrarLogs();
     }
 }

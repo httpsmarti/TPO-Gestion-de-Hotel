@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 
 public class Interfaz_ModificarCliente extends JFrame {
 
@@ -43,17 +44,23 @@ public class Interfaz_ModificarCliente extends JFrame {
         
         JLabel lblNombre = new JLabel("Nombre:");
         lblNombre.setFont(new Font("Calibri", Font.PLAIN, 16));
-        lblNombre.setBounds(244, 118, 61, 17);
+        lblNombre.setBounds(241, 173, 61, 17);
         contentPane.add(lblNombre);
         
         textNombre = new JTextField();
-        textNombre.setBounds(315, 114, 149, 26);
+        textNombre.setBounds(312, 169, 149, 26);
         contentPane.add(textNombre);
         textNombre.setColumns(10);
         
         JPanel panel = new JPanel();
-        panel.setBounds(10, 11, 192, 340);
+        panel.setBounds(10, 25, 180, 313);
         contentPane.add(panel);
+        panel.setLayout(null);
+        
+        JLabel lblNewLabel_1 = new JLabel("\r\n");
+        lblNewLabel_1.setIcon(new ImageIcon(Interfaz_ModificarCliente.class.getResource("/img/vistaBoston.png")));
+        lblNewLabel_1.setBounds(0, 0, 202, 315);
+        panel.add(lblNewLabel_1);
         
         JPanel panel_1 = new JPanel();
         panel_1.setBackground(new Color(231, 198, 255));
@@ -69,63 +76,63 @@ public class Interfaz_ModificarCliente extends JFrame {
         
         JLabel lblApellido = new JLabel("Apellido:");
         lblApellido.setFont(new Font("Calibri", Font.PLAIN, 16));
-        lblApellido.setBounds(488, 118, 61, 17);
+        lblApellido.setBounds(485, 178, 61, 17);
         contentPane.add(lblApellido);
         
         textApellido = new JTextField();
         textApellido.setColumns(10);
-        textApellido.setBounds(559, 114, 199, 26);
+        textApellido.setBounds(556, 174, 199, 26);
         contentPane.add(textApellido);
         
         JLabel lblDNI = new JLabel("DNI:");
         lblDNI.setFont(new Font("Calibri", Font.PLAIN, 16));
-        lblDNI.setBounds(244, 170, 61, 17);
+        lblDNI.setBounds(381, 110, 61, 17);
         contentPane.add(lblDNI);
         
         textDNI = new JTextField();
         textDNI.setColumns(10);
-        textDNI.setBounds(315, 166, 149, 26);
+        textDNI.setBounds(452, 106, 149, 26);
         contentPane.add(textDNI);
         
         textEdad = new JTextField();
         textEdad.setColumns(10);
-        textEdad.setBounds(559, 166, 199, 26);
+        textEdad.setBounds(556, 227, 199, 26);
         contentPane.add(textEdad);
         
         JLabel lblEdad = new JLabel("Edad:");
         lblEdad.setFont(new Font("Calibri", Font.PLAIN, 16));
-        lblEdad.setBounds(488, 170, 61, 17);
+        lblEdad.setBounds(485, 231, 61, 17);
         contentPane.add(lblEdad);
         
         textTelefono = new JTextField();
         textTelefono.setColumns(10);
-        textTelefono.setBounds(315, 214, 149, 26);
+        textTelefono.setBounds(312, 227, 149, 26);
         contentPane.add(textTelefono);
         
         JLabel lbltelefono = new JLabel("Teléfono:");
         lbltelefono.setFont(new Font("Calibri", Font.PLAIN, 16));
-        lbltelefono.setBounds(244, 221, 61, 17);
+        lbltelefono.setBounds(241, 234, 61, 17);
         contentPane.add(lbltelefono);
         
         textMail = new JTextField();
         textMail.setColumns(10);
-        textMail.setBounds(559, 214, 199, 26);
+        textMail.setBounds(556, 281, 199, 26);
         contentPane.add(textMail);
         
         JLabel lblmail = new JLabel("Mail:");
         lblmail.setFont(new Font("Calibri", Font.PLAIN, 16));
-        lblmail.setBounds(488, 221, 61, 17);
+        lblmail.setBounds(485, 281, 61, 17);
         contentPane.add(lblmail);
         
-        JLabel lblNombre_1_1_1_1_1_1 = new JLabel("Contacto de preferencia:");
+        JLabel lblNombre_1_1_1_1_1_1 = new JLabel("Contacto:");
         lblNombre_1_1_1_1_1_1.setFont(new Font("Calibri", Font.PLAIN, 16));
-        lblNombre_1_1_1_1_1_1.setBounds(244, 279, 170, 17);
+        lblNombre_1_1_1_1_1_1.setBounds(241, 281, 69, 17);
         contentPane.add(lblNombre_1_1_1_1_1_1);
         
         ContactPreferece = new JComboBox();
         ContactPreferece.setModel(new DefaultComboBoxModel(new String[] {"Teléfono", "Whatsapp", "Email"}));
         ContactPreferece.setToolTipText("");
-        ContactPreferece.setBounds(424, 275, 334, 26);
+        ContactPreferece.setBounds(312, 274, 149, 26);
         contentPane.add(ContactPreferece);
     }
     public JTextField getTextNombre() {
@@ -159,5 +166,4 @@ public class Interfaz_ModificarCliente extends JFrame {
 	public JComboBox getContactPreferece() {
 		return ContactPreferece;
 	}
-    
 }
