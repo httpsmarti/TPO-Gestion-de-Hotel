@@ -86,7 +86,7 @@ public class Reserva {
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 		this.fechaReserva = fechaReserva;
-		this.habitaciones = new ArrayList<AbstractHabitacion>();
+		this.habitaciones = habitaciones;
 		this.DNIClienteReserva = DNIClienteReserva;
 		this.huespedes = huespedes;
 		this.pagoContexto = pagoContexto;

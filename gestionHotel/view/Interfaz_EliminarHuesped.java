@@ -8,6 +8,7 @@ import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
+import javax.swing.ImageIcon;
 
 public class Interfaz_EliminarHuesped extends JFrame {
 
@@ -28,8 +29,14 @@ public class Interfaz_EliminarHuesped extends JFrame {
         contentPane.setLayout(null);
         
         JPanel panel = new JPanel();
-        panel.setBounds(10, 11, 192, 311);
+        panel.setBounds(23, 22, 173, 286);
         contentPane.add(panel);
+        panel.setLayout(null);
+        
+        JLabel lblNewLabel = new JLabel("");
+        lblNewLabel.setIcon(new ImageIcon(Interfaz_EliminarHuesped.class.getResource("/img/vistaBoston.png")));
+        lblNewLabel.setBounds(0, 0, 173, 286);
+        panel.add(lblNewLabel);
         
         JPanel panel_1 = new JPanel();
         panel_1.setLayout(null);

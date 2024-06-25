@@ -25,7 +25,7 @@ import java.awt.event.MouseEvent;
 		private JButton btnVerMisReservas;
 	    private JButton btnReservar;
 	    private JButton btnCerrarSesion;
-
+	    private JButton btnVerMisReservas_1;
 	    public static void main(String[] args) {
 	        EventQueue.invokeLater(new Runnable() {
 	            public void run() {
@@ -50,17 +50,17 @@ import java.awt.event.MouseEvent;
 
 	        JLabel lblNewLabel_2_1 = new JLabel("Mis Reservas");
 	        lblNewLabel_2_1.setFont(new Font("Calibri", Font.BOLD, 16));
-	        lblNewLabel_2_1.setBounds(222, 480, 90, 20);
+	        lblNewLabel_2_1.setBounds(413, 460, 90, 20);
 	        contentPane.add(lblNewLabel_2_1);
 
 	        JLabel lblNewLabel_2 = new JLabel("Reservar");
 	        lblNewLabel_2.setFont(new Font("Calibri", Font.BOLD, 16));
-	        lblNewLabel_2.setBounds(562, 480, 66, 20);
+	        lblNewLabel_2.setBounds(678, 460, 66, 20);
 	        contentPane.add(lblNewLabel_2);
 
 	        JLabel lblNewLabel = new JLabel("Cerrar Sesión");
 	        lblNewLabel.setFont(new Font("Calibri", Font.BOLD, 16));
-	        lblNewLabel.setBounds(864, 480, 90, 20);
+	        lblNewLabel.setBounds(894, 460, 90, 20);
 	        contentPane.add(lblNewLabel);
 
 	        JLabel lblNewLabel_1 = new JLabel("");
@@ -98,12 +98,12 @@ import java.awt.event.MouseEvent;
 	        btnVerMisReservas.setIcon(new ImageIcon(Interfaz_PaginaCliente.class.getResource("/img/misReservas.png")));
 	        btnVerMisReservas.setBackground(new Color(255, 255, 255));
 	        btnVerMisReservas.setFont(new Font("Calibri", Font.PLAIN, 15));
-	        btnVerMisReservas.setBounds(181, 307, 168, 162);
+	        btnVerMisReservas.setBounds(372, 287, 168, 162);
 	        contentPane.add(btnVerMisReservas);
 
 	        btnReservar = new JButton("\r\n");
 	        btnReservar.setIcon(new ImageIcon(Interfaz_PaginaCliente.class.getResource("/img/reserva.png")));
-	        btnReservar.addMouseListener(new MouseAdapter() {
+	        /*btnReservar.addMouseListener(new MouseAdapter() {
 	            @Override
 	            public void mouseClicked(MouseEvent e) {
 	                Interfaz_ReservarHabitacion reserva = new Interfaz_ReservarHabitacion();
@@ -111,18 +111,38 @@ import java.awt.event.MouseEvent;
 	                reserva.setLocationRelativeTo(null); // Centrar la nueva ventana
 	                dispose(); // Cerrar la ventana actual si lo deseas
 	            }
-	        });
+	        });*/
 	        btnReservar.setBackground(new Color(255, 255, 255));
 	        btnReservar.setFont(new Font("Calibri", Font.PLAIN, 15));
-	        btnReservar.setBounds(507, 307, 168, 162);
+	        btnReservar.setBounds(623, 287, 168, 162);
 	        contentPane.add(btnReservar);
 
 	        btnCerrarSesion = new JButton("");
 	        btnCerrarSesion.setIcon(new ImageIcon(Interfaz_PaginaCliente.class.getResource("/img/salida.png")));
 	        btnCerrarSesion.setBackground(new Color(255, 255, 255));
 	        btnCerrarSesion.setFont(new Font("Calibri", Font.PLAIN, 15));
-	        btnCerrarSesion.setBounds(828, 307, 168, 162);
+	        btnCerrarSesion.setBounds(858, 287, 168, 162);
 	        contentPane.add(btnCerrarSesion);
+	        
+	        btnVerMisReservas_1 = new JButton("");
+	        /*btnVerMisReservas_1.addActionListener(new ActionListener() {
+	        	public void actionPerformed(ActionEvent e) {
+	        		Interfaz_CambiarPassword cambiarp = new Interfaz_CambiarPassword();
+	        		cambiarp.setVisible(true);
+	        		cambiarp.setLocationRelativeTo(null); // Centrar la nueva ventana
+	                dispose(); // Cerrar la ventana actual si lo deseas
+	        	}
+	        });*/
+	        btnVerMisReservas_1.setIcon(new ImageIcon(Interfaz_PaginaCliente.class.getResource("/img/ambHabitacion.png")));
+	        btnVerMisReservas_1.setFont(new Font("Calibri", Font.PLAIN, 15));
+	        btnVerMisReservas_1.setBackground(Color.WHITE);
+	        btnVerMisReservas_1.setBounds(136, 287, 168, 162);
+	        contentPane.add(btnVerMisReservas_1);
+	        
+	        JLabel lblNewLabel_2_1_1 = new JLabel("Cambiar Contraseña");
+	        lblNewLabel_2_1_1.setFont(new Font("Calibri", Font.BOLD, 16));
+	        lblNewLabel_2_1_1.setBounds(148, 460, 142, 20);
+	        contentPane.add(lblNewLabel_2_1_1);
 	    }
 
 	    public JButton getBtnVerMisReservas() {
@@ -135,6 +155,10 @@ import java.awt.event.MouseEvent;
 
 	    public JButton getBtnCerrarSesion() {
 	        return btnCerrarSesion;
+	    }
+	    
+	    public JButton getBtnCambiarPassword() {
+	    	return btnVerMisReservas_1;
 	    }
 	}
 

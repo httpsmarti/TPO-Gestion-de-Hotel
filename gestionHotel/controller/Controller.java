@@ -59,7 +59,14 @@ public class Controller {
             long horasTranscurridas = diferenciaMillis / (60 * 60 * 1000);
             if (horasTranscurridas > 24) {
                 r.setEstado("Cancelada");
-                auditoria.agregarEvento(Calendar.getInstance().getTime(), "Se cancelo una reserva", "La reserva con codigo " + r.getIdReserva() + " se cancelo porque no se pago dentro de las 24 horas");
+                for (AbstractHabitacion h: r.getHabitaciones()) {
+                    for (AbstractHabitacion hab : habitaciones) {
+                        if(hab.equals(h)) {
+                            hab.setDisponible(true);
+                        }
+                    }
+                }
+                auditoria.agregarEvento(Calendar.getInstance().getTime(), "Se cancelo una reserva.", "Se cancelo la reserva con codigo: " + r.getIdReserva() + ", porque no se pago dentro de las 24 horas");
             }
         }
         generarReporteHabitaciones();
@@ -79,7 +86,8 @@ public class Controller {
     		btnCliente.addActionListener(new ActionListener() {
     			public void actionPerformed(ActionEvent e) {
     				vista.dispose();
-    				iniciarVistaSelectClient();
+    				iniciarVistaLoginUsuario();
+    				//iniciarVistaSelectClient();
     			}
     		});
         }
@@ -94,7 +102,51 @@ public class Controller {
         }
     }
     
-    private void iniciarVistaSelectClient() {
+    private void iniciarVistaLoginUsuario() {
+    	Interfaz_LoginUsuarios login = new Interfaz_LoginUsuarios();
+    	login.setVisible(true);
+    	login.setLocationRelativeTo(null);
+    	JTextField txtMail = login.getTxtMail();
+    	JTextField txtPassword = login.getPasswordField();
+    	JButton btnAtras = login.getBtnAtras();
+    	JButton btnIngresar = login.getBtnSiguiente();
+    	
+    	clienteActual = null;
+    	
+    	if (btnIngresar != null) {
+    		btnIngresar.addActionListener(new ActionListener() {
+    			public void actionPerformed(ActionEvent e) {
+    				boolean existe = false;
+    				for (Cliente c : clientes) {
+    					if(c.getMail().equals(txtMail.getText()) && c.getPassword().equals(txtPassword.getText())) {
+    						existe = true;
+    						clienteActual = c;
+    						break;
+    					}
+    				}
+    				
+    				if (existe) {
+    					System.out.println("Ingresó el cliente: " + clienteActual.getNombre());
+                        login.dispose();
+                        iniciarVistaCliente();
+    				} else {
+    					System.out.println("Mail o contraseña incorrectos!!!");
+    				}
+    			}
+    		});
+    	}
+    	
+    	if (btnAtras != null) {
+    		btnAtras.addActionListener(new ActionListener() {
+    			public void actionPerformed(ActionEvent e) {
+    				login.dispose();
+    				iniciarVistaLogin();
+    			}
+    		});
+    	}
+    }
+    
+    private void iniciarVistaSelectClient() {//ya no la usamos yipee
     	Interfaz_SelectClient sClient = new Interfaz_SelectClient();
     	sClient.setVisible(true);
     	sClient.setLocationRelativeTo(null);
@@ -240,7 +292,6 @@ public class Controller {
 		DefaultTableModel tabla = miRes.getTablaFuncional();
 		JButton btnEliminarReserva = miRes.getBtnEliminarReserva();
 		JButton btnAtras = miRes.getBtnAtras();
-		//JButton btnPagar = miRes.getBtnPagar();
 		JTable tablaClick = miRes.getTablaHabitacionesDispo();
 		tablaClick.addMouseListener(new MouseAdapter() {
             @Override
@@ -255,7 +306,7 @@ public class Controller {
                     	resSeleccionada.setEstado("Pagada");
                     	resSeleccionada.getPagoContexto().getEstrategia().pagar(resSeleccionada.getPrecio());
                     	Cliente clientePagado = getClienteByDNI(resSeleccionada.getDNIClienteReserva());
-                    	gestorNotif.enviarNotificacion(clientePagado, "Pagó su reserva y recibió su factura por el medio.", clientePagado.getContactoPref());;
+                    	gestorNotif.enviarNotificacion(clientePagado, "Pagó su reserva y recibió su factura.", clientePagado.getContactoPref());;
                     	auditoria.agregarEvento(Calendar.getInstance().getTime(), "Se pago una reserva.", "El cliente " + clientePagado.getNombre() + " pago su reserva con codigo " + resSeleccionada.getIdReserva());
                     	tabla.setRowCount(0);
                         for (Reserva res : reservas) {
@@ -293,7 +344,7 @@ public class Controller {
                 }
             }
         });
-				
+		
 		tabla.setRowCount(0);
         for (Reserva res : reservas) {
         	if (clienteActual == null) {
@@ -369,6 +420,7 @@ public class Controller {
     	JComboBox comboboxCantPersonas = interReserva.getComboBoxCantPers();
     	JTextField txtDNI = interReserva.getTextDNICliente();
     	JButton btnReiniciar = interReserva.getBtnReiniciarFiltro();
+    	
     	String DNI;
     	
     	
@@ -611,6 +663,10 @@ public class Controller {
     	JTextField txtTipoCambio = detalle.getTextTipoCambio();
     	JComboBox comboBoxBanco = detalle.getComboBoxBanco();
     	JLabel precio = detalle.getLprecio();
+    	JLabel nombre = detalle.getLNombre();
+    	
+    	nombre.setText(getClienteByDNI(DNI).getNombre());
+    	
     	List<Huesped> huespedes = new ArrayList<Huesped>();
     	
     	tablaHuespedes.setRowCount(0);
@@ -653,7 +709,7 @@ public class Controller {
     		        } else if (diasHastaCheckIn <= politicas.getCantDiasTarde()) {
     		            // aplico recargo tarde
     		        	precioTotal *= (politicas.getRecragoTarde())/100 + 1;
-    		        }                		
+    		        }
     				precio.setText(String.format("%.2f", precioTotal));
             	}
             }
@@ -733,8 +789,20 @@ public class Controller {
 		            // aplico recargo tarde
 		        	precioTotal *= politicas.getRecragoTarde()/100 + 1;
 		        }
-		        reservas.add(new Reserva(generarIdReserva(), precioTotal, dateCheckIn.getDate(), dateCheckOut.getDate(), Calendar.getInstance().getTime(), listaHabitaciones, DNI, huespedes, pc, "Pendiente de pago"));
+				
+				List<AbstractHabitacion> habs = new ArrayList<AbstractHabitacion>();
+				
+				for (AbstractHabitacion hab : listaHabitaciones) {
+					//System.out.println("Se reservo la habitacion " + hab.getIdHabitacion());
+					habs.add(hab);
+				}
+				
+		        reservas.add(new Reserva(generarIdReserva(), precioTotal, dateCheckIn.getDate(), dateCheckOut.getDate(), Calendar.getInstance().getTime(), habs, DNI, huespedes, pc, "Pendiente de pago"));
+		        //System.out.println("Reserva: " + reservas.get(reservas.size()-1).getHabitaciones().size());
 		        auditoria.agregarEvento(Calendar.getInstance().getTime(), "Se hizo una reserva.", "El cliente " + getClienteByDNI(DNI).getNombre() + " hizo una reserva con codigo " + reservas.get(reservas.size()-1).getIdReserva());
+		        
+		        System.out.println("Reserva exitosa!!!");
+		        
 		        for (AbstractHabitacion habitacion: listaHabitaciones) {
 		        	for (AbstractHabitacion h : habitaciones) {
 		        		if (habitacion.getIdHabitacion().equals(h.getIdHabitacion())) {
@@ -833,10 +901,10 @@ public class Controller {
             LocalDate localDateCheckOut = checkOutDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
             if (localDateCheckOut.isAfter(localDateCheckIn)) {
-                System.out.println("Fechas válidas: Check-Out es después de Check-In.");
+                //System.out.println("Fechas válidas: Check-Out es después de Check-In.");
                 return true;
             } else {
-                System.out.println("Fecha de Check-Out debe ser posterior a la fecha de Check-In.");
+                //System.out.println("Fecha de Check-Out debe ser posterior a la fecha de Check-In.");
             }
         }
         return false;
@@ -873,8 +941,10 @@ public class Controller {
 						if (r.getIdReserva().equals(txtCod.getText())){
 							r.setEstado("Cancelada");
 							auditoria.agregarEvento(Calendar.getInstance().getTime(), "Se cancelo una reserva", "La reserva con codigo " + r.getIdReserva() + " se cancelo manualmente");
+							//System.out.println("ASDASDASD " + r.getHabitaciones().size());
 							for (AbstractHabitacion h : r.getHabitaciones()) {
 								h.setDisponible(true);
+								//System.out.println("Habitacion: " + h.getIdHabitacion());
 							}
 						}
 					}
@@ -930,11 +1000,10 @@ public class Controller {
 		
 		btnAplicarCambios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(txtCantDiasTemprano.getText() != "" &&
-				txtCantDiasTarde.getText() != "" &&
-				txtDescuento.getText() != "" &&
-				txtRecargo.getText() != "") {
-					modPoliticas.dispose();
+				if(!txtCantDiasTemprano.getText().equals("") &&
+				!txtCantDiasTarde.getText().equals("") &&
+				!txtDescuento.getText().equals("") &&
+				!txtRecargo.getText().equals("")) {
 					politicas = new PoliticasReserva(Integer.parseInt(txtCantDiasTemprano.getText()), 
 													Integer.parseInt(txtCantDiasTarde.getText()), 
 													Float.parseFloat(txtDescuento.getText()), 
@@ -1002,7 +1071,7 @@ public class Controller {
         	btnModificar.addActionListener(new ActionListener() {
     			public void actionPerformed(ActionEvent e) {
     				habABM.dispose();
-    				iniciarVistaModificarHabitacion(); //sin terminar
+    				iniciarVistaModificarHabitacion();
     			}
     		});
         }
@@ -1312,6 +1381,8 @@ public class Controller {
     	JButton btnRegistrar = agrCli.getBtnRegistrar();
     	JComboBox comboBoxContactoPref = agrCli.getContactPreferece();
     	
+    	JTextField txtPassword = agrCli.getTextPassword();
+    	
     	btnRegistrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -1325,8 +1396,8 @@ public class Controller {
 				if (comboBoxContactoPref.getSelectedItem().equals("Email")) {
 					contactoPref = "mail";
 				}
-				if (txtNombre.getText() != "" && txtApellido.getText() != "" && txtDNI.getText() != "" && txtEdad.getText() != "" && txtTelefono.getText() != "" && txtMail.getText() != "") {
-					clientes.add(new Cliente(txtNombre.getText(), txtApellido.getText(), txtDNI.getText(), Integer.parseInt(txtEdad.getText()), txtTelefono.getText(), txtMail.getText(), contactoPref));					
+				if (!txtNombre.getText().equals("") && !txtApellido.getText().equals("") && !txtDNI.getText().equals("") && !txtEdad.getText().equals("") && !txtTelefono.getText().equals("") && !txtMail.getText().equals("") && !txtPassword.equals("")) {
+					clientes.add(new Cliente(txtNombre.getText(), txtApellido.getText(), txtDNI.getText(), Integer.parseInt(txtEdad.getText()), txtTelefono.getText(), txtMail.getText(), contactoPref, txtPassword.getText()));					
 					agrCli.dispose();
 					iniciarVistaClientesABM();
 				}
@@ -1342,11 +1413,36 @@ public class Controller {
         });
     }
     
+    private void iniciarVistaCambiarPassword() {
+    	Interfaz_CambiarPassword camPass = new Interfaz_CambiarPassword();
+    	camPass.setVisible(true);
+    	camPass.setLocationRelativeTo(null);
+    	JButton btnCambiar = camPass.getBtnCambiar();
+    	JTextField txtPassword = camPass.getTextPassword();
+    	
+    	btnCambiar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				clienteActual.setPassword(txtPassword.getText());
+				camPass.dispose();
+				iniciarVistaCliente();
+			}
+		});
+    	
+    	camPass.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+            	camPass.dispose();
+                iniciarVistaCliente();
+            }
+        });
+    }
+    
     private void iniciarVistaCliente() {
     	Interfaz_PaginaCliente pagCliente = new Interfaz_PaginaCliente();
     	JButton btnVerMisReservas = pagCliente.getBtnVerMisReservas();
     	JButton btnReservar = pagCliente.getBtnReservar();
     	JButton btnCerrarSesion = pagCliente.getBtnCerrarSesion();
+    	JButton btnCambiarPassword = pagCliente.getBtnCambiarPassword();
     	
     	pagCliente.setVisible(true);
     	pagCliente.setLocationRelativeTo(null);
@@ -1355,6 +1451,15 @@ public class Controller {
     			public void actionPerformed(ActionEvent e) {
     				pagCliente.dispose();
     				iniciarVistaVerReservas();
+    			}
+    		});
+    	}
+    	
+    	if (btnCambiarPassword != null) {
+    		btnCambiarPassword.addActionListener(new ActionListener() {
+    			public void actionPerformed(ActionEvent e) {
+    				pagCliente.dispose();
+    				iniciarVistaCambiarPassword();
     			}
     		});
     	}

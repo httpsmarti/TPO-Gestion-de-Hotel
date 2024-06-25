@@ -8,6 +8,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.Color;
+import javax.swing.ImageIcon;
 
 public class Interfaz_RegistrarHuesped extends JFrame {
 
@@ -43,8 +44,14 @@ public class Interfaz_RegistrarHuesped extends JFrame {
         textNombre.setColumns(10);
         
         JPanel panel = new JPanel();
-        panel.setBounds(10, 11, 192, 311);
+        panel.setBounds(25, 24, 170, 285);
         contentPane.add(panel);
+        panel.setLayout(null);
+        
+        JLabel lblNewLabel_1 = new JLabel("");
+        lblNewLabel_1.setIcon(new ImageIcon(Interfaz_RegistrarHuesped.class.getResource("/img/vistaBoston.png")));
+        lblNewLabel_1.setBounds(0, 0, 170, 285);
+        panel.add(lblNewLabel_1);
         
         JPanel panel_1 = new JPanel();
         panel_1.setBackground(new Color(231, 198, 255));

@@ -14,6 +14,7 @@ import javax.swing.JSpinner;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JRadioButton;
+import javax.swing.ImageIcon;
 
 public class Interfaz_AgregarHabitacion extends JFrame {
 
@@ -41,8 +42,14 @@ public class Interfaz_AgregarHabitacion extends JFrame {
         contentPane.setLayout(null);
         
         JPanel panel = new JPanel();
-        panel.setBounds(10, 11, 179, 311);
+        panel.setBounds(22, 42, 179, 311);
         contentPane.add(panel);
+        panel.setLayout(null);
+        
+        JLabel lblNewLabel = new JLabel("");
+        lblNewLabel.setIcon(new ImageIcon(Interfaz_AgregarHabitacion.class.getResource("/img/vistaBoston.png")));
+        lblNewLabel.setBounds(0, 0, 179, 311);
+        panel.add(lblNewLabel);
         
         JPanel panel_1 = new JPanel();
         panel_1.setLayout(null);

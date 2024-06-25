@@ -53,7 +53,7 @@ public class Auditoria {
 	
 	public void mostrarLogs() {
 		for (EventoAuditoria e : eventos) {
-			System.out.println("Titutlo: " + e.getTitulo() + ". Descripcion: " + e.getDescripcion() + ". Fecha: " + e.getFecha());
+			System.out.println("EVENTO Tituto: " + e.getTitulo() + ". Descripcion: " + e.getDescripcion() + ". Fecha: " + e.getFecha());
 		}
 	}
 }

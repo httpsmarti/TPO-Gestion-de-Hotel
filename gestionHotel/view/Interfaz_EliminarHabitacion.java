@@ -12,6 +12,7 @@ import java.awt.Font;
 import javax.swing.JSpinner;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 
 public class Interfaz_EliminarHabitacion extends JFrame {
 
@@ -30,8 +31,14 @@ public class Interfaz_EliminarHabitacion extends JFrame {
         contentPane.setLayout(null);
         
         JPanel panel = new JPanel();
-        panel.setBounds(10, 11, 179, 311);
+        panel.setBounds(20, 21, 169, 290);
         contentPane.add(panel);
+        panel.setLayout(null);
+        
+        JLabel lblNewLabel = new JLabel("");
+        lblNewLabel.setIcon(new ImageIcon(Interfaz_EliminarHabitacion.class.getResource("/img/vistaBoston.png")));
+        lblNewLabel.setBounds(0, 0, 169, 290);
+        panel.add(lblNewLabel);
         
         JPanel panel_1 = new JPanel();
         panel_1.setLayout(null);
@@ -56,7 +63,7 @@ public class Interfaz_EliminarHabitacion extends JFrame {
         
         ID_EliminarHabitacion = new JTextField();
         ID_EliminarHabitacion.setColumns(10);
-        ID_EliminarHabitacion.setBounds(313, 138, 236, 25);
+        ID_EliminarHabitacion.setBounds(313, 138, 200, 25);
         contentPane.add(ID_EliminarHabitacion);
 
         // Centrar la ventana cuando se hace visible

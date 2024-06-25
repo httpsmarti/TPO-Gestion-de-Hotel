@@ -53,13 +53,13 @@ public class Interfaz_ModificarCliente extends JFrame {
         textNombre.setColumns(10);
         
         JPanel panel = new JPanel();
-        panel.setBounds(10, 25, 180, 313);
+        panel.setBounds(20, 27, 175, 309);
         contentPane.add(panel);
         panel.setLayout(null);
         
         JLabel lblNewLabel_1 = new JLabel("\r\n");
         lblNewLabel_1.setIcon(new ImageIcon(Interfaz_ModificarCliente.class.getResource("/img/vistaBoston.png")));
-        lblNewLabel_1.setBounds(0, 0, 202, 315);
+        lblNewLabel_1.setBounds(0, 0, 202, 310);
         panel.add(lblNewLabel_1);
         
         JPanel panel_1 = new JPanel();
@@ -86,7 +86,7 @@ public class Interfaz_ModificarCliente extends JFrame {
         
         JLabel lblDNI = new JLabel("DNI:");
         lblDNI.setFont(new Font("Calibri", Font.PLAIN, 16));
-        lblDNI.setBounds(381, 110, 61, 17);
+        lblDNI.setBounds(404, 113, 39, 17);
         contentPane.add(lblDNI);
         
         textDNI = new JTextField();
@@ -126,13 +126,13 @@ public class Interfaz_ModificarCliente extends JFrame {
         
         JLabel lblNombre_1_1_1_1_1_1 = new JLabel("Contacto:");
         lblNombre_1_1_1_1_1_1.setFont(new Font("Calibri", Font.PLAIN, 16));
-        lblNombre_1_1_1_1_1_1.setBounds(241, 281, 69, 17);
+        lblNombre_1_1_1_1_1_1.setBounds(241, 288, 69, 17);
         contentPane.add(lblNombre_1_1_1_1_1_1);
         
         ContactPreferece = new JComboBox();
         ContactPreferece.setModel(new DefaultComboBoxModel(new String[] {"Teléfono", "Whatsapp", "Email"}));
         ContactPreferece.setToolTipText("");
-        ContactPreferece.setBounds(312, 274, 149, 26);
+        ContactPreferece.setBounds(312, 281, 149, 26);
         contentPane.add(ContactPreferece);
     }
     public JTextField getTextNombre() {

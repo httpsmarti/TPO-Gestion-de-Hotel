@@ -13,6 +13,7 @@ import java.awt.Font;
 import javax.swing.JSpinner;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 
 public class Interfaz_ModificarHabitacion extends JFrame {
 
@@ -27,6 +28,7 @@ public class Interfaz_ModificarHabitacion extends JFrame {
     private JRadioButton rdbtnMinibar;
     private JRadioButton rdbtnServicioDespertador;
     private JRadioButton rdbtnTv;
+    private JLabel lblNewLabel;
 
 	public Interfaz_ModificarHabitacion() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -38,8 +40,14 @@ public class Interfaz_ModificarHabitacion extends JFrame {
         contentPane.setLayout(null);
         
         JPanel panel = new JPanel();
-        panel.setBounds(10, 11, 179, 311);
+        panel.setBounds(20, 22, 169, 292);
         contentPane.add(panel);
+        panel.setLayout(null);
+        
+        lblNewLabel = new JLabel("");
+        lblNewLabel.setIcon(new ImageIcon(Interfaz_ModificarHabitacion.class.getResource("/img/vistaBoston.png")));
+        lblNewLabel.setBounds(0, 0, 169, 292);
+        panel.add(lblNewLabel);
         
         JPanel panel_1 = new JPanel();
         panel_1.setLayout(null);

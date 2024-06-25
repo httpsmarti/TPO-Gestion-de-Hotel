@@ -53,7 +53,7 @@ private ButtonGroup grupoMetodoPago = new ButtonGroup();
 private JButton btnAtras;
 private JDateChooser dateCheckIn;
 private JDateChooser dateCheckOut;
-
+private JLabel cliente;
 static DefaultTableModel tablaFuncional = new DefaultTableModel();
 static DefaultTableModel tablaFuncional1 = new DefaultTableModel();
 
@@ -224,7 +224,7 @@ public Interfaz_Detalle() {
     lblClienteResgistrado.setBounds(230, 11, 143, 32);
     panel_2_1.add(lblClienteResgistrado);
     
-    JLabel cliente = new JLabel("nombre");
+    cliente = new JLabel("nombre");
     cliente.setFont(new Font("Calibri", Font.PLAIN, 15));
     cliente.setBounds(370, 20, 74, 14);
     panel_2_1.add(cliente);
@@ -497,6 +497,10 @@ class CustomTableCellRenderer extends JPanel implements TableCellRenderer {
 	
 	public JLabel getLprecio() {
 		return precio;
+	}
+	
+	public JLabel getLNombre() {
+		return cliente;
 	}
 }
 
